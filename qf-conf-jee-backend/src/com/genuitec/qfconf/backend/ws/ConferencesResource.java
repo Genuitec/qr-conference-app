@@ -3,11 +3,10 @@ package com.genuitec.qfconf.backend.ws;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.genuitec.qfconf.backend.model.Conference;
+import com.genuitec.qfconf.backend.model.ConferenceModel;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Produces("application/xml")
@@ -26,6 +26,7 @@ public class ConferencesResource {
 
 	// mock implementation of storage
 	private TreeMap<Integer, Conference> conferenceMap = new TreeMap<Integer, Conference>();
+	private Logger log = Logger.getLogger(ConferencesResource.class.getName());
 
 	public ConferencesResource() {
 		Conference conf = new Conference();
@@ -44,9 +45,13 @@ public class ConferencesResource {
 
 	@GET
 	public List<Conference> getConferences() {
-		SortedSet<Conference> conferences = new TreeSet<Conference>();
-		conferences.addAll(conferenceMap.values());
-		return new ArrayList<Conference>(conferences);
+		List<Conference> confs = ConferenceModel
+				.newEntityManager()
+				.createQuery("SELECT c FROM Conference c ORDER BY c.startsOn",
+						Conference.class).getResultList();
+		log.log(Level.INFO, "Responding with {0} conferences received from the database",
+				new Object[] { confs.size() });
+		return confs;
 	}
 
 	@GET

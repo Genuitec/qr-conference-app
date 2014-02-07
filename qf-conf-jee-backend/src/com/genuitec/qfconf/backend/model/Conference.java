@@ -2,14 +2,24 @@ package com.genuitec.qfconf.backend.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Entity
 @XmlRootElement
 public class Conference implements Comparable<Conference> {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
+	@Temporal(TemporalType.DATE)
 	private Date startsOn;
+	@Temporal(TemporalType.DATE)
 	private Date endsOn;
 
 	public int getId() {

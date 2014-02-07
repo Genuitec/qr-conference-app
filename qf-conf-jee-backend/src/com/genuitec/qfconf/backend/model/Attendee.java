@@ -3,18 +3,27 @@ package com.genuitec.qfconf.backend.model;
 import java.util.Date;
 import java.util.SortedSet;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Entity
 @XmlRootElement
 public class Attendee {
 
 	// identifying data
+	@Id
+	@GeneratedValue
 	private int id;
+
 	private int conferenceID;
 
 	// information captured from QR code
-	private String first;
-	private String last;
+	private String firstName;
+	private String lastName;
 	private String organization;
 	private String title;
 	private String telephone;
@@ -30,7 +39,9 @@ public class Attendee {
 
 	// data specified by employee at conference
 	private String employee;
+	@Temporal(TemporalType.DATE)
 	private Date scannedAt;
+	@Temporal(TemporalType.DATE)
 	private Date modifiedAt;
 	private Rating rating;
 	private SortedSet<String> tags;
@@ -52,20 +63,20 @@ public class Attendee {
 		this.conferenceID = conferenceID;
 	}
 
-	public String getFirst() {
-		return first;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirst(String first) {
-		this.first = first;
+	public void setFirstName(String first) {
+		this.firstName = first;
 	}
 
-	public String getLast() {
-		return last;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLast(String last) {
-		this.last = last;
+	public void setLastName(String last) {
+		this.lastName = last;
 	}
 
 	public String getOrganization() {

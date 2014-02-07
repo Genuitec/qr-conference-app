@@ -18,4 +18,16 @@
       <attribute name="version-id" value="jersey_1.1"/>
     </node>
   </facet>
+  <facet id="jst.web"/>
+  <facet id="jst.web.jstl"/>
+  <facet id="wst.jsdt.web"/>
+  <facet id="java"/>
+  <facet id="jpt.jpa">
+    <node name="libprov">
+      <attribute name="config-id" value="jpa.eclipselink2_5"/>
+      <attribute name="copy-tlds" value="true"/>
+      <attribute name="provider-id" value="me-jpa-library-provider"/>
+      <attribute name="version-id" value="2.5"/>
+    </node>
+  </facet>
 </root>

@@ -42,8 +42,8 @@ public class AttendeesResource {
 
 		attendee.setConferenceID(1);
 
-		attendee.setFirst("John");
-		attendee.setLast("Appleseed");
+		attendee.setFirstName("John");
+		attendee.setLastName("Appleseed");
 		attendee.setCell("555-555-1212");
 		attendee.setEmail("john@seed.com");
 		attendee.setEmployee("Jed");
@@ -74,7 +74,7 @@ public class AttendeesResource {
 	public String addAttendee(@PathParam("conference") int conferenceID,
 			Attendee attendee) {
 		attendeeMap.put(attendee.getId(), attendee);
-		return "Attendee " + attendee.getFirst() + " " + attendee.getLast()
-				+ " added with ID " + attendee.getId();
+		return "Attendee " + attendee.getFirstName() + " "
+				+ attendee.getLastName() + " added with ID " + attendee.getId();
 	}
 }
