@@ -18,8 +18,10 @@
 </head>
 
 <body>
-	<h3>Login to the QR Conference Center:</h3>
+	<h1>Welcome to the QR Conference Center</h1>
+	<h2>Provide your login credentials to proceed</h2>
 	<form name="loginForm" method="POST" action="j_security_check">
+		<input type="hidden" value="Login" />
 		<p class="j_username">
 			<input type="text" name="j_username" id="j_username" size="25"><label
 				for="j_username">User Name</label>

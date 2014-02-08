@@ -18,10 +18,11 @@
 </head>
 
 <body>
-	<h2>Invalid user name or password.</h2>
+	<h1>Welcome to the QR Conference Center</h1>
+	<h2>Invalid username or password</h2>
 
 	<p>Please enter a user name or password that is authorized to
-		access this application.</p>
-	<a href="./">Return to login page</a>
+		access this application.<br/>&nbsp;</p>
+	<p><a class="button" href="admin/">Try Again</a></p>
 </body>
 </html>
