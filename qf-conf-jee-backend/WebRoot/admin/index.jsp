@@ -19,10 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-	<h3>Enter the QR Conference Center:</h3>
-	<p>If you have permissions, you may access the QR Conference center<br/>
-	to track conference attendees, export contacts, and manage your<br/>
-	conference list.<br/>&nbsp;</p>
-	<p><a class="button" href="admin/">Enter the Center</a></p>
+	<h3>Welcome to the QR Conference Center</h3>
 </body>
 </html>

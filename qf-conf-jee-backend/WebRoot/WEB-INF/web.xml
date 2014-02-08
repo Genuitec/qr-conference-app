@@ -27,7 +27,9 @@
 		<web-resource-collection>
 			<web-resource-name>wrcoll</web-resource-name>
 			<description />
-			<url-pattern>/*</url-pattern>
+			<url-pattern>/ws/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+			<url-pattern>/login/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<description />
@@ -38,11 +40,11 @@
 		<auth-method>FORM</auth-method>
 		<realm-name>file</realm-name>
 		<form-login-config>
-			<form-login-page>/login.jsp</form-login-page>
-			<form-error-page>/error.jsp</form-error-page>
+			<form-login-page>/login/login.jsp</form-login-page>
+			<form-error-page>/login/error.jsp</form-error-page>
 		</form-login-config>
 	</login-config>
 	<security-role>
-		<role-name>USER</role-name>
+		<role-name>myeclipseWeb</role-name>
 	</security-role>
 </web-app>
