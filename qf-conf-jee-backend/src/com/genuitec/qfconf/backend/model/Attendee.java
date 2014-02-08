@@ -10,6 +10,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.eclipse.persistence.annotations.Index;
+
 @Entity
 @XmlRootElement
 public class Attendee {
@@ -18,7 +20,10 @@ public class Attendee {
 	@Id
 	@GeneratedValue
 	private int id;
-
+	@Index
+	private String qrCodeSignature;
+	@Index
+	private long syncID;
 	private int conferenceID;
 
 	// information captured from QR code
@@ -221,5 +226,21 @@ public class Attendee {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	public String getQrCodeSignature() {
+		return qrCodeSignature;
+	}
+
+	public void setQrCodeSignature(String qrCodeSignature) {
+		this.qrCodeSignature = qrCodeSignature;
+	}
+
+	public long getSyncID() {
+		return syncID;
+	}
+
+	public void setSyncID(long syncID) {
+		this.syncID = syncID;
 	}
 }

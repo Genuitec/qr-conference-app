@@ -17,11 +17,11 @@ import com.genuitec.qfconf.backend.model.Attendee;
 import com.genuitec.qfconf.backend.model.ConferenceModel;
 
 @Produces("application/xml")
-@Path("attendees")
+@Path("sync")
 @RolesAllowed({ "myeclipseWeb" })
-public class AttendeesResource {
+public class SyncService {
 
-	private Logger log = Logger.getLogger(AttendeesResource.class.getName());
+	private Logger log = Logger.getLogger(SyncService.class.getName());
 
 	@GET
 	@Path("{conference}")
