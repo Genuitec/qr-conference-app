@@ -12,17 +12,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
-<link rel="stylesheet" type="text/css" href="normalize.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-	<h3>Enter the QR Conference Center:</h3>
-	<p>If you have permissions, you may access the QR Conference center<br/>
-	to track conference attendees, export contacts, and manage your<br/>
-	conference list.<br/>&nbsp;</p>
-	<p><a class="button" href="admin/">Enter the Center</a></p>
+	<h3>Welcome to the QR Conference Center</h3>
 </body>
 </html>
