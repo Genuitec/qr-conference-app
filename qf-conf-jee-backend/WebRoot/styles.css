@@ -37,22 +37,22 @@ label {
 .submit input {
 	width: auto;
 	padding: 9px 15px;
-	background: #617798;
+	background: #1B75BB;
 	border: 0;
 	font-size: 14px;
 	color: #FFFFFF;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 a.button {
 	width: auto;
 	padding: 9px 15px;
-	background: #617798;
+	background: #1B75BB;
 	border: 0;
 	font-size: 14px;
 	color: #FFFFFF;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 	text-decoration: none;
 }
