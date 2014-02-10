@@ -14,7 +14,11 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<link href="css/genuitec-styles.css" rel="stylesheet">
+<link href="css/genuitec-forms.css" rel="stylesheet">
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.js"></script>
 </head>
 
 <body>

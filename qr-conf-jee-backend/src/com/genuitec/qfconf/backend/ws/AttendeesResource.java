@@ -1,5 +1,7 @@
 package com.genuitec.qfconf.backend.ws;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,26 +15,32 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.genuitec.qfconf.backend.model.Attendee;
 import com.genuitec.qfconf.backend.model.ConferenceModel;
 
 @Produces("application/xml")
 @Path("attendees")
 @RolesAllowed({ "myeclipseWeb" })
+@SuppressWarnings("unchecked")
 public class AttendeesResource {
 
 	private Logger log = Logger.getLogger(AttendeesResource.class.getName());
 
 	@GET
-	@Path("{conference}")
-	public List<Attendee> getAttendees(@PathParam("conference") int conferenceID) {
+	@Path("{conference}/xml")
+	public List<Attendee> getAttendeesXML(
+			@PathParam("conference") int conferenceID) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
-			List<Attendee> confs = em.createQuery(
-					"SELECT a FROM Attendee a WHERE a.conferenceID="
-							+ conferenceID
-							+ " ORDER BY a.lastName, a.firstName",
-					Attendee.class).getResultList();
+			List<Attendee> confs = em
+					.createQuery(
+							"SELECT a FROM Attendee a WHERE a.conferenceID="
+									+ conferenceID
+									+ " ORDER BY a.organization, a.lastName, a.firstName",
+							Attendee.class).getResultList();
 			log.log(Level.INFO,
 					"Responding with {0} attendees for conference ID {1}",
 					new Object[] { confs.size(), conferenceID });
@@ -43,8 +51,22 @@ public class AttendeesResource {
 	}
 
 	@GET
-	@Path("{conference}/{attendee}")
-	public Attendee getAttendee(@PathParam("conference") int conferenceID,
+	@Path("{conference}/json")
+	@Produces("application/json")
+	public String getAttendeesJson(@PathParam("conference") int conferenceID) {
+		JSONArray rows = new JSONArray();
+		JSONObject model = new JSONObject();
+		model.put("aaData", rows);
+		for (Attendee next : getAttendeesXML(conferenceID)) {
+			JSONArray data = toJsonArray(next);
+			rows.add(data);
+		}
+		return model.toString();
+	}
+
+	@GET
+	@Path("{conference}/{attendee}/xml")
+	public Attendee getAttendeeXML(@PathParam("conference") int conferenceID,
 			@PathParam("attendee") int attendeeID) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
@@ -67,7 +89,7 @@ public class AttendeesResource {
 	}
 
 	@POST
-	@Path("add")
+	@Path("add/xml")
 	@Consumes("application/xml")
 	@Produces("text/html")
 	public String addAttendee(Attendee attendee) {
@@ -83,5 +105,35 @@ public class AttendeesResource {
 		} finally {
 			em.close();
 		}
+	}
+
+	public long getAttendeeCount(int conferenceID) {
+		EntityManager em = ConferenceModel.newEntityManager();
+		try {
+			Object result = em.createQuery(
+					"SELECT count(a) FROM Attendee a WHERE a.conferenceID="
+							+ conferenceID).getSingleResult();
+			return (Long) result;
+		} finally {
+			em.close();
+		}
+	}
+
+	private JSONArray toJsonArray(Attendee attendee) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		JSONArray data = new JSONArray();
+		data.add(attendee.getId());
+		data.add(attendee.getOrganization());
+		data.add(attendee.getFirstName());
+		data.add(attendee.getLastName());
+		data.add(attendee.getTitle());
+		data.add(attendee.isFollowup() ? "Follow-up" : "");
+		data.add(attendee.getRating());
+		data.add(attendee.getTags());
+		data.add(dateFormat.format(attendee.getScannedat()));
+		data.add(attendee.getEmployee());
+		String notes = attendee.getNotes();
+		data.add(notes != null && notes.length() > 0 ? "Has Notes" : "");
+		return data;
 	}
 }

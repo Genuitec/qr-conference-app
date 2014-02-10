@@ -1,5 +1,7 @@
 package com.genuitec.qfconf.backend.ws;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,18 +15,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.genuitec.qfconf.backend.model.Conference;
 import com.genuitec.qfconf.backend.model.ConferenceModel;
 
 @Produces("application/xml")
 @Path("conferences")
 @RolesAllowed({ "myeclipseWeb" })
+@SuppressWarnings("unchecked")
 public class ConferencesResource {
 
 	private Logger log = Logger.getLogger(ConferencesResource.class.getName());
 
 	@GET
-	public List<Conference> getConferences() {
+	@Path("xml")
+	public List<Conference> getConferencesXML() {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			List<Conference> confs = em.createQuery(
@@ -40,8 +47,22 @@ public class ConferencesResource {
 	}
 
 	@GET
-	@Path("{id}")
-	public Conference getConference(@PathParam("id") int conferenceID) {
+	@Path("json")
+	@Produces("application/json")
+	public String getConferencesJson() {
+		JSONArray rows = new JSONArray();
+		JSONObject model = new JSONObject();
+		model.put("aaData", rows);
+		for (Conference next : getConferencesXML()) {
+			JSONArray data = toJsonArray(next);
+			rows.add(data);
+		}
+		return model.toString();
+	}
+
+	@GET
+	@Path("{id}/xml")
+	public Conference getConferenceXML(@PathParam("id") int conferenceID) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			Conference conf = em.find(Conference.class, conferenceID);
@@ -57,11 +78,22 @@ public class ConferencesResource {
 		}
 	}
 
+	@GET
+	@Path("{id}/json")
+	@Produces("application/json")
+	public String getConferenceJson(@PathParam("id") int conferenceID) {
+		JSONObject model = new JSONObject();
+		Conference conf = getConferenceXML(conferenceID);
+		if (conf != null)
+			model.put("aaData", conf);
+		return model.toString();
+	}
+
 	@POST
-	@Path("add")
+	@Path("add/xml")
 	@Consumes("application/xml")
 	@Produces("text/html")
-	public String addConference(Conference conference) {
+	public String addConferenceXML(Conference conference) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -73,5 +105,16 @@ public class ConferencesResource {
 		} finally {
 			em.close();
 		}
+	}
+
+	private JSONArray toJsonArray(Conference conference) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		JSONArray data = new JSONArray();
+		data.add(conference.getId());
+		data.add(conference.getName());
+		data.add(dateFormat.format(conference.getStartsOn()));
+		data.add(dateFormat.format(conference.getEndsOn()));
+		data.add(new AttendeesResource().getAttendeeCount(conference.getId()));
+		return data;
 	}
 }

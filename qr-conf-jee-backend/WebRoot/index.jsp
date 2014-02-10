@@ -12,15 +12,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<link href="css/genuitec-styles.css" rel="stylesheet">
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.js"></script>
 </head>
 
 <body>
 	<h1>Welcome to the QR Conference Center</h1>
 	<h2>Log in to manage your conferences and contacts</h2>
-	<p>If you have permissions, you may access the QR Conference center<br/>
-	to track conference attendees, export contacts, and manage your<br/>
-	conference list.<br/>&nbsp;</p>
+	<p>If you have permissions, you may access the QR Conference center to track conference<br/>
+	attendees, export contacts, and manage your conference list.<br/>&nbsp;</p>
 	<p><a class="button" href="admin/">Enter the Center</a></p>
 </body>
 </html>

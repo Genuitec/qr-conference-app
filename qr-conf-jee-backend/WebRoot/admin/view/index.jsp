@@ -11,7 +11,7 @@
 		response.sendRedirect("../");
 		return;
 	}
-	Conference conf = new ConferencesResource().getConference(Validate.getInt(id));
+	Conference conf = new ConferencesResource().getConferenceXML(Validate.getInt(id));
 	if (conf == null) {
 		response.sendRedirect("../");
 		return;
@@ -26,49 +26,85 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<link rel="stylesheet" type="text/css" href="css/styles.css">
-<link rel="stylesheet" type="text/css" href="css/tables.css">
+<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<link href="css/jquery-datatables-themeroller-1.9.4.css" rel="stylesheet">
+<link href="css/genuitec-styles.css" rel="stylesheet">
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.js"></script>
+<script src="js/jquery-datatables-1.9.4.js"></script>
 </head>
 
 <body>
 	<h1>Manage the QR Conference Center</h1>
-	<h2>Conference: <%= conf.getName() %></h2>
-
-	<%
-		List<Attendee> attendees = new AttendeesResource().getAttendees(conf.getId());
-		if (attendees.isEmpty()) {
-			out.println("<h4>No attendees found.</h4>");
-		} else {
-	%>
-	<table id="hor-minimalist-a" summary="Conference Attendees">
-		<thead>
-			<tr>
-				<th scope="col">First Name</th>
-				<th scope="col">Last Name</th>
-				<th scope="col">Rating</th>
-				<th scope="col">Tags</th>
-				<th scope="col">Scanned By</th>
-			</tr>
-		</thead>
-		<tbody>
-	<%
-			for (Attendee next : attendees) {
-	%>
-			<tr>
-				<td><%= next.getFirstName() %></td>
-				<td><%= next.getLastName() %></td>
-				<td><%= next.getRating() %></td>
-				<td><%= next.getTags() %></td>
-				<td><%= next.getEmployee() %></td>
-			</tr>
-	<%
-			}
-	%>
-		</tbody>
+	<h2>Conference: <strong><%= conf.getName() %></strong></h2>
+	<h3>Attendees List</h3>
+	<table id="attendees" width="100%">
+	    <thead>
+	        <tr>
+	            <th width="50%" scope="col" align="left"><font color="#eeeeee">Loading...</font></th>
+	            <th width="15%" scope="col">&nbsp;</th>
+	            <th width="10%" scope="col">&nbsp;</th>
+	            <th width="10%" scope="col">&nbsp;</th>
+	            <th width="12%" scope="col">&nbsp;</th>
+	            <th width="8%" nowrap scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
+	            <th width="10%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
+	            <th width="9%" scope="col">&nbsp;</th>
+	            <th width="10%" scope="col">&nbsp;</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	            <td>&nbsp;</td>
+	        </tr>
+	    </tbody>
 	</table>
-	<%
-		}
-	%>
-	<br/><a class="button" href="admin">Back to Conference List</a>
+	<script>
+	$(document).ready(function() {
+		// id, org, first, last, title, followup, rating, tags, when, who, notes
+
+	    oTable = $('#attendees').dataTable( {
+	        "bProcessing": true,
+	        "bJQueryUI": true,
+	        "bLengthChange": false,
+	        "sAjaxSource": 'ws/attendees/<%= conf.getId() %>/json',
+	        "iDisplayLength": 20,
+	        "bAutoWidth": false,
+	        "aoColumns": [
+	        	{ "bVisible": false },
+	        	{ "sTitle": "Organization" },
+	        	{ "sTitle": "First" },
+	        	{ "sTitle": "Last" },
+	        	{ "sTitle": "Title" },
+	        	{ "sTitle": "Follow-Up" },
+	        	{ "sTitle": "Rating" },
+	        	{ "sTitle": "Tags" },
+	        	{ "sTitle": "When", "sType": "date" },
+	        	{ "sTitle": "Who" },
+	        	{ "sTitle": "Notes" }
+	        ]
+	    } );
+		$('#attendees').on('click', 'tr', function(event) {
+			var row = oTable.fnGetData(this);
+			if (null != row) {
+				var id = row[0];
+				// do something with attendee ID (pop-up dialog?)
+			}
+		});
+	} );
+	</script><br/>
+	<h3>Other Actions</h3>
+	<a class="button" href="admin">Back to Conference List</a>
 </body>
 </html>

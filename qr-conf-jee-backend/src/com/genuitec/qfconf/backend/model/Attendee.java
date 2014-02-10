@@ -51,6 +51,7 @@ public class Attendee {
 	private Rating rating;
 	private SortedSet<String> tags;
 	private String notes;
+	private boolean followup;
 
 	public int getId() {
 		return id;
@@ -242,5 +243,13 @@ public class Attendee {
 
 	public void setSyncID(long syncID) {
 		this.syncID = syncID;
+	}
+
+	public boolean isFollowup() {
+		return followup;
+	}
+
+	public void setFollowup(boolean followup) {
+		this.followup = followup;
 	}
 }
