@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Validate {
 
 	public static boolean isNonEmpty(String text) {
@@ -55,7 +57,14 @@ public class Validate {
 			return -1;
 		}
 	}
-	
+
+	public static String nonNull(HttpServletRequest request, String name) {
+		String value = request.getParameter(name);
+		if (value == null)
+			return "";
+		return value;
+	}
+
 	public static String nonNull(String value) {
 		if (value == null)
 			return "";

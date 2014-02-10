@@ -26,8 +26,7 @@
 
 <body>
 	<h1>Manage the QR Conference Center</h1>
-	<h2>What do you want to get started with?</h2>
-	<h3>Conferences List</h3>
+	<h2>Which conference do you want to manage?</h2>
 	<table id="conferences" width="100%">
 	    <thead>
 	        <tr>
@@ -57,6 +56,9 @@
 	        "sAjaxSource": 'ws/conferences/json',
 	        "iDisplayLength": 20,
 	        "bAutoWidth": false,
+	        "oLanguage": {
+		        "sEmptyTable": "<br/>No conferences have been added for tracked yet.<br/>&nbsp;",
+	        	},
 	        "aoColumns": [
 	        	{ "bVisible": false },
 	        	{ "sTitle": "Conference Name" },
@@ -75,6 +77,6 @@
 	} );
 	</script><br/>
 	<h3>Other Actions</h3>
-	<p><a class="button" href="admin/add/">Add Conference</a></p>
+	<p><a class="buttongreen" href="admin/add/conference/">Add Conference</a></p>
 </body>
 </html>

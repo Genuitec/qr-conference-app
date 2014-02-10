@@ -24,8 +24,8 @@
 			conf.setName(name);
 			conf.setStartsOn(Validate.getDate(startsOn));
 			conf.setEndsOn(Validate.getDate(stopsOn));
-			new ConferencesResource().addConference(conf);
-			response.sendRedirect("../");
+			new ConferencesResource().addConferenceXML(conf);
+			response.sendRedirect("../../");
 			return;
 		}
 	}
@@ -48,7 +48,7 @@
 
 <body>
 	<h1>Manage the QR Conference Center</h1>
-	<h2>Set up a new conference for management</h2>
+	<h2>Set up a new conference for management:</h2>
 	<form name="addForm" method="POST">
 		<input type="hidden" name="action" value="add">
 		<p class="name">

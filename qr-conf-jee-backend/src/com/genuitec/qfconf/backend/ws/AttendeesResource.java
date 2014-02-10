@@ -92,7 +92,7 @@ public class AttendeesResource {
 	@Path("add/xml")
 	@Consumes("application/xml")
 	@Produces("text/html")
-	public String addAttendee(Attendee attendee) {
+	public String addAttendeeXML(Attendee attendee) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -128,8 +128,18 @@ public class AttendeesResource {
 		data.add(attendee.getLastName());
 		data.add(attendee.getTitle());
 		data.add(attendee.isFollowup() ? "Follow-up" : "");
-		data.add(attendee.getRating());
-		data.add(attendee.getTags());
+		String rating = attendee.getRating().toString();
+		if (rating == null)
+			rating = "cold";
+		rating = Character.toUpperCase(rating.charAt(0)) + rating.substring(1);
+		data.add(rating);
+		String tags = "";
+		for (String next : attendee.getTags()) {
+			if (tags.length() > 0)
+				tags += ", ";
+			tags += next;
+		}
+		data.add(tags);
 		data.add(dateFormat.format(attendee.getScannedat()));
 		data.add(attendee.getEmployee());
 		String notes = attendee.getNotes();

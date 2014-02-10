@@ -36,22 +36,21 @@
 
 <body>
 	<h1>Manage the QR Conference Center</h1>
-	<h2>Conference: <strong><%= conf.getName() %></strong></h2>
-	<h3>Attendees List</h3>
+	<h2>Attendees for <strong><%= conf.getName() %></strong></h2>
 	<table id="attendees" width="100%">
 	    <thead>
 	        <tr>
 	            <th width="50%" scope="col" align="left"><font color="#eeeeee">Loading...</font></th>
-	            <th width="15%" scope="col">&nbsp;</th>
-	            <th width="10%" scope="col">&nbsp;</th>
-	            <th width="10%" scope="col">&nbsp;</th>
-	            <th width="12%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
 	            <th width="8%" nowrap scope="col">&nbsp;</th>
 	            <th width="8%" scope="col">&nbsp;</th>
-	            <th width="10%" scope="col">&nbsp;</th>
+	            <th width="18%" scope="col">&nbsp;</th>
 	            <th width="8%" scope="col">&nbsp;</th>
-	            <th width="9%" scope="col">&nbsp;</th>
-	            <th width="10%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
+	            <th width="8%" scope="col">&nbsp;</th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -81,6 +80,9 @@
 	        "sAjaxSource": 'ws/attendees/<%= conf.getId() %>/json',
 	        "iDisplayLength": 20,
 	        "bAutoWidth": false,
+	        "oLanguage": {
+		        "sEmptyTable": "<br/>No attendees have been tracked for <strong><%= conf.getName() %></strong> yet.<br/>&nbsp;",
+	        	},
 	        "aoColumns": [
 	        	{ "bVisible": false },
 	        	{ "sTitle": "Organization" },
@@ -105,6 +107,6 @@
 	} );
 	</script><br/>
 	<h3>Other Actions</h3>
-	<a class="button" href="admin">Back to Conference List</a>
+	<a class="buttongreen" href="admin/add/attendee/?id=<%= conf.getId() %>">Manually Add Attendee</a>&nbsp;&nbsp;<a class="button" href="admin">Back to Conference List</a>
 </body>
 </html>
