@@ -15,13 +15,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
+import com.genuitec.qfconf.backend.model.AddResult;
 import com.genuitec.qfconf.backend.model.Conference;
 import com.genuitec.qfconf.backend.model.ConferenceModel;
+import com.genuitec.qfconf.backend.model.DataTableResult;
 
-@Produces("application/xml")
+@Produces({ "application/xml", "application/json" })
 @Path("conferences")
 @RolesAllowed({ "myeclipseWeb" })
 @SuppressWarnings("unchecked")
@@ -30,8 +29,7 @@ public class ConferencesResource {
 	private Logger log = Logger.getLogger(ConferencesResource.class.getName());
 
 	@GET
-	@Path("xml")
-	public List<Conference> getConferencesXML() {
+	public List<Conference> getConferences() {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			List<Conference> confs = em.createQuery(
@@ -47,22 +45,24 @@ public class ConferencesResource {
 	}
 
 	@GET
-	@Path("json")
+	@Path("datatable")
 	@Produces("application/json")
-	public String getConferencesJson() {
-		JSONArray rows = new JSONArray();
-		JSONObject model = new JSONObject();
-		model.put("aaData", rows);
-		for (Conference next : getConferencesXML()) {
-			JSONArray data = toJsonArray(next);
-			rows.add(data);
+	public DataTableResult getConferencesDatatable() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		DataTableResult result = new DataTableResult();
+		for (Conference conference : getConferences()) {
+			result.addRowData(String.valueOf(conference.getId()), conference
+					.getName(), dateFormat.format(conference.getStartsOn()),
+					dateFormat.format(conference.getEndsOn()), String
+							.valueOf(new AttendeesResource()
+									.getAttendeeCount(conference.getId())));
 		}
-		return model.toString();
+		return result;
 	}
 
 	@GET
-	@Path("{id}/xml")
-	public Conference getConferenceXML(@PathParam("id") int conferenceID) {
+	@Path("{id}")
+	public Conference getConference(@PathParam("id") int conferenceID) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			Conference conf = em.find(Conference.class, conferenceID);
@@ -78,22 +78,11 @@ public class ConferencesResource {
 		}
 	}
 
-	@GET
-	@Path("{id}/json")
-	@Produces("application/json")
-	public String getConferenceJson(@PathParam("id") int conferenceID) {
-		JSONObject model = new JSONObject();
-		Conference conf = getConferenceXML(conferenceID);
-		if (conf != null)
-			model.put("aaData", conf);
-		return model.toString();
-	}
-
 	@POST
-	@Path("add/xml")
-	@Consumes("application/xml")
-	@Produces("text/html")
-	public String addConferenceXML(Conference conference) {
+	@Path("add")
+	@Consumes({ "application/xml", "application/json" })
+	@Produces({ "application/xml", "application/json" })
+	public AddResult addConference(Conference conference) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -101,20 +90,9 @@ public class ConferencesResource {
 			em.getTransaction().commit();
 			log.log(Level.INFO, "Added conference with ID {0}: {1}",
 					new Object[] { conference.getId(), conference.getName() });
-			return "added-conference: " + conference.getId();
+			return new AddResult(true, conference.getId());
 		} finally {
 			em.close();
 		}
-	}
-
-	private JSONArray toJsonArray(Conference conference) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		JSONArray data = new JSONArray();
-		data.add(conference.getId());
-		data.add(conference.getName());
-		data.add(dateFormat.format(conference.getStartsOn()));
-		data.add(dateFormat.format(conference.getEndsOn()));
-		data.add(new AttendeesResource().getAttendeeCount(conference.getId()));
-		return data;
 	}
 }

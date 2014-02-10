@@ -12,7 +12,7 @@
 		response.sendRedirect("../");
 		return;
 	}
-	Conference conf = new ConferencesResource().getConferenceXML(Validate.getInt(id));
+	Conference conf = new ConferencesResource().getConference(Validate.getInt(id));
 	if (conf == null) {
 		response.sendRedirect("../");
 		return;
@@ -72,7 +72,7 @@
 
 			attendee.setModifiedAt(new Date());
 			attendee.setScannedAt(new Date());
-			new AttendeesResource().addAttendeeXML(attendee);
+			new AttendeesResource().addAttendee(attendee);
 			response.sendRedirect("../../");
 			return;
 		}

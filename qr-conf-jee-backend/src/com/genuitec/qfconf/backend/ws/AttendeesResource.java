@@ -2,6 +2,7 @@ package com.genuitec.qfconf.backend.ws;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,24 +16,21 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
+import com.genuitec.qfconf.backend.model.AddResult;
 import com.genuitec.qfconf.backend.model.Attendee;
 import com.genuitec.qfconf.backend.model.ConferenceModel;
+import com.genuitec.qfconf.backend.model.DataTableResult;
 
-@Produces("application/xml")
+@Produces({ "application/xml", "application/json" })
 @Path("attendees")
 @RolesAllowed({ "myeclipseWeb" })
-@SuppressWarnings("unchecked")
 public class AttendeesResource {
 
 	private Logger log = Logger.getLogger(AttendeesResource.class.getName());
 
 	@GET
-	@Path("{conference}/xml")
-	public List<Attendee> getAttendeesXML(
-			@PathParam("conference") int conferenceID) {
+	@Path("{conference}")
+	public List<Attendee> getAttendees(@PathParam("conference") int conferenceID) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			List<Attendee> confs = em
@@ -51,22 +49,33 @@ public class AttendeesResource {
 	}
 
 	@GET
-	@Path("{conference}/json")
+	@Path("{conference}/datatable")
 	@Produces("application/json")
-	public String getAttendeesJson(@PathParam("conference") int conferenceID) {
-		JSONArray rows = new JSONArray();
-		JSONObject model = new JSONObject();
-		model.put("aaData", rows);
-		for (Attendee next : getAttendeesXML(conferenceID)) {
-			JSONArray data = toJsonArray(next);
-			rows.add(data);
+	public DataTableResult getAttendeesDatatable(
+			@PathParam("conference") int conferenceID) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		DataTableResult result = new DataTableResult();
+		for (Attendee attendee : getAttendees(conferenceID)) {
+			List<String> rowData = new ArrayList<String>();
+			rowData.add(String.valueOf(attendee.getId()));
+			rowData.add(attendee.getOrganization());
+			rowData.add(attendee.getFirstName());
+			rowData.add(attendee.getLastName());
+			rowData.add(attendee.getTitle());
+			rowData.add(describeFollowup(attendee));
+			rowData.add(describeRating(attendee));
+			rowData.add(describeTags(attendee));
+			rowData.add(dateFormat.format(attendee.getScannedat()));
+			rowData.add(attendee.getEmployee());
+			rowData.add(describeNotes(attendee));
+			result.addRowData(rowData);
 		}
-		return model.toString();
+		return result;
 	}
 
 	@GET
-	@Path("{conference}/{attendee}/xml")
-	public Attendee getAttendeeXML(@PathParam("conference") int conferenceID,
+	@Path("{conference}/{attendee}")
+	public Attendee getAttendee(@PathParam("conference") int conferenceID,
 			@PathParam("attendee") int attendeeID) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
@@ -89,10 +98,10 @@ public class AttendeesResource {
 	}
 
 	@POST
-	@Path("add/xml")
-	@Consumes("application/xml")
-	@Produces("text/html")
-	public String addAttendeeXML(Attendee attendee) {
+	@Path("add")
+	@Consumes({ "application/xml", "application/json" })
+	@Produces({ "application/xml", "application/json" })
+	public AddResult addAttendee(Attendee attendee) {
 		EntityManager em = ConferenceModel.newEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -101,7 +110,7 @@ public class AttendeesResource {
 			log.log(Level.INFO, "Added attendee with ID {0}: {1} {2}",
 					new Object[] { attendee.getId(), attendee.getFirstName(),
 							attendee.getLastName() });
-			return "added-attendee: " + attendee.getId();
+			return new AddResult(true, attendee.getId());
 		} finally {
 			em.close();
 		}
@@ -119,31 +128,31 @@ public class AttendeesResource {
 		}
 	}
 
-	private JSONArray toJsonArray(Attendee attendee) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		JSONArray data = new JSONArray();
-		data.add(attendee.getId());
-		data.add(attendee.getOrganization());
-		data.add(attendee.getFirstName());
-		data.add(attendee.getLastName());
-		data.add(attendee.getTitle());
-		data.add(attendee.isFollowup() ? "Follow-up" : "");
-		String rating = attendee.getRating().toString();
-		if (rating == null)
-			rating = "cold";
-		rating = Character.toUpperCase(rating.charAt(0)) + rating.substring(1);
-		data.add(rating);
+	private String describeNotes(Attendee attendee) {
+		String notes = attendee.getNotes();
+		notes = notes != null && notes.length() > 0 ? "Has Notes" : "";
+		return notes;
+	}
+
+	private String describeTags(Attendee attendee) {
 		String tags = "";
 		for (String next : attendee.getTags()) {
 			if (tags.length() > 0)
 				tags += ", ";
 			tags += next;
 		}
-		data.add(tags);
-		data.add(dateFormat.format(attendee.getScannedat()));
-		data.add(attendee.getEmployee());
-		String notes = attendee.getNotes();
-		data.add(notes != null && notes.length() > 0 ? "Has Notes" : "");
-		return data;
+		return tags;
+	}
+
+	private String describeRating(Attendee attendee) {
+		String rating = attendee.getRating().toString();
+		if (rating == null)
+			rating = "cold";
+		rating = Character.toUpperCase(rating.charAt(0)) + rating.substring(1);
+		return rating;
+	}
+
+	private String describeFollowup(Attendee attendee) {
+		return attendee.isFollowup() ? "Follow-up" : "";
 	}
 }

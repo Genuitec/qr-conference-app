@@ -24,7 +24,7 @@
 			conf.setName(name);
 			conf.setStartsOn(Validate.getDate(startsOn));
 			conf.setEndsOn(Validate.getDate(stopsOn));
-			new ConferencesResource().addConferenceXML(conf);
+			new ConferencesResource().addConference(conf);
 			response.sendRedirect("../../");
 			return;
 		}

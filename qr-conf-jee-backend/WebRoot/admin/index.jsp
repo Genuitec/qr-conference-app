@@ -53,7 +53,7 @@
 	        "bProcessing": true,
 	        "bJQueryUI": true,
 	        "bLengthChange": false,
-	        "sAjaxSource": 'ws/conferences/json',
+	        "sAjaxSource": 'ws/conferences/datatable',
 	        "iDisplayLength": 20,
 	        "bAutoWidth": false,
 	        "oLanguage": {

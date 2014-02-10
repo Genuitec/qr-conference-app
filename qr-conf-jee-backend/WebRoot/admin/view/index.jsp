@@ -11,7 +11,7 @@
 		response.sendRedirect("../");
 		return;
 	}
-	Conference conf = new ConferencesResource().getConferenceXML(Validate.getInt(id));
+	Conference conf = new ConferencesResource().getConference(Validate.getInt(id));
 	if (conf == null) {
 		response.sendRedirect("../");
 		return;
@@ -71,13 +71,11 @@
 	</table>
 	<script>
 	$(document).ready(function() {
-		// id, org, first, last, title, followup, rating, tags, when, who, notes
-
 	    oTable = $('#attendees').dataTable( {
 	        "bProcessing": true,
 	        "bJQueryUI": true,
 	        "bLengthChange": false,
-	        "sAjaxSource": 'ws/attendees/<%= conf.getId() %>/json',
+	        "sAjaxSource": 'ws/attendees/<%= conf.getId() %>/datatable',
 	        "iDisplayLength": 20,
 	        "bAutoWidth": false,
 	        "oLanguage": {
