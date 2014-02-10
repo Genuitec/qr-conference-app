@@ -64,16 +64,16 @@
 	<form name="addForm" method="POST">
 		<input type="hidden" name="action" value="add">
 		<p class="name">
-			<input type="text" name="name" id="name" size="25" value="<%= Validate.nonNull(name) %>"><label
+			<input type="text" name="name" id="name" size="25" value="<%= Validate.nonNull(name) %>"><label class="right"
 				for="name">Conference Name</label>
 		</p>
 		<p class="startsOn">
-			<input type="text"name="startsOn" id="startsOn" size="10" value="<%= Validate.nonNull(startsOn) %>"><label
-				for="startsOn">Starts On (yyyy/mm/dd)</label>
+			<input type="text"name="startsOn" id="startsOn" size="10" value="<%= Validate.nonNull(startsOn) %>"><label class="right"
+				for="startsOn">Starts On (yyyy/MM/dd)</label>
 		</p>
 		<p class="stopsOn">
-			<input type="text" name="stopsOn" id="stopsOn" size="10" value="<%= Validate.nonNull(stopsOn) %>"><label
-				for="stopsOn">Ends On (yyyy/mm/dd)</label>
+			<input type="text" name="stopsOn" id="stopsOn" size="10" value="<%= Validate.nonNull(stopsOn) %>"><label class="right"
+				for="stopsOn">Ends On (yyyy/MM/dd)</label>
 		</p>
 		<% if (error != null) { %>
 		<h4><%= error %></h4>

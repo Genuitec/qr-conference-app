@@ -33,7 +33,6 @@ import com.genuitec.qfconf.backend.model.DataTableResult;
 @Produces({ "application/xml", "application/json" })
 @Path("conferences")
 @RolesAllowed({ "myeclipseWeb" })
-@SuppressWarnings("unchecked")
 public class ConferencesResource {
 
 	private Logger log = Logger.getLogger(ConferencesResource.class.getName());

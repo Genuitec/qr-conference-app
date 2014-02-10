@@ -37,7 +37,7 @@ input:hover,textarea:hover,input:focus,textarea:focus {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 5px;
 }
 
-label {
+label.right {
 	margin-left: 10px;
 	color: #999999;
 }
@@ -54,4 +54,9 @@ label {
 	-webkit-border-radius: 3px;
 	text-decoration: none;
 	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+}
+
+fieldset {
+	border-width: 0px;
+	
 }

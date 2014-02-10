@@ -264,6 +264,21 @@ strong {
 	color: #1B75BB;
 }
 
+.ui-button-text-only .ui-button-text {
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: normal;
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+	padding: 6px 20px;
+}
+
+.ui-dialog .ui-dialog-title {
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: normal;
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+}
+
 .dataTables_wrapper .ui-toolbar {
 	padding-top: 1px;
 	padding-right: 2px;

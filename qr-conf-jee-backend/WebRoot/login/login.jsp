@@ -39,11 +39,11 @@
 	<form name="loginForm" method="POST" action="j_security_check">
 		<input type="hidden" value="Login" />
 		<p class="j_username">
-			<input type="text" name="j_username" id="j_username" size="25"><label
+			<input type="text" name="j_username" id="j_username" size="25"><label class="right"
 				for="j_username">User Name</label>
 		</p>
 		<p class="j_password">
-			<input type="password" size="15" name="j_password" id="j_password"><label
+			<input type="password" size="15" name="j_password" id="j_password"><label class="right"
 				for="j_password">Password</label>
 		</p>
 		<p class="submit">

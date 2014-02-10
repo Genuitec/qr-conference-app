@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "datatable")
 public class DataTableResult {
-	private List<String[]> aaData;
+	private List<String[]> aaData = new ArrayList<String[]>();
 
 	@XmlElement(name = "aaData")
 	public List<String[]> getRowData() {
