@@ -1,15 +1,14 @@
-
 <%
-	/*******************************************************************************
-	 *  Copyright (c) 2014 Genuitec, LLC.
-	 *  All rights reserved. This program and the accompanying materials
-	 *  are made available under the terms of the Eclipse Public License v1.0
-	 *  which accompanies this distribution, and is available at
-	 *  http://www.eclipse.org/legal/epl-v10.html
-	 * 
-	 *  Contributors:
-	 *     Genuitec, LLC - initial API and implementation using MyEclipse
-	 *******************************************************************************/
+/*******************************************************************************
+ *  Copyright (c) 2014 Genuitec, LLC.
+ *  All rights reserved. This program and the accompanying materials
+ *  are made available under the terms of the Eclipse Public License v1.0
+ *  which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ * 
+ *  Contributors:
+ *     Genuitec, LLC - initial API and implementation using MyEclipse
+ *******************************************************************************/
 %>
 <%@ page language="java" pageEncoding="ISO-8859-1"
 	import="java.util.*,java.text.*,com.genuitec.qfconf.backend.model.*,com.genuitec.qfconf.backend.ws.*"%>
@@ -202,7 +201,6 @@ $.fn.dataTableExt.oApi.fnReloadAjax = function ( oSettings, sNewSource, fnCallba
 						bValid = bValid && checkRegexp(endsOn, /^(19|20)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])$/i, "Stops On must be in YYYY/MM/DD format.");
 	
 						if (bValid) {
-							
 							var serialized = $("#conferenceForm").serializeArray();
 					        var s = '';
 					        var data = {};
@@ -291,9 +289,6 @@ $.fn.dataTableExt.oApi.fnReloadAjax = function ( oSettings, sNewSource, fnCallba
 								});
 			});
 	</script>
-
-	<br />
-	<h3>Other Actions</h3>
 	<p>
 		<button id="add-conference">Add Conference</button>
 	</p>

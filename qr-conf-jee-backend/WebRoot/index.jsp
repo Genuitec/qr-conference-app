@@ -26,15 +26,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="expires" content="0">
 <link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 <link href="css/genuitec-styles.css" rel="stylesheet">
+<link href="css/genuitec-forms.css" rel="stylesheet">
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.js"></script>
+<script>
+$(function() {
+	$("#conference-list").button().click(function() {
+		window.location.href="admin/";
+	});
+});
+</script>
 </head>
 
 <body>
 	<h1>Welcome to the QR Conference Center</h1>
 	<h2>Log in to manage your conferences and contacts</h2>
 	<p>If you have permissions, you may access the QR Conference center to track conference<br/>
-	attendees, export contacts, and manage your conference list.<br/>&nbsp;</p>
-	<p><a class="button" href="admin/">Enter the Center</a></p>
+	attendees, export contacts, and manage your conference list.</p>
+	<p>
+		<button id="conference-list">View Conferences</button>
+	</p>
 </body>
 </html>

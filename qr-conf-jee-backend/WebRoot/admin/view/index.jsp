@@ -47,6 +47,9 @@
 </head>
 
 <body>
+
+	<div id="dialog" title="View Attendee"></div>
+
 	<h1>Manage the QR Conference Center</h1>
 	<h2>Attendees for <strong><%= conf.getName() %></strong></h2>
 	<table id="attendees" width="100%">
@@ -111,12 +114,33 @@
 			var row = oTable.fnGetData(this);
 			if (null != row) {
 				var id = row[0];
-				// do something with attendee ID (pop-up dialog?)
+				$.ajax({
+				    url: 'admin/view/attendee/?conf=<%= conf.getId() %>&id='+id,
+				    success: function(data) {
+				    	$("#dialog").html(data).dialog({
+							autoOpen : false,
+							height : 350,
+							width : 600,
+				    		modal:true
+						}).dialog('open');
+				    }
+				});
 			}
 		});
 	} );
-	</script><br/>
-	<h3>Other Actions</h3>
-	<a class="buttongreen" href="admin/add/attendee/?id=<%= conf.getId() %>">Manually Add Attendee</a>&nbsp;&nbsp;<a class="button" href="admin">Back to Conference List</a>
+	$(function() {
+		$("#add-attendee").button().click(function() {
+			window.location.href="admin/add/attendee/?id=<%= conf.getId() %>";
+		});
+		$("#conference-list").button().click(function() {
+			window.location.href="admin/";
+		});
+	});
+	</script>
+	<p>
+		<button id="add-attendee">Manually Add Attendee</button>
+		<button id="conference-list">Back to Conferences</button>
+	</p>
+
 </body>
 </html>
