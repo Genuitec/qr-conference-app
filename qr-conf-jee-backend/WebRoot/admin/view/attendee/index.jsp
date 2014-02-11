@@ -51,8 +51,11 @@
 	        	out.println("<label class='details'>Company</label>"+attendee.getOrganization()+"<br/>");
 	    	if (Validate.isNonEmpty(attendee.getTitle()))
 	        	out.println("<label class='details'>Title</label>"+attendee.getTitle()+"<br/>");
+	    	out.print("<label class='details'>Email</label>");
 	    	if (Validate.isNonEmpty(attendee.getEmail()))
-	        	out.println("<label class='details'>Email</label>"+attendee.getEmail()+"<br/>");
+	        	out.println(attendee.getEmail()+"<br/>");
+	    	else
+	        	out.println("<i style='color: #9999aa'>Not Available</i><br/>");
         %>
         <h6>Contact Numbers</h6>
         <%
@@ -70,7 +73,7 @@
 	        	number = true;
 	    	}
 	    	if (!number) {
-	    		out.println("<label class='details'>Phones</label>Not Available<br/>");
+	    		out.println("<label class='details'>Phones</label><i style='color: #9999aa'>Not Available</i><br/>");
 	    	}
         %>
     </div>
@@ -121,7 +124,7 @@
 	        	address = true;
 	    	}
 	    	if (!address) {
-	    		out.println("<label class='details'>Address</label>Not Available<br/>");
+	    		out.println("<label class='details'>Address</label><i style='color: #9999aa'>Not Available</i><br/>");
 	    	}
 		%>
     </div>
