@@ -22,6 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.persistence.annotations.Index;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.genuitec.qfconf.backend.serialize.YYYYMMDDHHMMDateDeserializer;
+import com.genuitec.qfconf.backend.serialize.YYYYMMDDHHMMDateSerializer;
+
 @Entity
 @XmlRootElement
 public class Attendee {
@@ -203,6 +208,8 @@ public class Attendee {
 		return scannedAt;
 	}
 
+	@JsonDeserialize(using = YYYYMMDDHHMMDateDeserializer.class)
+	@JsonSerialize(using = YYYYMMDDHHMMDateSerializer.class)
 	public void setScannedAt(Date scannedAt) {
 		this.scannedAt = scannedAt;
 	}
@@ -211,6 +218,8 @@ public class Attendee {
 		return modifiedAt;
 	}
 
+	@JsonDeserialize(using = YYYYMMDDHHMMDateDeserializer.class)
+	@JsonSerialize(using = YYYYMMDDHHMMDateSerializer.class)
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}

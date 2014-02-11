@@ -60,3 +60,9 @@ fieldset {
 	border-width: 0px;
 	
 }
+
+div.dataTables_filter input {
+	padding: 2px;
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+	font-size: 11pt;
+}

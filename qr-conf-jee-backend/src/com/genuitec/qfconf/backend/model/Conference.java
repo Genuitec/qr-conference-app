@@ -19,6 +19,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.genuitec.qfconf.backend.serialize.YYYYMMDDDateDeserializer;
+import com.genuitec.qfconf.backend.serialize.YYYYMMDDDateSerializer;
+
 @Entity
 @XmlRootElement
 public class Conference implements Comparable<Conference> {
@@ -52,6 +57,8 @@ public class Conference implements Comparable<Conference> {
 		return startsOn;
 	}
 
+	@JsonDeserialize(using = YYYYMMDDDateDeserializer.class)
+	@JsonSerialize(using = YYYYMMDDDateSerializer.class)
 	public void setStartsOn(Date startsOn) {
 		this.startsOn = startsOn;
 	}
@@ -60,6 +67,8 @@ public class Conference implements Comparable<Conference> {
 		return endsOn;
 	}
 
+	@JsonDeserialize(using = YYYYMMDDDateDeserializer.class)
+	@JsonSerialize(using = YYYYMMDDDateSerializer.class)
 	public void setEndsOn(Date endsOn) {
 		this.endsOn = endsOn;
 	}
