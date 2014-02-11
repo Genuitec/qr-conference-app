@@ -116,6 +116,8 @@
 		width: 420px;
  	}
  	div.buttons {
+		display: inline-block; 	
+		float: left;
  		overflow: auto;
  		width: 100%;
  	}

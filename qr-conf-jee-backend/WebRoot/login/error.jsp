@@ -28,16 +28,24 @@
 <meta http-equiv="expires" content="0">
 <link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 <link href="css/genuitec-styles.css" rel="stylesheet">
+<link href="css/genuitec-forms.css" rel="stylesheet">
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.js"></script>
 </head>
 
 <body>
+	<script>
+		$(function() {
+			$("#try-again").button().click(function() {
+				window.location.href = "admin/";
+			});
+		});
+	</script>
 	<h1>Welcome to the QR Conference Center</h1>
 	<h2>Invalid username or password</h2>
 
 	<p>Please enter a user name or password that is authorized to
 		access this application.<br/>&nbsp;</p>
-	<p><a class="button" href="admin/">Try Again</a></p>
+	<p><button id="try-again">Try Again</button></p>
 </body>
 </html>

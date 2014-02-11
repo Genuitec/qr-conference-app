@@ -34,6 +34,11 @@
 </head>
 
 <body>
+	<script>
+		$(function() {
+			$("#login").button();
+		});
+	</script>
 	<h1>Welcome to the QR Conference Center</h1>
 	<h2>Provide your login credentials to proceed</h2>
 	<form name="loginForm" method="POST" action="j_security_check">
@@ -47,7 +52,7 @@
 				for="j_password">Password</label>
 		</p>
 		<p class="submit">
-			<input type="submit" value="Login" />
+			<button id="login">Login</button>
 		</p>
 	</form>
 </body>
