@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>QR conf</title>
+        
+        <link rel="stylesheet"  href="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css">
+        <link rel="stylesheet"  href="assets/css/app.css">
+        <!--<link rel="stylesheet" href="_assets/css/jqm-demos.css">-->
+        
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        
+        <script src="assets/libs/jquery-1.10.2.min.js"></script>
+        <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+        
+        <script src="assets/libs/html5-qrcode.min.js"></script>
+        
+        <script src="assets/libs/jquery-1.10.2.min.js"></script>
+        
+        <script src="assets/helpers/helpers.js"></script>
+        <script src="assets/helpers/localStorage_helper.js"></script>
+        
+        
+        <script src="app/app.js"></script>
+        <script src="app/config/autoload.js"></script>
+        <script src="app/config/config.js"></script>
+        <script src="app/resources/roomer_api.js"></script>
+       
+        <script src="app/models/Hotel.js"></script>
+       
+        <script src="app/widgets.js"></script>
+        <script src="app/viewHelpers/home_page.js"></script>
+        
+        <script src="app/controller.js"></script>
+        <script src="app/router.js"></script>
+    
+        
+        <script>
+//        $(document).ready(function(){
+//              
+//            $('#reader').html5_qrcode(function(data){
+//                console.log("Yeah!");
+//
+//                },function(error){
+//                    console.log("error");
+//                }, function(videoError){
+//                    console.log(videoError);
+//                    console.log("video error");
+//            });
+//        });
+        </script>
+    </head>
+    <body>
+        
+         
+        
+       <!-- scannow_page -->
+       <!-- scannow_page -->
+        <div id="scannowpage" data-role="page">
+            <div data-role="header">
+                <h1>Scan Now</h1>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+                <!--<p>Scanner</p>-->
+                <div class="scan-area">
+                    <div class="scan-corner-lt"></div> 
+                    <div class="scan-corner-rt"></div> 
+                    <div class="scan-corner-lb"></div> 
+                    <div class="scan-corner-rb"></div> 
+                </div>
+                
+                <div class="recent-scans">
+                    <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
+                    <ul data-role="listview">
+                        <li><a href="#scaninfopage?id=1">Bob Simpeton</a></li>
+                        <li><a href="#scaninfopage?id=2">Jane Walker</a></li>
+                        <li><a href="#scaninfopage?id=3">That guy</a></li>
+                        <li><a href="#scaninfopage?id=4">Yo man</a></li>
+                    </ul>
+                </div>
+                
+                
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /scannow_page -->
+        <!-- /scannow_page -->
+        
+        <!-- scaninfo_page -->
+        <!-- scaninfo_page -->
+        <div id="scaninfopage" data-role="page">
+            <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
+                <h1>Jane Walker</h1>
+                <p class="email">jane@walker.com</p>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+                
+                <form>
+                    <div class="rating form-part first-form-part">
+                        <h2>Rapid Rating</h2>
+                        <div class="form-part-wrapper">
+                            <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                                <label class="cold" for="radio-choice-h-2a">Cold</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                                <label class="warm" for="radio-choice-h-2b">Warm</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+                                <label class="hot" for="radio-choice-h-2c">Hot</label>
+                            </fieldset>
+
+                            <fieldset data-role="controlgroup">
+                                <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
+                                <input type="checkbox" name="checkbox-2" id="checkbox-2">
+                            </fieldset>
+                        </div>
+                    </div>
+                    
+                    <div class="form-part">
+                        <h2>Contact Tags</h2>
+                        <div class="form-part-wrapper tags-wrapper">
+                            <div class="tags">
+                                <ul>
+                                    <li>RCP</li>
+                                    <li>Call</li>
+                                    <li>Eclipse IDE</li>
+                                    <li>Large Op</li>
+                                    <li>My Eclipse</li>
+                                    <li>Cool</li>
+                                    <li>Friendly</li>
+                                    <li>RCP</li>
+                                    <li>Call</li>
+                                    <li>Eclipse IDE</li>
+                                    <li>Large Op</li>
+                                    <li>My Eclipse</li>
+                                    <li>Cool</li>
+                                    <li>Friendly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-part">
+                        <h2>Notes</h2>
+                        <div class="form-part-wrapper">
+                            <div class="notes">
+                                <p>No notes added yet. Double tap to edit notes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-part">
+                        <h2>Contact details</h2>
+                        <div class="form-part-wrapper">
+                             <ul data-role="listview" data-inset="true">
+                                <li class="ui-field-contain">
+                                    <label>Name:</label>
+                                    <label>Jane Walker</label>
+                                </li>
+                                <li class="ui-field-contain">
+                                    <label>Title:</label>
+                                    <label>Chief Engineer</label>
+                                </li>
+                                <li class="ui-field-contain">
+                                    <label>Company</label>
+                                    <label>Yo</label>
+                                </li>
+                                <li class="ui-field-contain">
+                                    <label>Email(s):</label>
+                                    <label>jane@gmail.com</label>
+                                </li>
+                                <li class="ui-field-contain">
+                                    <label>Address</label>
+                                    <label>Usa, NY, Central Part 3/2 adsnjsanjdkaskd</label>
+                                </li>
+                                <li class="ui-field-contain">
+                                    <label>Website</label>
+                                    <label>company.com</label>
+                                </li>
+                                 <li class="ui-body ui-body-b">
+                                    <div data-role="navbar">
+                                        <ul>
+                                            <li><a href="#" class="ui-btn-active">Call</a></li>
+                                            <li><a href="#">Email</a></li>
+                                            <li><a href="#">Web</a></li>
+                                        </ul>
+                                    </div><!-- /navbar -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /scaninfo_page -->
+        <!-- /scaninfo_page -->
+
+        <!-- login_page -->
+       <!-- login_page -->
+        <div id="login_page" data-role="page">
+            <div data-role="header">
+                <h2>QR Conference Buddy</h2>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content recent-scans">
+                <!--<p>Scanner</p>-->
+                <h2>Log in to your company's server:</h2>
+                <div class="form">
+                    <form method="post" action="demoform.asp">
+                        <div>
+                         <label for="hosturl">Host URL:</label>
+                         <input type="text" name="hosturl" id="hosturl" value="http://">
+                         <label for="userid">User ID:</label>
+                         <input type="text" name="userid" id="userid">
+                         <label for="password">Password:</label>
+                         <input type="password" name="password" id="password">
+                        </div>
+                        <div>
+                            <input type="submit" id="submit" value="Login">
+                        </div>
+                    </form>
+                    <div class="text">
+                        <p>For information on setting up your own server, go to genuitec.com/confbuddy or you can try out the example server at http:// confbuddy.github.com/example/</p>
+                    </div>
+                </div>
+                    
+                
+                
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+         <!-- chconf_page -->
+       <!-- chconf_page -->
+        <div id="chconf_page" data-role="page">
+            <div data-role="header">
+                <h1>QR Conference Buddy</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <!--<p>Scanner</p>-->
+                <div class="main">
+                    <a href="#eclipse2014" class="ui-btn ui-btn-icon-right ui-icon-carat-r">EclipseCon 2014 NA</a>
+                </div>
+                <div>
+                    <a href="#addconf" data-role="button" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
+                        <span class="ui-btn-inner">
+                            <span class="ui-btn-text">Add Conference</span>
+                        </span>
+                    </a>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+        <!-- eclipse2014_page -->
+       <!-- eclipse2014_page -->
+        <div id="attendees" data-role="page">
+            <div data-role="header">
+                <h1>Browse Attendees</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <div class="recent-scans">
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-first-child"><a href="#alphabetical" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Alphabetical</a></li>
+                        <li><a href="#today" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Today</a></li>
+                        <li><a href="#follow" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Follow up</a></li>
+                        <li class="ui-last-child"><a href="#hotlead" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Hot Leads</a></li>
+                        <li class="ui-last-child"><a href="#warmlead" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Warm Leads</a></li>
+                    </ul>
+                </div>
+                <div class="attend">
+                    <h2>By Contact Tags</h2>
+                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Eclipse IDE</a>
+                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mobile</a>
+                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">RCP</a>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+        <!-- eclipse2014_page -->
+       <!-- eclipse2014_page -->
+        <div id="eclipse2014" data-role="page">
+            <div data-role="header">
+                <h1>EclipseCon 2014 NA</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <!--<p>Scanner</p>-->
+                <div class="main">
+                    <a href="#scannow_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Scan Now</a>
+                </div>
+                <div class="recent-scans">
+                    <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Simpeton</a></li>
+                        <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Walker</a></li>
+                        <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">That guy</a></li>
+                        <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Yo man</a></li>
+                    </ul>
+                </div>
+                <div class="attend">
+                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Browse Attendees</a>
+                </div>
+                <div>
+                <h2>Conference Stats</h2>
+                    <table id="my-table">
+                        <tbody>
+                          <tr>
+                              <td>Total scans</td>
+                              <td class="right"><a href="#" data-rel="external">121(9 offline)</a></td>
+                          </tr>
+                          <tr>
+                              <td>Top Leads</td>
+                              <td class="right"><a href="#" data-rel="external">9 hot & 17 warm</a></td>
+                          </tr>
+                          <tr>
+                              <td>Followups</td>
+                              <td class="right"><a href="#" data-rel="external">5 needed(3 done)</a></td>
+                          </tr>
+                          <tr>
+                              <td>Last Sync</td>
+                              <td class="right">5 minutes ago</td>
+                          </tr>
+                          
+                          </tbody>
+                    </table>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+         <!-- eclipse2014_page -->
+       <!-- eclipse2014_page -->
+        <div id="sortattend" data-role="page">
+            <div data-role="header">
+                <h1>Today</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <div class="recent-scans">
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">John Watersmith<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                        <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Appleseed<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
+                        <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Fitzgerald<br /><span class="scanned">Scanned by Jane today at 15:21</span></a></li>
+                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Paul Scotty<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mary Jane<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                        <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Makrus Kraus<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                    </ul>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+    </body>
+</html>
