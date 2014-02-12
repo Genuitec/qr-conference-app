@@ -147,7 +147,8 @@
         var hashset;
         $(document).on("click", 'a', function(){
 //            console.log("aaaa click")
-            hashset = $(this).attr("href").match(/.*(#.*)/)[1];
+//            hashset = $(this).attr("href").match(/.*(#.*)/)[1];
+            hashset = $(this).attr("href").match(/^#(.[^\?]+)\?*/)[1];
             sessionStorage_helper.set("params", _get_page_params( ($(this).attr("href").replace("#", "")) ));
         });
         
@@ -156,16 +157,26 @@
             console.log(h.newURL);
             console.log(hashset);
             
-            if(h.newURL.match(/.*#(.*)/) === null || h.newURL.match(/.*#(.*)/)[1] === "")
-                if(h.newURL.match(/.*(#.*)/)[1] === hashset)
+//            if(h.newURL.match(/.*#(.*)/) === null || h.newURL.match(/.*#(.*)/)[1] === "")
+//                if(h.newURL.match(/.*(#.*)/)[1] === hashset)
+//                    return routetogo("scannowpage", false, true);
+//                else
+//                    return routetogo("scannowpage", true, true);
+//            else
+//                if(h.newURL.match(/.*(#.*)/)[1] === hashset)
+//                    return routetogo(h.newURL.match(/.*#(.*)/)[1], false, true);
+//                else 
+//                    return routetogo(h.newURL.match(/.*#(.*)/)[1], true, true);
+            if(h.newURL.match(/^#(.[^\?]+)\?*/) === null || h.newURL.match(/^#(.[^\?]+)\?*/)[1] === "")
+                if(h.newURL.match(/^#(.[^\?]+)\?*/)[1] === hashset)
                     return routetogo("scannowpage", false, true);
                 else
                     return routetogo("scannowpage", true, true);
             else
-                if(h.newURL.match(/.*(#.*)/)[1] === hashset)
-                    return routetogo(h.newURL.match(/.*#(.*)/)[1], false, true);
+                if(h.newURL.match(/^#(.[^\?]+)\?*/)[1] === hashset)
+                    return routetogo(h.newURL.match(/^#(.[^\?]+)\?*/)[1], false, true);
                 else 
-                    return routetogo(h.newURL.match(/.*#(.*)/)[1], true, true);
+                    return routetogo(h.newURL.match(/^#(.[^\?]+)\?*/)[1], true, true);
         }, false);
 //        
 //        $(document).on("click", '[data-rel="back"]', function(e){
