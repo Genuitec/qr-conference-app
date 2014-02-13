@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.phonegap.example"
+        version     = "1.0.0"
+        versionCode = "10" >
+
+        <!-- versionCode is optional and Android only -->
+
+        <preference name="phonegap-version" value="3.1.0" />
+
+        <name>QR Conference</name>
+
+        <description>
+            QR Conference Mobile application and backend for tracking conference attendees
+            that you speak to at an exhibition booth, when conference attendees have QR codes
+            on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
+        </description>
+
+        <author href="http://yoursite.com" email="you@youremail.com">
+            Genuitec
+        </author>
+
+    </widget>
