@@ -1,7 +1,10 @@
 /* #scannow_page */
 #scannow_page .scan-area {
     height: 400px;
+}
+#scannow_page .scan-area .scan-inner{
     position: relative;
+    height: 100%;
 }
 #scannow_page .scan-area .scan-corner-lt,
 #scannow_page .scan-area .scan-corner-rt,

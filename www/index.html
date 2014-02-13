@@ -15,9 +15,7 @@
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
         
         <script src="assets/libs/html5-qrcode.min.js"></script>
-        
-        <script src="assets/libs/jquery-1.10.2.min.js"></script>
-        
+                
         <script src="assets/helpers/helpers.js"></script>
         <script src="assets/helpers/localStorage_helper.js"></script>
         
@@ -30,26 +28,11 @@
         <script src="app/models/Hotel.js"></script>
        
         <script src="app/widgets.js"></script>
-        <script src="app/viewHelpers/home_page.js"></script>
+        <script src="app/viewHelpers/scannow_page.js"></script>
+        <script src="app/viewHelpers/scaninfo_page.js"></script>
         
         <script src="app/controller.js"></script>
         <script src="app/router.js"></script>
-    
-        
-        <script>
-//        $(document).ready(function(){
-//              
-//            $('#reader').html5_qrcode(function(data){
-//                console.log("Yeah!");
-//
-//                },function(error){
-//                    console.log("error");
-//                }, function(videoError){
-//                    console.log(videoError);
-//                    console.log("video error");
-//            });
-//        });
-        </script>
     </head>
     <body>
         
@@ -57,29 +40,30 @@
         
        <!-- scannow_page -->
        <!-- scannow_page -->
-        <div id="scannowpage" data-role="page">
+        <div id="scannow_page" data-role="page">
             <div data-role="header">
                 <h1>Scan Now</h1>
             </div><!-- /header -->
             <div role="main" class="ui-content">
                 <!--<p>Scanner</p>-->
-                <div class="scan-area">
-                    <div class="scan-corner-lt"></div> 
-                    <div class="scan-corner-rt"></div> 
-                    <div class="scan-corner-lb"></div> 
-                    <div class="scan-corner-rb"></div> 
+                <div class="scan-area" id="scanner">
+                    <div class="scan-inner">
+                        <div class="scan-corner-lt"></div> 
+                        <div class="scan-corner-rt"></div> 
+                        <div class="scan-corner-lb"></div> 
+                        <div class="scan-corner-rb"></div> 
+                    </div>
                 </div>
                 
                 <div class="recent-scans">
                     <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
                     <ul data-role="listview">
-                        <li><a href="#scaninfopage?id=1">Bob Simpeton</a></li>
-                        <li><a href="#scaninfopage?id=2">Jane Walker</a></li>
-                        <li><a href="#scaninfopage?id=3">That guy</a></li>
-                        <li><a href="#scaninfopage?id=4">Yo man</a></li>
+                        <li><a href="#scaninfo_page?id=1">Bob Simpeton</a></li>
+                        <li><a href="#scaninfo_page?id=2">Jane Walker</a></li>
+                        <li><a href="#scaninfo_page?id=3">That guy</a></li>
+                        <li><a href="#scaninfo_page?id=4">Yo man</a></li>
                     </ul>
                 </div>
-                
                 
             </div><!-- /content -->
             <div data-role="footer">
@@ -91,7 +75,7 @@
         
         <!-- scaninfo_page -->
         <!-- scaninfo_page -->
-        <div id="scaninfopage" data-role="page">
+        <div id="scaninfo_page" data-role="page">
             <div data-role="header">
                 <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>Jane Walker</h1>

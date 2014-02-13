@@ -1,19 +1,18 @@
 (function(Controller, viewHelpers, Models, Router){
     
-    Controller.scannowpage = function(params, load){
-//        Async.parallel({
-//            amazing_deals: Models.Deal.amazing_deals,
-//            last_minute_deals: Models.Deal.last_minute_deals
-//        }, function(data){
-            console.log("111");
-            viewHelpers.scannowpage();
-            if(is_set(load))load();
-//        });
+    Controller.scannow_page = function(params, load){
+        viewHelpers.scannow_page();
+        
+        
+        if(is_set(load))load();
     };
-    Controller.scaninfopage = function(params, load){
-//        console.log(sessionStorage_helper.get("params"))
-        console.log("222");
-        console.log(params);
+    
+    Controller.scaninfo_page = function(params, load){
+        if(empty(params))return Router.redirect("scannow_page", {switchPage:true});
+        
+        viewHelpers.scaninfo_page();
+        
+        if(is_set(load))load();
     };
     
     
