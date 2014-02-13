@@ -22,6 +22,10 @@
             Genuitec
         </author>
         
+        <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
+
+        <feature name="http://api.phonegap.com/1.0/device" />
+        
         <!-- to enable individual permissions use the following examples -->
         <feature name="http://api.phonegap.com/1.0/battery"/>
         <feature name="http://api.phonegap.com/1.0/camera"/>
@@ -32,7 +36,4 @@
         <feature name="http://api.phonegap.com/1.0/network"/>
         <feature name="http://api.phonegap.com/1.0/notification"/>
         
-        
-        <gap:plugin name="com.phonegap.plugins.barcodescanner" />
-
     </widget>
