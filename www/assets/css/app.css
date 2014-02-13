@@ -9,10 +9,10 @@ h1 > span, h2 > span{
     outline: 0;
 }
 #scannow_page .scan-area:active .scan-corner{
-    border-color: red;
+    border-color: #1EBD1E;
 }
 #scannow_page .scan-area:active h1 > span{
-    color: red;
+    color: #1EBD1E;
 }
 #scannow_page .scan-area .scan-inner{
     position: relative;
