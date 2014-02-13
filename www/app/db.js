@@ -1,6 +1,7 @@
-(function(APP){
+//(function(APP){
    
-    APP.DB = 
+//    APP.DB = 
+    App.DB = 
         (new SQLite())
             .init("QRconference", // db name
                 ["cars", "users", "scans"], // tables listed here
@@ -75,4 +76,4 @@
                     category_id INTEGER NOT NULL)'],
                 true);
 
-}(App));
+//}(App));
