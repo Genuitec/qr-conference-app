@@ -1,4 +1,5 @@
 var App = {
+    DB          : {},
     viewHelpers : {},
     Controller  : {},
     Models      : {},

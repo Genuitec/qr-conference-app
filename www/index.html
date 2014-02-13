@@ -7,9 +7,8 @@
         
         <link rel="stylesheet"  href="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css">
         <link rel="stylesheet"  href="assets/css/app.css">
-        <!--<link rel="stylesheet" href="_assets/css/jqm-demos.css">-->
-        
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">-->
+        <link rel="stylesheet" href="assets/css/fonts.css">
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="barcodescanner.js"></script>
@@ -17,24 +16,21 @@
         
         <script src="assets/libs/jquery-1.10.2.min.js"></script>
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
-        
-        <!--<script src="assets/libs/html5-qrcode.min.js"></script>-->
-                
+                        
         <script src="assets/helpers/helpers.js"></script>
         <script src="assets/helpers/localStorage_helper.js"></script>
-        
+        <script src="assets/libs/db_helper.js"></script>
         
         <script src="app/app.js"></script>
+        <script src="app/db.js"></script>
         <script src="app/config/autoload.js"></script>
         <script src="app/config/config.js"></script>
-        <script src="app/resources/roomer_api.js"></script>
-       
-        <script src="app/models/Hotel.js"></script>
-       
-        <script src="app/widgets.js"></script>
+        <!--<script src="app/resources/roomer_api.js"></script>-->
+        <!--<script src="app/models/Hotel.js"></script>-->
+        <script src="app/widgets/loader.js"></script>
+        <script src="app/widgets/scan.js"></script>
         <script src="app/viewHelpers/scannow_page.js"></script>
         <script src="app/viewHelpers/scaninfo_page.js"></script>
-        
         <script src="app/controller.js"></script>
         <script src="app/router.js"></script>
     </head>
@@ -50,12 +46,15 @@
             </div><!-- /header -->
             <div role="main" class="ui-content">
                 <!--<p>Scanner</p>-->
-                <div class="scan-area" id="scanner">
+                <div class="scan-area" id="scanner" tabindex="0">
                     <div class="scan-inner">
-                        <div class="scan-corner-lt"></div> 
-                        <div class="scan-corner-rt"></div> 
-                        <div class="scan-corner-lb"></div> 
-                        <div class="scan-corner-rb"></div> 
+                        <div class="scan-inside">
+                            <h1><span>S</span>c<span>a</span>n n<span>o</span>w</h1>
+                        </div>
+                        <div class="scan-corner-lt scan-corner"></div> 
+                        <div class="scan-corner-rt scan-corner"></div> 
+                        <div class="scan-corner-lb scan-corner"></div> 
+                        <div class="scan-corner-rb scan-corner"></div> 
                     </div>
                 </div>
                 

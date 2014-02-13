@@ -1,10 +1,31 @@
 /* #scannow_page */
+h1 > span, h2 > span{
+    color: #27A9E1;
+}
+
 #scannow_page .scan-area {
-    height: 400px;
+    width: 70%;
+    margin: 20px auto;
+    outline: 0;
+}
+#scannow_page .scan-area:active .scan-corner{
+    border-color: red;
+}
+#scannow_page .scan-area:active h1 > span{
+    color: red;
 }
 #scannow_page .scan-area .scan-inner{
     position: relative;
     height: 100%;
+    text-align: center;
+    width: 100%;
+}
+#scannow_page .scan-area .scan-inner .scan-inside {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-size: 150%;
 }
 #scannow_page .scan-area .scan-corner-lt,
 #scannow_page .scan-area .scan-corner-rt,
