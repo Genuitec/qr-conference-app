@@ -1,5 +1,5 @@
 (function(APP){
-    
+   
     APP.DB = 
         (new SQLite())
             .init("QRconference", // db name
