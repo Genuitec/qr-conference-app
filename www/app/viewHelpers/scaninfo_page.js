@@ -6,7 +6,7 @@
             template = Handlebars.compile($("#scaninfo_page-template").html());
         
         $('#scaninfo_page section[data-role="templates"]').html(template(data));
-//        list.listview('refresh'); 
+//        list.listview('refresh');
         
     };
     
