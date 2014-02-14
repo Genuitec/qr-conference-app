@@ -5,7 +5,8 @@
             amount : 5
         },
         scans : {
-            db_fields : ["id", "type", "fn", "email", "tel", "changed", "version"]
+            db_fields : ["id", "type", "md5", "n", "fn", "title","org" , "email", "tel", "note", "categories", "changed", "version"],
+            error_already_exist : "Already Scanned"
         }
     };
     

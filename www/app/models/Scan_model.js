@@ -5,8 +5,18 @@
         create : function(data, callback){
             DB.insert("scans", data, callback);
         },
-        read : function(callback){
-            
+        read : function(where, callback){
+            DB.select();
+            DB.from("scans");
+            if(arguments.length === 2)
+                for(var i in where)
+                    DB.where(i+" = "+where[i]);
+            else callback = where;
+            DB.query(function(data){
+                var _data = strfield_to_array("email", data);
+                _data = strfield_to_array("tel", _data);
+                callback(_data);
+            });
         },
         update : function(callback){
             

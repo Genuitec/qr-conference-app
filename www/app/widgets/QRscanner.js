@@ -1,7 +1,8 @@
 (function(Widgets, vCardParser, Scan, getConfig){
     
-    var ScanHandler = function(scanData, callback, test){
+    var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
+        this.md5 = md5;
         this.scanData = scanData;
         this.callback = callback;
         
@@ -18,9 +19,17 @@
         },
         saveQrToDB = function(data){
             /** save to db and call callback(last_parsed data) **/
-            Scan.create( filter_fields(data, getConfig("scans", "db_fields") ), function(insertId){
-                data.id = insertId;
-                _self.callback(data);
+            data.md5 = _self.md5;
+            
+            Scan.read({md5:_self.md5}, function(checkData){
+                if(checkData.length > 0)
+                    return alert(getConfig("scans", "error_already_exist"));
+                
+                Scan.create( filter_fields(data, getConfig("scans", "db_fields") ), function(insertId){
+                    data.id = insertId;
+                    
+                    _self.callback(data);
+                });
             });
         };
             
@@ -40,7 +49,7 @@
                         /**
                          * success
                          */
-                        new ScanHandler(scanData.text, callback);
+                        new ScanHandler(scanData.text, md5(scanData.text), callback);
                         /**
                          * success
                          */
@@ -58,7 +67,7 @@
                             {value: "2222@mail.ru"}],
                     tel: [{value: "23213213231"},
                             {value: "2222@mail.ru"}],
-                }, callback, true);
+                }, "123", callback, true);
                 
                 callback({error:e});
                 console.log(e);

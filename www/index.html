@@ -69,12 +69,7 @@
                 
                 <div class="recent-scans">
                     <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
-                    <ul data-role="listview">
-                        <li><a href="#scaninfo_page?id=1">Bob Simpeton</a></li>
-                        <li><a href="#scaninfo_page?id=2">Jane Walker</a></li>
-                        <li><a href="#scaninfo_page?id=3">That guy</a></li>
-                        <li><a href="#scaninfo_page?id=4">Yo man</a></li>
-                    </ul>
+                    <ul data-role="listview"></ul>
                 </div>
                 
             </div><!-- /content -->
@@ -84,12 +79,6 @@
         </div><!-- /page -->
         <!-- /scannow_page -->
         <!-- /scannow_page -->
-        
-        <script id="recentscan-template" type="text/x-handlebars-template">
-            {{#each scans}}
-                <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
-            {{/each}}
-        </script>
         
         <!-- scaninfo_page -->
         <!-- scaninfo_page -->
@@ -102,6 +91,7 @@
             <div role="main" class="ui-content">
                 
                 <form>
+                    <section data-role="templates">
                     <div class="rating form-part first-form-part">
                         <h2>Rapid Rating</h2>
                         <div class="form-part-wrapper">
@@ -194,6 +184,7 @@
                             </ul>
                         </div>
                     </div>
+                    </section>
                 </form>
                 
             </div><!-- /content -->
@@ -378,5 +369,111 @@
         </div><!-- /page -->
         <!-- /login_page -->
         <!-- /login_page -->
+        
+        
+        
+        
+        <!-- templates -->
+        <script id="recentscan-template" type="text/x-handlebars-template">
+            {{#each scans}}
+                <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
+            {{/each}}
+        </script>
+        
+        <script id="scaninfo_page-template" type="text/x-handlebars-template">
+            <div class="rating form-part first-form-part">
+                <h2>Rapid Rating</h2>
+                <div class="form-part-wrapper">
+                    <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                        <label class="cold" for="radio-choice-h-2a">Cold</label>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                        <label class="warm" for="radio-choice-h-2b">Warm</label>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+                        <label class="hot" for="radio-choice-h-2c">Hot</label>
+                    </fieldset>
+
+                    <fieldset data-role="controlgroup">
+                        <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
+                        <input type="checkbox" name="checkbox-2" id="checkbox-2">
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="form-part">
+                <h2>Contact Tags</h2>
+                <div class="form-part-wrapper tags-wrapper">
+                    <div class="tags">
+                        <ul>
+                            <li>RCP</li>
+                            <li>Call</li>
+                            <li>Eclipse IDE</li>
+                            <li>Large Op</li>
+                            <li>My Eclipse</li>
+                            <li>Cool</li>
+                            <li>Friendly</li>
+                            <li>RCP</li>
+                            <li>Call</li>
+                            <li>Eclipse IDE</li>
+                            <li>Large Op</li>
+                            <li>My Eclipse</li>
+                            <li>Cool</li>
+                            <li>Friendly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-part">
+                <h2>Notes</h2>
+                <div class="form-part-wrapper">
+                    <div class="notes">
+                        <p>No notes added yet. Double tap to edit notes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-part">
+                <h2>Contact details</h2>
+                <div class="form-part-wrapper">
+                     <ul data-role="listview" data-inset="true">
+                        <li class="ui-field-contain">
+                            <label>Name:</label>
+                            <label>Jane Walker</label>
+                        </li>
+                        <li class="ui-field-contain">
+                            <label>Title:</label>
+                            <label>Chief Engineer</label>
+                        </li>
+                        <li class="ui-field-contain">
+                            <label>Company</label>
+                            <label>Yo</label>
+                        </li>
+                        <li class="ui-field-contain">
+                            <label>Email(s):</label>
+                            <label>jane@gmail.com</label>
+                        </li>
+                        <li class="ui-field-contain">
+                            <label>Address</label>
+                            <label>Usa, NY, Central Part 3/2 adsnjsanjdkaskd</label>
+                        </li>
+                        <li class="ui-field-contain">
+                            <label>Website</label>
+                            <label>company.com</label>
+                        </li>
+                         <li class="ui-body ui-body-b">
+                            <div data-role="navbar">
+                                <ul>
+                                    <li><a href="#" class="ui-btn-active">Call</a></li>
+                                    <li><a href="#">Email</a></li>
+                                    <li><a href="#">Web</a></li>
+                                </ul>
+                            </div><!-- /navbar -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+        <!-- templates -->
     </body>
 </html>

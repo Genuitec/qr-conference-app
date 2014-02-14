@@ -1,8 +1,6 @@
 (function(View, Router, QRscanner){
     
-    var template,
-    
-    list;
+    var template, list;
     
     $(document).ready(function(){
         template = Handlebars.compile($("#recentscan-template").html());

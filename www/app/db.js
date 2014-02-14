@@ -9,11 +9,17 @@
                 ['CREATE TABLE IF NOT EXISTS scans(\n\
                     id INTEGER PRIMARY KEY AUTOINCREMENT NULL,\n\
                     type VARCHAR(255) NULL,\n\
+                    n VARCHAR(255) NULL,\n\
                     fn VARCHAR(255) NOT NULL,\n\
                     email VARCHAR(255) NULL,\n\
                     tel VARCHAR(255) NULL,\n\
+                    note VARCHAR(255) NULL,\n\
+                    org VARCHAR(255) NULL,\n\
+                    title VARCHAR(255) NULL,\n\
+                    categories VARCHAR(255) NULL,\n\
                     changed VARCHAR(255) NULL,\n\
                     version VARCHAR(255) NULL,\n\
+                    md5 TEXT NULL,\n\
                     time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
         
                 'CREATE TABLE IF NOT EXISTS users(\n\
