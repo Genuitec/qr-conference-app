@@ -1,7 +1,12 @@
 (function(Config){
     
     var configs = {
-        
+        recent_scans : {
+            amount : 5
+        },
+        scans : {
+            db_fields : ["id", "type", "fn", "email", "tel", "changed", "version"]
+        }
     };
     
     Config.get = function(){

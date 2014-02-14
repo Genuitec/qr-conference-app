@@ -16,18 +16,25 @@
         
         <script src="assets/libs/jquery-1.10.2.min.js"></script>
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+        
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/myHelpers.js"></script>
+        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/async.js"></script>-->
+        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/localStorage_helper.js"></script>-->
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/db_helper.js"></script>
+        
+        <script src="assets/libs/handlebars-v1.3.0.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/handlebars_helpers.js"></script>
+        
         <script src="assets/bundles/vcardjs/src/Math.uuid.js"></script>
         <script src="assets/bundles/vcardjs/src/vcard.js"></script>
         <script src="assets/bundles/vcardjs/src/vcf.js"></script>
                         
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/helpers/helpers.js"></script>
-        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/helpers/localStorage_helper.js"></script>-->
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/db_helper.js"></script>
-        
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/app.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/db.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/autoload.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/config.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Scan_model.js"></script>
+        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/User_model.js"></script>-->
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/resources/vCardParser.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/loader.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/QRscanner.js"></script>
@@ -35,23 +42,6 @@
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/scaninfo_page.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/controller.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/router.js"></script>
-<!--        <script src="assets/libs/jquery-1.10.2.min.js"></script>
-        <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
-                        
-        <script src="assets/helpers/helpers.js"></script>
-        <script src="assets/helpers/localStorage_helper.js"></script>
-        <script src="assets/libs/db_helper.js"></script>
-        
-        <script src="app/app.js"></script>
-        <script src="app/db.js"></script>
-        <script src="app/config/autoload.js"></script>
-        <script src="app/config/config.js"></script>
-        <script src="app/widgets/loader.js"></script>
-        <script src="app/widgets/scan.js"></script>
-        <script src="app/viewHelpers/scannow_page.js"></script>
-        <script src="app/viewHelpers/scaninfo_page.js"></script>
-        <script src="app/controller.js"></script>
-        <script src="app/router.js"></script>-->
     </head>
     <body>
         
@@ -94,6 +84,12 @@
         </div><!-- /page -->
         <!-- /scannow_page -->
         <!-- /scannow_page -->
+        
+        <script id="recentscan-template" type="text/x-handlebars-template">
+            {{#each scans}}
+                <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
+            {{/each}}
+        </script>
         
         <!-- scaninfo_page -->
         <!-- scaninfo_page -->

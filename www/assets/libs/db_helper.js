@@ -16,10 +16,17 @@ var SQLite = function(){ // works with local SQLite DB
     },
 
     _querySuccess = function(tx, results, callback){
-        var len = results.rows.length, db_result = [];
-        for(var i = 0; i < len; i++)
-            db_result[i] = results.rows.item(i);
-        
+//        console.log(results);
+//        try{
+            var len = results.rows.length, db_result = [];
+            if(results.rows.length === 0 && results.rowsAffected > 0)
+                db_result = results;
+            else
+                for(var i = 0; i < len; i++)
+                    db_result[i] = results.rows.item(i);
+//        }catch(e){
+//            db_result = [];
+//        }
         return (callback ? callback(db_result) : true);
     },
 
@@ -408,18 +415,20 @@ var SQLite = function(){ // works with local SQLite DB
             console.log("inited");
 
             return {
-                select    : select,
-                from      : from,
-                where     : where,
-                where_in  : where_in,
-                order_by  : order_by,
-                join      : join,
-                left_join : left_join,
-                query     : query,
-                row       : row,
-                col       : col,
-                insert    : insert,
-                update    : update,
+                select          : select,
+                from            : from,
+                where           : where,
+                where_in        : where_in,
+                order_by        : order_by,
+                order_by_desc   : order_by_desc,
+                limit           : limit,
+                join            : join,
+                left_join       : left_join,
+                query           : query,
+                row             : row,
+                col             : col,
+                insert          : insert,
+                update          : update,
                 recreate_db : function(){
                     _init_db(db_name, db_tables, db_tables_sql, true);
                 }

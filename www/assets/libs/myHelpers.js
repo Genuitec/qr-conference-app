@@ -1,6 +1,10 @@
+String.prototype.trim = function(){
+    return this.replace(/^\s+|\s+$/g, "");
+};
+
 Array.range = function(a, b, step){
     var A= [];
-    if(typeof a== 'number'){
+    if(typeof a == 'number'){
         A[0]= a;
         step= step || 1;
         while(a+step<= b){
@@ -28,6 +32,50 @@ function clone_object(o, field_name, replace_with){
         oo[field_name] = trim_ar_strings(replace_with);
     return oo;
 }
+
+function clone_object_array_fields_to_str(o, field_name){
+    var oo = {}, field = "";
+    for(var i in o){
+        oo[i] = o[i];
+        if(arguments.length === 2 && is_array(o[i])){
+            o[i].forEach(function(arEl){
+                if(typeof(arEl) === "object")
+                    for(var k in arEl)
+                        if(k === field_name)
+                            field+= (field === "" ? arEl[k] : (","+arEl[k]));
+            });
+            oo[i] = field.trim();
+            field = "";
+        }
+    }
+    return oo;
+}
+
+function filter_fields(data, fields){
+    if(!is_array(fields) || arguments.length < 2)return false;
+    for(var i in data)
+        if(fields.indexOf(i) === -1)
+            delete data[i];
+    return data;
+}
+
+function trim_ar_strings(ar){
+    for(var i = 0; i< ar.length; ++i)
+        ar[i] = ar[i].replace(/^\s+|\s+$/g, "");
+    return ar;
+}
+
+function strfield_to_array(field, data){
+    if(data instanceof Array){
+        var _data = [];
+        data.forEach(function(v, k){
+            _data.push(clone_object(v, field, v[field].split(","))); // images string to array
+        });
+        return _data;
+    }else{
+        return clone_object(data, field, data[field].split(","));
+    }
+};
 
 function is_set(){ //many arguments
     try {
