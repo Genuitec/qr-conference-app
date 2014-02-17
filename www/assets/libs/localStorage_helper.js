@@ -1,6 +1,7 @@
-(function(local, session){
+//(function(local, session){
     
-    var l_Storage = function(Storage){
+//    var l_Storage = function(Storage){
+    myLocalStorage = function(Storage){
         return {
             set: function(k, v){
                 if(arguments.length !== 2)return false;
@@ -13,7 +14,6 @@
             get: function(k){
                 if(arguments.length !== 1)return false;
                 var result = Storage.getItem(k);
-    //            console.log(result);
                 if(result === null)return false;
                 if(result.match(/\[.*\]|\{.*\}/)){
                     return JSON.parse(result);
@@ -29,9 +29,9 @@
         };
     };
     
-    localStorage_helper = new l_Storage(local);
-    sessionStorage_helper = new l_Storage(session);
+//    localStorage_helper = new l_Storage(local);
+//    sessionStorage_helper = new l_Storage(session);
     
-}(localStorage, sessionStorage));
+//}(localStorage, sessionStorage));
 
 

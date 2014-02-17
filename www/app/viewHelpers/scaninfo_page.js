@@ -5,7 +5,7 @@
             template = Handlebars.compile($("#scaninfo_page-template").html());
         console.log(data);
         
-        $('#scaninfo_page').html(template(data)).trigger('create');;
+        $('#scaninfo_page').html(template(data)).trigger('create');
 //        list.listview('refresh');
         
     };

@@ -5,9 +5,10 @@
             amount : 5
         },
         scans : {
-            db_fields : ["id", "type", "md5", "n", "fn", "title","org" , "email", "tel", "note", "categories", "changed", "version"],
+            db_fields : ["id", "md5", "fn", "title", "org" , "email", "tel", "adr", "type", "version"],
             error_already_exist : "Already Scanned"
-        }
+        },
+        home_page : "chooseconference_page"
     };
     
     Config.get = function(){

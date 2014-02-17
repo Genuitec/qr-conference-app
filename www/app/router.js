@@ -1,4 +1,4 @@
-(function(Router, Controller, Loader){
+(function(Router, Controller, Loader, getConfig){
     
     // all specific routes goes here ---> F E app_page!==controller || hash !== controller
     var _routes = {
@@ -57,9 +57,11 @@
     },
             
     SwitchPage = function(params){
+        console.log("params")
 //        console.log("params")
-//        console.log("params")
-//        console.log(params)
+        console.log(params)
+//        console.log("SwitchPage");
+//        console.log(params);
         $.mobile.changePage("#"+params.page);
         
 //        params.hash = params.hash.replace(/^#/,"");
@@ -80,38 +82,28 @@
     };
     
     
-//    Router.redirect = function(page, params, history_need, callback){
-    Router.redirect = function(page, prms){ 
+    Router.redirect = function(page, prms){
         /**
-         * 
          * var prms = {
          *      params: 
          *      history_need:
          *      callback:
          * }
-         * 
          * */
-//        Loader.start();
-//        console.log(prms)
         if(!empty(prms)){
             if(is_set(prms.params))var params = prms.params.params;
             if(is_set(prms.history_need)) var history_need = prms.history_need;
             if(is_set(prms.callback)) var callback = prms.callback;
-//            if(is_set(prms.history_need)) var history_need = prms.history_need;
         }
         if(history_need !== false)var history_need = true;
         
         page = page.replace(/^#/,"");
-//        console.log(_passParams);
-//        console.log(_get_page_params(page));
         var page_and_params = (!is_set(_passParams) ? _get_page_params(page) : _passParams),
             route = {
                 app_page : page_and_params.app_page,
                 controller : page_and_params.app_page
             };
-                    
-//            _passParams = false;
-            
+                                
         if( !is_array(params) ){
             //adding params
             if(_check_params(params)){
@@ -133,15 +125,12 @@
 
         if(route.controller in Controller){
             route.hash = "#"+page;
-//            return _action(route, params, history_need, function(){
-            
             return _action(route, params, history_need, function(){
-//                SwitchPage({page: route.app_page, hash:page});
                 if(is_set(prms) && is_set(prms.switchPage))
                     SwitchPage({page: route.app_page, hash:page});
             });
         }
-        return Router.redirect("scannow_page");
+        return Router.redirect(getConfig("home_page"));
     };   
     
     Router.show_history = function(){
@@ -155,10 +144,9 @@
     Router.redirect_back = function(){
         if(_history.length > 1){
             var back_el = _history[_history.length-2];
-//            _last_hash = back_el.route.hash;
             Router.redirect(back_el.route.hash, back_el.params, false, back_el.callback);
             _history = _history.slice(0, _history.length-1);
-        }else return Router.redirect("scannow_page");
+        }else return Router.redirect(getConfig("home_page"));
     };
     
     Router.back = function(){
@@ -166,13 +154,15 @@
             var back_el = _history[_history.length-2];
             SwitchPage({page: back_el.route.app_page, hash: back_el.route.hash});
             _history = _history.slice(0, _history.length-1);
-        }else return Router.redirect("scannow_page");
+        }else return Router.redirect(getConfig("home_page"));
     };
     
         
     $(document).ready(function(){
-        $(document).on("click", 'a', function(){
+        $(document).on("click", 'a', function(e){
             if(!$(this).attr("data-rel") && $(this).attr("data-rel") !== "back"){
+//                e.preventDeafult;
+//                console.log("a");
                 var page_name = $(this).attr("href").match(/^#(.[^\?]+)\?*/)[1];
                 Router.redirect(page_name, {
                     params: _get_page_params( $(this).attr("href").replace("#", "") ),
@@ -182,39 +172,8 @@
             }
         });
         
-//        $(document).on("pagebeforeshow",function(data, ev){
-//            data.delegateTarget.baseURI
-//            console.log("data")
-//            return false
-//            console.log(data)
-//            console.log(ev)
-//        alert("pagebeforeshow event fired - pagetwo is about to be shown");
-//        });
-        
-        
-//        var hashset;
-//        $(document).on("click", 'a', function(){
-//            if($(this).attr("data-rel") && $(this).attr("data-rel") === "back")
-//                return false;
-//            hashset = $(this).attr("href").match(/^#(.[^\?]+)\?*/)[1];
-//            _passParams = _get_page_params( ($(this).attr("href").replace("#", "")) );
-//        });
-//        
-//        window.addEventListener("hashchange", function(h){
-//            if(h.newURL.match(/#(.[^\?]+)\?*/) === null || h.newURL.match(/#(.[^\?]+)\?*/)[1] === "")
-//                if(h.newURL.match(/#(.[^\?]+)\?*/)[1] === hashset)
-//                    return routetogo("scannow_page", false, true);
-//                else
-//                    return routetogo("scannow_page", true, true);
-//            else
-//                if(h.newURL.match(/#(.[^\?]+)\?*/)[1] === hashset)
-//                    return routetogo(h.newURL.match(/#(.*)/)[1], false, true);
-//                else 
-//                    return routetogo(h.newURL.match(/#(.*)/)[1], true, true);
-//        }, false);
-//        
         window.location.hash === "" ?
-            Router.redirect("scannow_page") : 
+            Router.redirect(getConfig("home_page")) : 
             Router.redirect(window.location.hash.replace("#", ""),{switchPage: true}); //start the app
 //        window.location.hash === "" ?
 //            routetogo("scannow_page", true, true) : 
@@ -232,4 +191,4 @@
     
    
     
-}(App.Router, App.Controller, App.Widgets.Loader));
+}(App.Router, App.Controller, App.Widgets.Loader, App.Config.get));

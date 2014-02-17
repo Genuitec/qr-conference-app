@@ -18,8 +18,8 @@
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
         
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/myHelpers.js"></script>
-        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/async.js"></script>-->
-        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/localStorage_helper.js"></script>-->
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/async.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/localStorage_helper.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/db_helper.js"></script>
         
         <script src="assets/libs/handlebars-v1.3.0.js"></script>
@@ -34,23 +34,94 @@
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/autoload.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/config.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Scan_model.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Conference_model.js"></script>
         <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/User_model.js"></script>-->
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/resources/vCardParser.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/loader.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/QRscanner.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/notes.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/scannow_page.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/scaninfo_page.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/chooseconference_page.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/conference_page.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/controller.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/router.js"></script>
     </head>
     <body>
         
-         
+        <!-- chconf_page -->
+        <!-- chconf_page -->
+        <div id="chooseconference_page" data-role="page">
+            <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
+                <h1>QR Conference Buddy</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <!--<p>Scanner</p>-->
+                <div class="main">
+                    <!-- templates -->
+                </div>
+                <div>
+                    <a href="#addconf" data-role="button" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
+                        <span class="ui-btn-inner">
+                            <span class="ui-btn-text">Add Conference</span>
+                        </span>
+                    </a>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
         
-       <!-- scannow_page -->
-       <!-- scannow_page -->
+        <!-- login_page -->
+        <!-- login_page -->
+        <div id="login_page" data-role="page">
+            <div data-role="header">
+                <h2>QR Conference Buddy</h2>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content recent-scans">
+                <!--<p>Scanner</p>-->
+                <h2>Log in to your company's server:</h2>
+                <div class="form">
+                    <form method="post" action="#chooseconference_page">
+                        <div>
+                         <label for="hosturl">Host URL:</label>
+                         <input type="text" name="hosturl" id="hosturl" value="http://">
+                         <label for="userid">User ID:</label>
+                         <input type="text" name="userid" id="userid">
+                         <label for="password">Password:</label>
+                         <input type="password" name="password" id="password">
+                        </div>
+                        <div>
+                            <input type="submit" id="submit" value="Login">
+                        </div>
+                    </form>
+                    <div class="text">
+                        <p>For information on setting up your own server, go to genuitec.com/confbuddy or you can try out the example server at http:// confbuddy.github.com/example/</p>
+                    </div>
+                </div>
+                    
+                
+                
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->        
+        
+        
+        <!-- scannow_page -->
+        <!-- scannow_page -->
         <div id="scannow_page" data-role="page">
             <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>Scan Now</h1>
             </div><!-- /header -->
             <div role="main" class="ui-content">
@@ -80,78 +151,16 @@
         <!-- /scannow_page -->
         <!-- /scannow_page -->
         
+        
         <!-- scaninfo_page -->
         <!-- scaninfo_page -->
         <div id="scaninfo_page" data-role="page"></div><!-- /page -->
         <!-- /scaninfo_page -->
         <!-- /scaninfo_page -->
-
-        <!-- login_page -->
-       <!-- login_page -->
-        <div id="login_page" data-role="page">
-            <div data-role="header">
-                <h2>QR Conference Buddy</h2>
-            </div>
-            <!-- /header -->
-            <div role="main" class="ui-content recent-scans">
-                <!--<p>Scanner</p>-->
-                <h2>Log in to your company's server:</h2>
-                <div class="form">
-                    <form method="post" action="demoform.asp">
-                        <div>
-                         <label for="hosturl">Host URL:</label>
-                         <input type="text" name="hosturl" id="hosturl" value="http://">
-                         <label for="userid">User ID:</label>
-                         <input type="text" name="userid" id="userid">
-                         <label for="password">Password:</label>
-                         <input type="password" name="password" id="password">
-                        </div>
-                        <div>
-                            <input type="submit" id="submit" value="Login">
-                        </div>
-                    </form>
-                    <div class="text">
-                        <p>For information on setting up your own server, go to genuitec.com/confbuddy or you can try out the example server at http:// confbuddy.github.com/example/</p>
-                    </div>
-                </div>
-                    
-                
-                
-            </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
-        </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->
-         <!-- chconf_page -->
-       <!-- chconf_page -->
-        <div id="chconf_page" data-role="page">
-            <div data-role="header">
-                <h1>QR Conference Buddy</h1>
-            </div>
-            <!-- /header -->
-            <div role="main" class="ui-content">
-                <!--<p>Scanner</p>-->
-                <div class="main">
-                    <a href="#eclipse2014" class="ui-btn ui-btn-icon-right ui-icon-carat-r">EclipseCon 2014 NA</a>
-                </div>
-                <div>
-                    <a href="#addconf" data-role="button" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
-                        <span class="ui-btn-inner">
-                            <span class="ui-btn-text">Add Conference</span>
-                        </span>
-                    </a>
-                </div>
-            </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
-        </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->
+        
+        
         <!-- eclipse2014_page -->
-       <!-- eclipse2014_page -->
+        <!-- eclipse2014_page -->
         <div id="attendees" data-role="page">
             <div data-role="header">
                 <h1>Browse Attendees</h1>
@@ -180,10 +189,60 @@
         </div><!-- /page -->
         <!-- /login_page -->
         <!-- /login_page -->
+        
+        
         <!-- eclipse2014_page -->
-       <!-- eclipse2014_page -->
-        <div id="eclipse2014" data-role="page">
+        <!-- eclipse2014_page -->
+        <div id="conference_page" data-role="page"></div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+        
+        
+        <!-- eclipse2014_page -->
+        <!-- eclipse2014_page -->
+        <div id="sortattend" data-role="page">
             <div data-role="header">
+                <h1>Today</h1>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content">
+                <div class="recent-scans">
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">John Watersmith<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                        <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Appleseed<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
+                        <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Fitzgerald<br /><span class="scanned">Scanned by Jane today at 15:21</span></a></li>
+                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Paul Scotty<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mary Jane<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                        <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Makrus Kraus<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+                    </ul>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->
+        
+        
+        
+        
+        <!-- templates -->
+        <script id="recentscan-template" type="text/x-handlebars-template">
+            {{#each scans}}
+                <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
+            {{/each}}
+        </script>
+        
+        <script id="chooseconference_page-template" type="text/x-handlebars-template">
+            {{#each this}}
+                <a href="#conference_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{name}}</a>
+            {{/each}}
+        </script>
+        
+        <script id="conference_page-template" type="text/x-handlebars-template">
+            <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>EclipseCon 2014 NA</h1>
             </div>
             <!-- /header -->
@@ -232,45 +291,8 @@
             <div data-role="footer">
                 <h4>Page Footer</h4>
             </div><!-- /footer -->
-        </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->
-         <!-- eclipse2014_page -->
-       <!-- eclipse2014_page -->
-        <div id="sortattend" data-role="page">
-            <div data-role="header">
-                <h1>Today</h1>
-            </div>
-            <!-- /header -->
-            <div role="main" class="ui-content">
-                <div class="recent-scans">
-                    <ul data-role="listview" class="ui-listview">
-                        <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">John Watersmith<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                        <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Appleseed<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
-                        <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Fitzgerald<br /><span class="scanned">Scanned by Jane today at 15:21</span></a></li>
-                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Paul Scotty<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mary Jane<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                        <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Makrus Kraus<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                    </ul>
-                </div>
-            </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
-        </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->
-        
-        
-        
-        
-        <!-- templates -->
-        <script id="recentscan-template" type="text/x-handlebars-template">
-            {{#each scans}}
-                <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
-            {{/each}}
+            
         </script>
-        
         <script id="scaninfo_page-template" type="text/x-handlebars-template">
             <div data-role="header">
                 <a href="#" data-role="button" data-rel="back">Go Back</a>
@@ -330,7 +352,20 @@
                         <h2>Notes</h2>
                         <div class="form-part-wrapper">
                             <div class="notes">
-                                <p>No notes added yet. Double tap to edit notes</p>
+                        
+                                <div data-role="notes" el-id="{{id}}">
+                                    <form data-role="note-form">
+                                        {{#if notes}}
+                                            <p>{{notes}}</p>
+                                        {{else}}
+                                            <p>No notes added yet. Double tap to edit notes</p>
+                                        {{/if}}
+                                        <textarea>{{notes}}</textarea>
+                                        <button type="button" data-role="note-reset">reset</button>
+                                        <button type="submit">submit</button>
+                                    </form>
+                                </div>
+                        
                             </div>
                         </div>
                     </div>
@@ -365,17 +400,17 @@
                                         {{/each}}
                                     </li>
                                 {{/if}}
-                                {{#if fn}}  
-                                <li class="ui-field-contain">
-                                    <label>Address</label>
-                                    <label><p>Usa, NY, Central Part 3/2 adsnjsanjdkaskd</p></label>
-                                </li>
+                                {{#if adr}}  
+                                    <li class="ui-field-contain">
+                                        <label>Address</label>
+                                        <label><p>{{adr}}</p></label>
+                                    </li>
                                 {{/if}}
-                                {{#if fn}}  
-                                <li class="ui-field-contain">
-                                    <label>Website</label>
-                                    <label>company.com</label>
-                                </li>
+                                {{#if web}}  
+                                    <li class="ui-field-contain">
+                                        <label>Website</label>
+                                        <label>{{web}}</label>
+                                    </li>
                                 {{/if}}
                                 <li class="ui-body ui-body-b">
                                     <div data-role="navbar">

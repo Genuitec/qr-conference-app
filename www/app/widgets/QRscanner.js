@@ -1,4 +1,4 @@
-(function(Widgets, vCardParser, Scan, getConfig){
+(function(Widgets, vCardParser, Scan, getConfig, Session){
     
     var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
@@ -15,13 +15,45 @@
         },
         handleQRdata = function(vCard){
             /** final parse data **/
-            saveQrToDB(clone_object_array_fields_to_str(vCard, "value"));
+            console.log("vCard");
+            console.log(vCard);
+//            saveQrToDB(clone_object_array_fields_to_str(vCard, "value"));
+            saveQrToDB( (function(o){
+                var oo = {}, field = "";
+                for(var i in o){
+                    oo[i] = o[i];
+                    if( (i === "email" || i === "tel") && is_array(o[i])){
+                        o[i].forEach(function(arEl){
+                            if(typeof(arEl) === "object")
+                                for(var k in arEl)
+                                    if(k === "value")
+                                        field+= (field === "" ? arEl[k] : (","+arEl[k]));
+                        });
+                        oo[i] = field.trim();
+                        field = "";
+                    }
+                    if(i === "org")
+                        oo[i] = o[i][0]['organization-name'];
+                    if(i === "adr")
+                        oo[i] = o[i]['value'];
+                    if(i === "title")
+                        oo[i] = o[i][0];
+                    if(i === "fn")
+                        oo[i] = o[i];
+                }
+                return oo;
+            }(vCard)) );        
         },
         saveQrToDB = function(data){
             /** save to db and call callback(last_parsed data) **/
             data.md5 = _self.md5;
-            
-            Scan.read({md5:_self.md5}, function(checkData){
+            data.conference_id = Session.get("conference_id");
+            console.log("saveQrToDB");
+            console.log(data);
+            Scan.read({
+                md5           :    _self.md5,
+                conference_id :    data.conference_id
+            }, function(checkData){
                 if(checkData.length > 0)
                     return alert(getConfig("scans", "error_already_exist"));
                 
@@ -78,4 +110,4 @@
         
     }());
     
-}(App.Widgets, App.Resources.vCardParser, App.Models.Scan, App.Config.get));
+}(App.Widgets, App.Resources.vCardParser, App.Models.Scan, App.Config.get, App.Session));

@@ -6,5 +6,6 @@ var App = {
     Router      : {},
     Widgets     : {},
     Resources   : {},
+    Session     : new myLocalStorage(sessionStorage),
     Config      : {}
 };

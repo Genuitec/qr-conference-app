@@ -1,3 +1,59 @@
+function strfield_to_array(field, data){
+    if(is_array(data)){
+        var _data = [];
+        data.forEach(function(v, k){
+            var f_split = [];
+            if(is_array(field))
+                field.forEach(function(iv){
+                    f_split.push(v[iv].split(","));
+                });
+            else
+                f_split = v[field].split(",");
+            _data.push(clone_object(v, field, f_split)); // images string to array
+        });
+        return _data;
+    }else{
+        var f_split = [];
+        if(is_array(field))
+            field.forEach(function(iv){
+                f_split.push(data[iv].split(","));
+            });
+        else
+            f_split = data[field].split(",");
+        return clone_object(data, field, f_split);
+    }
+};
+
+function clone_object(o, field_name, replace_with){
+    var oo = {};
+    for(var i in o){
+        oo[i] = o[i];
+
+        if(arguments.length === 3)
+            if(is_array(field_name)){
+                if(field_name.indexOf(i) >= 0){
+                    oo[i] = trim_ar_strings(replace_with[field_name.indexOf(i)]);
+                }
+            }else{
+                oo[field_name] = trim_ar_strings(replace_with);
+            }
+    }
+    return oo;
+}
+
+function trim_ar_strings(ar){
+    for(var i = 0; i< ar.length; ++i)
+        if(is_array(ar[i]))
+            for(var k = 0; k < ar[i].length; ++k)
+                ar[i][k] = ar[i][k].replace(/^\s+|\s+$/g, "");
+        else        
+            ar[i] = ar[i].replace(/^\s+|\s+$/g, "");
+    return ar;
+}
+
+
+
+
 String.prototype.trim = function(){
     return this.replace(/^\s+|\s+$/g, "");
 };
@@ -23,15 +79,14 @@ Array.range = function(a, b, step){
     return A;
 };
 
-function clone_object(o, field_name, replace_with){
-    var oo = {};
-    for(var i in o){
-        oo[i] = o[i];
-    }
-    if(arguments.length === 3)
-        oo[field_name] = trim_ar_strings(replace_with);
-    return oo;
-}
+//function clone_object(o, field_name, replace_with){
+//    var oo = {};
+//    for(var i in o)
+//        oo[i] = o[i];
+//    if(arguments.length === 3)
+//        oo[field_name] = trim_ar_strings(replace_with);
+//    return oo;
+//}
 
 function clone_object_array_fields_to_str(o, field_name){
     var oo = {}, field = "";
@@ -59,23 +114,23 @@ function filter_fields(data, fields){
     return data;
 }
 
-function trim_ar_strings(ar){
-    for(var i = 0; i< ar.length; ++i)
-        ar[i] = ar[i].replace(/^\s+|\s+$/g, "");
-    return ar;
-}
+//function trim_ar_strings(ar){
+//    for(var i = 0; i< ar.length; ++i)
+//        ar[i] = ar[i].replace(/^\s+|\s+$/g, "");
+//    return ar;
+//}
 
-function strfield_to_array(field, data){
-    if(data instanceof Array){
-        var _data = [];
-        data.forEach(function(v, k){
-            _data.push(clone_object(v, field, v[field].split(","))); // images string to array
-        });
-        return _data;
-    }else{
-        return clone_object(data, field, data[field].split(","));
-    }
-};
+//function strfield_to_array(field, data){
+//    if(data instanceof Array){
+//        var _data = [];
+//        data.forEach(function(v, k){
+//            _data.push(clone_object(v, field, v[field].split(","))); // images string to array
+//        });
+//        return _data;
+//    }else{
+//        return clone_object(data, field, data[field].split(","));
+//    }
+//};
 
 function is_set(){ //many arguments
     try {

@@ -155,21 +155,21 @@ h1 > span, h2 > span{
 }
 /*login_page*/
 /*chconf_page*/
-#chconf_page div.main {
+#chooseconference_page div.main {
     padding: 5% 0 65% 0;
 }
 /*chconf_page*/
-/*eclipse2014*/
-#eclipse2014 table{
+/*conference_page*/
+#conference_page table{
     width: 100%;
 }
-#eclipse2014 td.right{
+#conference_page td.right{
     text-align: right;
 }
-#eclipse2014 div.attend{
+#conference_page div.attend{
     margin-top: 10%;
 }
-/*eclipse2014*/
+/*conference_page*/
 
 /*sortattend*/
 #sortattend span.scanned {
