@@ -82,116 +82,7 @@
         
         <!-- scaninfo_page -->
         <!-- scaninfo_page -->
-        <div id="scaninfo_page" data-role="page">
-            <div data-role="header">
-                <a href="#" data-role="button" data-rel="back">Go Back</a>
-                <h1>Jane Walker</h1>
-                <p class="email">jane@walker.com</p>
-            </div><!-- /header -->
-            <div role="main" class="ui-content">
-                
-                <form>
-                    <section data-role="templates">
-                    <div class="rating form-part first-form-part">
-                        <h2>Rapid Rating</h2>
-                        <div class="form-part-wrapper">
-                            <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
-                                <label class="cold" for="radio-choice-h-2a">Cold</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
-                                <label class="warm" for="radio-choice-h-2b">Warm</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
-                                <label class="hot" for="radio-choice-h-2c">Hot</label>
-                            </fieldset>
-
-                            <fieldset data-role="controlgroup">
-                                <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
-                                <input type="checkbox" name="checkbox-2" id="checkbox-2">
-                            </fieldset>
-                        </div>
-                    </div>
-                    
-                    <div class="form-part">
-                        <h2>Contact Tags</h2>
-                        <div class="form-part-wrapper tags-wrapper">
-                            <div class="tags">
-                                <ul>
-                                    <li>RCP</li>
-                                    <li>Call</li>
-                                    <li>Eclipse IDE</li>
-                                    <li>Large Op</li>
-                                    <li>My Eclipse</li>
-                                    <li>Cool</li>
-                                    <li>Friendly</li>
-                                    <li>RCP</li>
-                                    <li>Call</li>
-                                    <li>Eclipse IDE</li>
-                                    <li>Large Op</li>
-                                    <li>My Eclipse</li>
-                                    <li>Cool</li>
-                                    <li>Friendly</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-part">
-                        <h2>Notes</h2>
-                        <div class="form-part-wrapper">
-                            <div class="notes">
-                                <p>No notes added yet. Double tap to edit notes</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-part">
-                        <h2>Contact details</h2>
-                        <div class="form-part-wrapper">
-                             <ul data-role="listview" data-inset="true">
-                                <li class="ui-field-contain">
-                                    <label>Name:</label>
-                                    <label>Jane Walker</label>
-                                </li>
-                                <li class="ui-field-contain">
-                                    <label>Title:</label>
-                                    <label>Chief Engineer</label>
-                                </li>
-                                <li class="ui-field-contain">
-                                    <label>Company</label>
-                                    <label>Yo</label>
-                                </li>
-                                <li class="ui-field-contain">
-                                    <label>Email(s):</label>
-                                    <label>jane@gmail.com</label>
-                                </li>
-                                <li class="ui-field-contain">
-                                    <label>Address</label>
-                                    <label>Usa, NY, Central Part 3/2 adsnjsanjdkaskd</label>
-                                </li>
-                                <li class="ui-field-contain">
-                                    <label>Website</label>
-                                    <label>company.com</label>
-                                </li>
-                                 <li class="ui-body ui-body-b">
-                                    <div data-role="navbar">
-                                        <ul>
-                                            <li><a href="#" class="ui-btn-active">Call</a></li>
-                                            <li><a href="#">Email</a></li>
-                                            <li><a href="#">Web</a></li>
-                                        </ul>
-                                    </div><!-- /navbar -->
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    </section>
-                </form>
-                
-            </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
-        </div><!-- /page -->
+        <div id="scaninfo_page" data-role="page"></div><!-- /page -->
         <!-- /scaninfo_page -->
         <!-- /scaninfo_page -->
 
@@ -381,98 +272,130 @@
         </script>
         
         <script id="scaninfo_page-template" type="text/x-handlebars-template">
-            <div class="rating form-part first-form-part">
-                <h2>Rapid Rating</h2>
-                <div class="form-part-wrapper">
-                    <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
-                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
-                        <label class="cold" for="radio-choice-h-2a">Cold</label>
-                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
-                        <label class="warm" for="radio-choice-h-2b">Warm</label>
-                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
-                        <label class="hot" for="radio-choice-h-2c">Hot</label>
-                    </fieldset>
+            <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
+                <h1>{{fn}}</h1>
+                {{#each email}}
+                    <p class="email">{{this}}</p>
+                {{/each}}
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+                
+                <form>
+                    <section data-role="templates">
+                    <div class="rating form-part first-form-part">
+                        <h2>Rapid Rating</h2>
+                        <div class="form-part-wrapper">
+                            <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                                <label class="cold" for="radio-choice-h-2a">Cold</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                                <label class="warm" for="radio-choice-h-2b">Warm</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+                                <label class="hot" for="radio-choice-h-2c">Hot</label>
+                            </fieldset>
 
-                    <fieldset data-role="controlgroup">
-                        <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
-                        <input type="checkbox" name="checkbox-2" id="checkbox-2">
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="form-part">
-                <h2>Contact Tags</h2>
-                <div class="form-part-wrapper tags-wrapper">
-                    <div class="tags">
-                        <ul>
-                            <li>RCP</li>
-                            <li>Call</li>
-                            <li>Eclipse IDE</li>
-                            <li>Large Op</li>
-                            <li>My Eclipse</li>
-                            <li>Cool</li>
-                            <li>Friendly</li>
-                            <li>RCP</li>
-                            <li>Call</li>
-                            <li>Eclipse IDE</li>
-                            <li>Large Op</li>
-                            <li>My Eclipse</li>
-                            <li>Cool</li>
-                            <li>Friendly</li>
-                        </ul>
+                            <fieldset data-role="controlgroup">
+                                <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
+                                <input type="checkbox" name="checkbox-2" id="checkbox-2">
+                            </fieldset>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-part">
-                <h2>Notes</h2>
-                <div class="form-part-wrapper">
-                    <div class="notes">
-                        <p>No notes added yet. Double tap to edit notes</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-part">
-                <h2>Contact details</h2>
-                <div class="form-part-wrapper">
-                     <ul data-role="listview" data-inset="true">
-                        <li class="ui-field-contain">
-                            <label>Name:</label>
-                            <label>Jane Walker</label>
-                        </li>
-                        <li class="ui-field-contain">
-                            <label>Title:</label>
-                            <label>Chief Engineer</label>
-                        </li>
-                        <li class="ui-field-contain">
-                            <label>Company</label>
-                            <label>Yo</label>
-                        </li>
-                        <li class="ui-field-contain">
-                            <label>Email(s):</label>
-                            <label>jane@gmail.com</label>
-                        </li>
-                        <li class="ui-field-contain">
-                            <label>Address</label>
-                            <label>Usa, NY, Central Part 3/2 adsnjsanjdkaskd</label>
-                        </li>
-                        <li class="ui-field-contain">
-                            <label>Website</label>
-                            <label>company.com</label>
-                        </li>
-                         <li class="ui-body ui-body-b">
-                            <div data-role="navbar">
+                    
+                    <div class="form-part">
+                        <h2>Contact Tags</h2>
+                        <div class="form-part-wrapper tags-wrapper">
+                            <div class="tags">
                                 <ul>
-                                    <li><a href="#" class="ui-btn-active">Call</a></li>
-                                    <li><a href="#">Email</a></li>
-                                    <li><a href="#">Web</a></li>
+                                    <li>RCP</li>
+                                    <li>Call</li>
+                                    <li>Eclipse IDE</li>
+                                    <li>Large Op</li>
+                                    <li>My Eclipse</li>
+                                    <li>Cool</li>
+                                    <li>Friendly</li>
+                                    <li>RCP</li>
+                                    <li>Call</li>
+                                    <li>Eclipse IDE</li>
+                                    <li>Large Op</li>
+                                    <li>My Eclipse</li>
+                                    <li>Cool</li>
+                                    <li>Friendly</li>
                                 </ul>
-                            </div><!-- /navbar -->
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-part">
+                        <h2>Notes</h2>
+                        <div class="form-part-wrapper">
+                            <div class="notes">
+                                <p>No notes added yet. Double tap to edit notes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-part">
+                        <h2>Contact details</h2>
+                        <div class="form-part-wrapper">
+                             <ul data-role="listview" data-inset="true">
+                                {{#if fn}}
+                                    <li class="ui-field-contain">
+                                        <label>Name:</label>
+                                        <label>{{fn}}</label>
+                                    </li>
+                                {{/if}}
+                                {{#if title}}
+                                    <li class="ui-field-contain">
+                                        <label>Title:</label>
+                                        <label>Chief Engineer</label>
+                                    </li>
+                                {{/if}}
+                                {{#if org}}  
+                                    <li class="ui-field-contain">
+                                        <label>Company</label>
+                                        <label>Yo</label>
+                                    </li>
+                                {{/if}}
+                                {{#if email}}
+                                    <li class="ui-field-contain">
+                                        <label>Email(s):</label>
+                                        {{#each email}}
+                                            <label>{{this}}</label>
+                                        {{/each}}
+                                    </li>
+                                {{/if}}
+                                {{#if fn}}  
+                                <li class="ui-field-contain">
+                                    <label>Address</label>
+                                    <label><p>Usa, NY, Central Part 3/2 adsnjsanjdkaskd</p></label>
+                                </li>
+                                {{/if}}
+                                {{#if fn}}  
+                                <li class="ui-field-contain">
+                                    <label>Website</label>
+                                    <label>company.com</label>
+                                </li>
+                                {{/if}}
+                                <li class="ui-body ui-body-b">
+                                    <div data-role="navbar">
+                                        <ul>
+                                            <li><a href="#" class="ui-btn-active">Call</a></li>
+                                            <li><a href="#">Email</a></li>
+                                            <li><a href="#">Web</a></li>
+                                        </ul>
+                                    </div><!-- /navbar -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </section>
+                </form>
+                
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
         </script>
         <!-- templates -->
     </body>

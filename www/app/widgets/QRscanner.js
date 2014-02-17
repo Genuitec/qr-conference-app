@@ -45,6 +45,7 @@
                 cordova.plugins.barcodeScanner.scan(
                     function (scanData) {
                         console.log(scanData);
+                        console.log("scanData.text");
                         console.log(scanData.text);
                         /**
                          * success
