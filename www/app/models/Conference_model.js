@@ -14,35 +14,43 @@
             else callback = where;
             DB.query(callback);
         },
-        info: function(where, callback){
+        info: function(conference_id, callback){
             Async.parallel({
                 conference : function(c){
                     DB.select();
                     DB.from("conferences");
-                    for(var i in where)
-                        DB.where(i+' = "'+where[i]+'"');
-                    if(arguments.length === 2)
-                        for(var i in where)
-                            DB.where(i+' = "'+where[i]+'"');
-                    else callback = where;
+                    DB.where('id = "'+conference_id+'"');
                     DB.row(c);
                 },
                 scans: function(c){
-                    Models.Scan.recent(where.id, c);
+                    Models.Scan.list(conference_id, function(list){
+                        c({recent:list.slice(0, getConfig("recent_scans", "amount")), amount:list.length});
+                    });
                 },
                 stat: function(c){
                     c([]);
                 }
-            }, callback);
-//            DB.select();
-//            DB.from("conferences");
-//            if(arguments.length === 2)
-//                for(var i in where)
-//                    DB.where(i+' = "'+where[i]+'"');
-//            else callback = where;
-//            DB.query(function(data){
-//                
-//            });
+            }, function(result){
+                callback({
+                    conference : result.conference,
+                    scans      : result.scans.recent,
+                    stat       : {
+                        scans:{
+                            total   :   result.scans.amount,
+                            offline :   result.scans.amount
+                        },
+                        top_leads       : {
+                            hot     : 1,
+                            warm    : 1
+                        },
+                        followups       : {
+                            needed  : 3,
+                            done    : 3
+                        },
+                        lastSync        : 5
+                    }
+                });
+            });
         },
         update : function(callback){
             

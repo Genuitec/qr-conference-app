@@ -6,7 +6,6 @@
         console.log(data);
         
         $('#scaninfo_page').html(template(data)).trigger('create');
-//        list.listview('refresh');
         
     };
     

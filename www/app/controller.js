@@ -1,7 +1,7 @@
 (function(Controller, viewHelpers, Models, Router, Session){
 
     Controller.scannow_page = function(params, load){
-        Models.Scan.recent(Session.get("conference_id"), viewHelpers.scannow_page);        
+        Models.Scan.recent(params.conferenceid, viewHelpers.scannow_page);        
         if(is_set(load))load();
     };
 
@@ -13,9 +13,7 @@
     Controller.conference_page = function(params, load){
         if(empty(params) || empty(params.id))return Router.redirect("chooseconference_page", {switchPage:true});
         
-        Models.Conference.info({
-            id: params.id
-        }, function(data){
+        Models.Conference.info(params.id, function(data){
             Session.set("conference_id", data.conference.id);
             viewHelpers.conference_page(data);
             if(is_set(load))load();

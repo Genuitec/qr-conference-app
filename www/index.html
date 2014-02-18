@@ -17,25 +17,45 @@
         <script src="assets/libs/jquery-1.10.2.min.js"></script>
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
         
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/myHelpers.js"></script>
+        <script src="assets/libs/myHelpers.js"></script>
+        <script src="assets/libs/async.js"></script>
+        <script src="assets/libs/localStorage_helper.js"></script>
+        <script src="assets/libs/db_helper.js"></script>
+<!--        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/myHelpers.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/async.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/localStorage_helper.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/db_helper.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/db_helper.js"></script>-->
         
         <script src="assets/libs/handlebars-v1.3.0.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/handlebars_helpers.js"></script>
+        <script src="assets/libs/handlebars_helpers.js"></script>
+        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/handlebars_helpers.js"></script>-->
         
         <script src="assets/bundles/vcardjs/src/Math.uuid.js"></script>
         <script src="assets/bundles/vcardjs/src/vcard.js"></script>
         <script src="assets/bundles/vcardjs/src/vcf.js"></script>
                         
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/app.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/db.js"></script>
+        <script src="app/config/autoload.js"></script>
+        <script src="app/config/config.js"></script>
+        <script src="app/models/Scan_model.js"></script>
+        <script src="app/models/Conference_model.js"></script>
+        <script src="app/resources/vCardParser.js"></script>
+        <script src="app/widgets/loader.js"></script>
+        <script src="app/widgets/QRscanner.js"></script>
+        <script src="app/widgets/notes.js"></script>
+        <script src="app/viewHelpers/scannow_page.js"></script>
+        <script src="app/viewHelpers/scaninfo_page.js"></script>
+        <script src="app/viewHelpers/chooseconference_page.js"></script>
+        <script src="app/viewHelpers/conference_page.js"></script>
+        <script src="app/controller.js"></script>
+        <script src="app/router.js"></script>
+<!--        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/app.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/db.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/autoload.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/config.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Scan_model.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Conference_model.js"></script>
-        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/User_model.js"></script>-->
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/resources/vCardParser.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/loader.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/QRscanner.js"></script>
@@ -45,7 +65,7 @@
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/chooseconference_page.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/conference_page.js"></script>
         <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/controller.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/router.js"></script>
+        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/router.js"></script>-->
     </head>
     <body>
         
@@ -62,13 +82,14 @@
                 <div class="main">
                     <!-- templates -->
                 </div>
+                <!--
                 <div>
                     <a href="#addconf" data-role="button" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
                         <span class="ui-btn-inner">
                             <span class="ui-btn-text">Add Conference</span>
                         </span>
                     </a>
-                </div>
+                </div> -->
             </div><!-- /content -->
             <div data-role="footer">
                 <h4>Page Footer</h4>
@@ -126,6 +147,7 @@
             </div><!-- /header -->
             <div role="main" class="ui-content">
                 <!--<p>Scanner</p>-->
+                <!--<section data-role="templates"></section>-->
                 <div class="scan-area" id="scanner" tabindex="0">
                     <div class="scan-inner">
                         <div class="scan-inside">
@@ -226,8 +248,20 @@
         
         
         
-        
         <!-- templates -->
+        <script id="scannow-template" type="text/x-handlebars-template">
+            <div class="scan-area" id="scanner" tabindex="0">
+                <div class="scan-inner">
+                    <div class="scan-inside">
+                        <h1><span>S</span>c<span>a</span>n n<span>o</span>w</h1>
+                    </div>
+                    <div class="scan-corner-lt scan-corner"></div> 
+                    <div class="scan-corner-rt scan-corner"></div> 
+                    <div class="scan-corner-lb scan-corner"></div> 
+                    <div class="scan-corner-rb scan-corner"></div> 
+                </div>
+            </div>
+        </script>
         <script id="recentscan-template" type="text/x-handlebars-template">
             {{#each scans}}
                 <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
@@ -243,21 +277,28 @@
         <script id="conference_page-template" type="text/x-handlebars-template">
             <div data-role="header">
                 <a href="#" data-role="button" data-rel="back">Go Back</a>
-                <h1>EclipseCon 2014 NA</h1>
+                <h1>{{conference.name}}</h1>
             </div>
             <!-- /header -->
             <div role="main" class="ui-content">
                 <!--<p>Scanner</p>-->
                 <div class="main">
-                    <a href="#scannow_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Scan Now</a>
+                    <a href="#scannow_page?conferenceid={{conference.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Scan Now</a>
                 </div>
                 <div class="recent-scans">
                     <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
                     <ul data-role="listview" class="ui-listview">
+                        
+                        {{#each scans}}
+                            <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">name</a></li>
+                        {{/each}}
+                                
+                        <!--      
                         <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Simpeton</a></li>
                         <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Walker</a></li>
                         <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">That guy</a></li>
                         <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Yo man</a></li>
+                        -->
                     </ul>
                 </div>
                 <div class="attend">
@@ -269,19 +310,19 @@
                         <tbody>
                           <tr>
                               <td>Total scans</td>
-                              <td class="right"><a href="#" data-rel="external">121(9 offline)</a></td>
+                              <td class="right"><a href="#" data-rel="external">{{stat.scans.total}}({{stat.scans.offline}} offline)</a></td>
                           </tr>
                           <tr>
                               <td>Top Leads</td>
-                              <td class="right"><a href="#" data-rel="external">9 hot & 17 warm</a></td>
+                              <td class="right"><a href="#" data-rel="external">{{stat.top_leads.hot}} hot & {{stat.top_leads.warm}} warm</a></td>
                           </tr>
                           <tr>
                               <td>Followups</td>
-                              <td class="right"><a href="#" data-rel="external">5 needed(3 done)</a></td>
+                              <td class="right"><a href="#" data-rel="external">{{stat.followups.needed}} needed({{stat.followups.done}} done)</a></td>
                           </tr>
                           <tr>
                               <td>Last Sync</td>
-                              <td class="right">5 minutes ago</td>
+                              <td class="right">{{stat.lastSync}} minutes ago</td>
                           </tr>
                           
                           </tbody>
@@ -291,8 +332,8 @@
             <div data-role="footer">
                 <h4>Page Footer</h4>
             </div><!-- /footer -->
-            
         </script>
+        
         <script id="scaninfo_page-template" type="text/x-handlebars-template">
             <div data-role="header">
                 <a href="#" data-role="button" data-rel="back">Go Back</a>
@@ -428,6 +469,7 @@
                 </form>
                 
             </div><!-- /content -->
+            
             <div data-role="footer">
                 <h4>Page Footer</h4>
             </div><!-- /footer -->

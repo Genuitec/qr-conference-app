@@ -19,11 +19,9 @@
     _passParams = false,
     
     _action = function(route, params, history_need, callback){
-//        console.log(route)
-//        console.log(params)
         if(route.controller in Controller){
             Controller[route.controller](params, callback);
-            if(history_need)
+            if(history_need !== false)
                 _history.push({
                     route: route,
                     params: params
@@ -90,13 +88,12 @@
          *      callback:
          * }
          * */
+        var history_need = true;
         if(!empty(prms)){
             if(is_set(prms.params))var params = prms.params.params;
-            if(is_set(prms.history_need)) var history_need = prms.history_need;
+            if(prms.history_need === false) history_need = prms.history_need;
             if(is_set(prms.callback)) var callback = prms.callback;
         }
-        if(history_need !== false)var history_need = true;
-        
         page = page.replace(/^#/,"");
         var page_and_params = (!is_set(_passParams) ? _get_page_params(page) : _passParams),
             route = {
@@ -144,9 +141,10 @@
     Router.redirect_back = function(){
         if(_history.length > 1){
             var back_el = _history[_history.length-2];
-            Router.redirect(back_el.route.hash, back_el.params, false, back_el.callback);
+//            Router.redirect(back_el.route.hash, back_el.params, false, back_el.callback);
+            Router.redirect(back_el.route.hash, {switchPage: true, history_need: false});
             _history = _history.slice(0, _history.length-1);
-        }else return Router.redirect(getConfig("home_page"));
+        }else return Router.redirect(getConfig("home_page"), {switchPage: true});
     };
     
     Router.back = function(){
@@ -161,13 +159,15 @@
     $(document).ready(function(){
         $(document).on("click", 'a', function(e){
             if(!$(this).attr("data-rel") && $(this).attr("data-rel") !== "back"){
-//                e.preventDeafult;
-//                console.log("a");
                 var page_name = $(this).attr("href").match(/^#(.[^\?]+)\?*/)[1];
                 Router.redirect(page_name, {
                     params: _get_page_params( $(this).attr("href").replace("#", "") ),
                     switchPage: true
                 });
+                return false;
+            }else{
+                console.log("back");
+                Router.redirect_back();
                 return false;
             }
         });

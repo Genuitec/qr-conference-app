@@ -19,6 +19,13 @@
                 callback(strfield_to_array(["email", "tel"], data));
             });
         },
+        list : function(conference_id, callback){
+            DB.select();
+            DB.from("scans");
+            DB.where('conference_id = "'+conference_id+'"');
+            DB.order_by_desc("time");
+            DB.query(callback);
+        },
         update : function(callback){
             
         },

@@ -20,6 +20,7 @@
     View.scannow_page = function(data, load){
         console.log(data);
         list.html(template({scans: data}));
+        list.listview('refresh'); 
         if(is_set(load))load();
     };
     
