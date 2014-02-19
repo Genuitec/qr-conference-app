@@ -17,6 +17,9 @@
         <script src="assets/libs/jquery-1.10.2.min.js"></script>
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
         
+        <script src="assets/libs/hammer.js"></script>
+        <script src="assets/libs/jquery.hammer.js"></script>
+        
         <script src="assets/libs/myHelpers.js"></script>
         <script src="assets/libs/async.js"></script>
         <script src="assets/libs/localStorage_helper.js"></script>
@@ -38,12 +41,14 @@
         <script src="app/db.js"></script>
         <script src="app/config/autoload.js"></script>
         <script src="app/config/config.js"></script>
+        <script src="app/models/Attendee_model.js"></script>
         <script src="app/models/Scan_model.js"></script>
         <script src="app/models/Conference_model.js"></script>
         <script src="app/resources/vCardParser.js"></script>
         <script src="app/widgets/loader.js"></script>
         <script src="app/widgets/QRscanner.js"></script>
-        <script src="app/widgets/notes.js"></script>
+        <script src="app/widgets/attendeeNotes.js"></script>
+        <script src="app/widgets/voteAttendeeForm.js"></script>
         <script src="app/viewHelpers/scannow_page.js"></script>
         <script src="app/viewHelpers/scaninfo_page.js"></script>
         <script src="app/viewHelpers/chooseconference_page.js"></script>
@@ -183,7 +188,7 @@
         
         <!-- eclipse2014_page -->
         <!-- eclipse2014_page -->
-        <div id="attendees" data-role="page">
+        <div id="attendees_page" data-role="page">
             <div data-role="header">
                 <h1>Browse Attendees</h1>
             </div>
@@ -200,9 +205,9 @@
                 </div>
                 <div class="attend">
                     <h2>By Contact Tags</h2>
-                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Eclipse IDE</a>
-                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mobile</a>
-                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">RCP</a>
+                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Eclipse IDE</a>
+                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mobile</a>
+                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">RCP</a>
                 </div>
             </div><!-- /content -->
             <div data-role="footer">
@@ -262,6 +267,7 @@
                 </div>
             </div>
         </script>
+        
         <script id="recentscan-template" type="text/x-handlebars-template">
             {{#each scans}}
                 <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
@@ -302,7 +308,7 @@
                     </ul>
                 </div>
                 <div class="attend">
-                    <a href="#attendees" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Browse Attendees</a>
+                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Browse Attendees</a>
                 </div>
                 <div>
                 <h2>Conference Stats</h2>
@@ -345,128 +351,138 @@
             <div role="main" class="ui-content">
                 
                 <form>
-                    <section data-role="templates">
-                    <div class="rating form-part first-form-part">
-                        <h2>Rapid Rating</h2>
-                        <div class="form-part-wrapper">
-                            <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
-                                <label class="cold" for="radio-choice-h-2a">Cold</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
-                                <label class="warm" for="radio-choice-h-2b">Warm</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
-                                <label class="hot" for="radio-choice-h-2c">Hot</label>
-                            </fieldset>
+                    <!-- <section data-role="templates"> -->
+                        <div class="rating form-part first-form-part">
+                            <h2>Rapid Rating</h2>
+                            <div class="form-part-wrapper">
+                                <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
+                                    <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
+                                    <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" {{#is rating "cold"}}checked="checked"{{/is}}>
+                                    <label class="cold" for="radio-choice-h-2a">Cold</label>
+                                    <input type="radio" name="rating" id="radio-choice-h-2b" value="warm" {{#is rating "warm"}}checked="checked"{{/is}}>
+                                    <label class="warm" for="radio-choice-h-2b">Warm</label>
+                                    <input type="radio" name="rating" id="radio-choice-h-2c" value="hot" {{#is rating "hot"}}checked="checked"{{/is}}>
+                                    <label class="hot" for="radio-choice-h-2c">Hot</label>
+                                </fieldset>
 
-                            <fieldset data-role="controlgroup">
-                                <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
-                                <input type="checkbox" name="checkbox-2" id="checkbox-2">
-                            </fieldset>
+                                <fieldset data-role="controlgroup">
+                                    <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
+                                    <input type="checkbox" name="followup" id="checkbox-2" {{#is followup 1}}checked="checked"{{/is}}>
+                                </fieldset>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-part">
-                        <h2>Contact Tags</h2>
-                        <div class="form-part-wrapper tags-wrapper">
-                            <div class="tags">
-                                <ul>
-                                    <li>RCP</li>
-                                    <li>Call</li>
-                                    <li>Eclipse IDE</li>
-                                    <li>Large Op</li>
-                                    <li>My Eclipse</li>
-                                    <li>Cool</li>
-                                    <li>Friendly</li>
-                                    <li>RCP</li>
-                                    <li>Call</li>
-                                    <li>Eclipse IDE</li>
-                                    <li>Large Op</li>
-                                    <li>My Eclipse</li>
-                                    <li>Cool</li>
-                                    <li>Friendly</li>
+                </form>
+                        <div class="form-part">
+                            <h2>Contact Tags</h2>
+                            <div class="form-part-wrapper tags-wrapper">
+                                <div class="tags">
+                                    <ul>
+                                        <li>RCP</li>
+                                        <li>Call</li>
+                                        <li>Eclipse IDE</li>
+                                        <li>Large Op</li>
+                                        <li>My Eclipse</li>
+                                        <li>Cool</li>
+                                        <li>Friendly</li>
+                                        <li>RCP</li>
+                                        <li>Call</li>
+                                        <li>Eclipse IDE</li>
+                                        <li>Large Op</li>
+                                        <li>My Eclipse</li>
+                                        <li>Cool</li>
+                                        <li>Friendly</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-part">
+                            <h2>Notes</h2>
+                            <div class="form-part-wrapper">
+                                <div class="notes">
+
+                                    <div data-role="notes">
+                                        <!-- <input type="hidden" name="notes" value="{{notes}}" /> -->
+                                        <form data-role="note-form">
+                                            {{#if notes}}
+                                                <p>{{notes}}</p>
+                                            {{else}}
+                                                <p>No notes added yet. Double tap to edit notes</p>
+                                            {{/if}}
+                                            <textarea>{{notes}}</textarea>
+                                            <button type="submit">submit</button>
+                                            <button type="button" data-role="note-reset">reset</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-part">
+                            <h2>Contact details</h2>
+                            <div class="form-part-wrapper">
+                                 <ul data-role="listview" data-inset="true">
+                                    {{#if fn}}
+                                        <li class="ui-field-contain">
+                                            <label>Name:</label>
+                                            <label>{{fn}}</label>
+                                        </li>
+                                    {{/if}}
+                                    {{#if title}}
+                                        <li class="ui-field-contain">
+                                            <label>Title:</label>
+                                            <label>Chief Engineer</label>
+                                        </li>
+                                    {{/if}}
+                                    {{#if org}}  
+                                        <li class="ui-field-contain">
+                                            <label>Company</label>
+                                            <label>Yo</label>
+                                        </li>
+                                    {{/if}}
+                                    {{#if tel}}
+                                        <li class="ui-field-contain">
+                                            <label>Phone(s):</label>
+                                            {{#each tel}}
+                                                <label>{{this}}</label>
+                                            {{/each}}
+                                        </li>
+                                    {{/if}}
+                                    {{#if email}}
+                                        <li class="ui-field-contain">
+                                            <label>Email(s):</label>
+                                            {{#each email}}
+                                                <label>{{this}}</label>
+                                            {{/each}}
+                                        </li>
+                                    {{/if}}
+                                    {{#if adr}}  
+                                        <li class="ui-field-contain">
+                                            <label>Address</label>
+                                            <label><p>{{adr}}</p></label>
+                                        </li>
+                                    {{/if}}
+                                    {{#if org}}
+                                        <li class="ui-field-contain">
+                                            <label>Website</label>
+                                            <label>{{org}}</label>
+                                        </li>
+                                    {{/if}}
+                                    <li class="ui-body ui-body-b">
+                                        <div data-role="navbar">
+                                            <ul>
+                                                {{#if tel.[0]}}<li><a href="tel:{{tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
+                                                {{#if email.[0]}}<li><a href="mailto:{{email.[0]}}">Email</a></li>{{/if}}
+                                                {{#if org}}<li><a href="{{org}}" target="_blank" onclick="window.open('http://{{org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
+                                            </ul>
+                                        </div><!-- /navbar -->
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-part">
-                        <h2>Notes</h2>
-                        <div class="form-part-wrapper">
-                            <div class="notes">
-                        
-                                <div data-role="notes" el-id="{{id}}">
-                                    <form data-role="note-form">
-                                        {{#if notes}}
-                                            <p>{{notes}}</p>
-                                        {{else}}
-                                            <p>No notes added yet. Double tap to edit notes</p>
-                                        {{/if}}
-                                        <textarea>{{notes}}</textarea>
-                                        <button type="button" data-role="note-reset">reset</button>
-                                        <button type="submit">submit</button>
-                                    </form>
-                                </div>
-                        
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-part">
-                        <h2>Contact details</h2>
-                        <div class="form-part-wrapper">
-                             <ul data-role="listview" data-inset="true">
-                                {{#if fn}}
-                                    <li class="ui-field-contain">
-                                        <label>Name:</label>
-                                        <label>{{fn}}</label>
-                                    </li>
-                                {{/if}}
-                                {{#if title}}
-                                    <li class="ui-field-contain">
-                                        <label>Title:</label>
-                                        <label>Chief Engineer</label>
-                                    </li>
-                                {{/if}}
-                                {{#if org}}  
-                                    <li class="ui-field-contain">
-                                        <label>Company</label>
-                                        <label>Yo</label>
-                                    </li>
-                                {{/if}}
-                                {{#if email}}
-                                    <li class="ui-field-contain">
-                                        <label>Email(s):</label>
-                                        {{#each email}}
-                                            <label>{{this}}</label>
-                                        {{/each}}
-                                    </li>
-                                {{/if}}
-                                {{#if adr}}  
-                                    <li class="ui-field-contain">
-                                        <label>Address</label>
-                                        <label><p>{{adr}}</p></label>
-                                    </li>
-                                {{/if}}
-                                {{#if web}}  
-                                    <li class="ui-field-contain">
-                                        <label>Website</label>
-                                        <label>{{web}}</label>
-                                    </li>
-                                {{/if}}
-                                <li class="ui-body ui-body-b">
-                                    <div data-role="navbar">
-                                        <ul>
-                                            <li><a href="#" class="ui-btn-active">Call</a></li>
-                                            <li><a href="#">Email</a></li>
-                                            <li><a href="#">Web</a></li>
-                                        </ul>
-                                    </div><!-- /navbar -->
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    </section>
-                </form>
+                   <!--  </section> -->
+               <!-- </form> -->
                 
             </div><!-- /content -->
             

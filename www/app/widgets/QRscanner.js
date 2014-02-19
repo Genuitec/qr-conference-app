@@ -1,4 +1,4 @@
-(function(Widgets, vCardParser, Scan, getConfig, Session){
+(function(Widgets, vCardParser, Scan, Attendee, getConfig, Session){
     
     var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
@@ -17,8 +17,7 @@
             /** final parse data **/
             console.log("vCard");
             console.log(vCard);
-//            saveQrToDB(clone_object_array_fields_to_str(vCard, "value"));
-            saveQrToDB( (function(o){
+            returnCallback( (function(o){
                 var oo = {}, field = "";
                 for(var i in o){
                     oo[i] = o[i];
@@ -44,25 +43,13 @@
                 return oo;
             }(vCard)) );        
         },
-        saveQrToDB = function(data){
+        returnCallback = function(data){
             /** save to db and call callback(last_parsed data) **/
             data.md5 = _self.md5;
             data.conference_id = Session.get("conference_id");
-            console.log("saveQrToDB");
+            console.log("returnCallback");
             console.log(data);
-            Scan.read({
-                md5           :    _self.md5,
-                conference_id :    data.conference_id
-            }, function(checkData){
-                if(checkData.length > 0)
-                    return alert(getConfig("scans", "error_already_exist"));
-                
-                Scan.create( filter_fields(data, getConfig("scans", "db_fields") ), function(insertId){
-                    data.id = insertId;
-                    
-                    _self.callback(data);
-                });
-            });
+            _self.callback(data);
         };
             
         return MakeObjectFromText(_self.scanData);
@@ -71,6 +58,23 @@
     
     
     Widgets.QRscanner = (function(){
+        
+        var saveQRtoDB = function(QR, callback){
+            Scan.read({
+                md5           :    QR.md5,
+                conference_id :    QR.conference_id
+            }, function(checkData){
+                if(checkData.length > 0)
+                    return alert(getConfig("scans", "error_already_exist"));
+                
+                var _filteredQR = filter_fields(QR, getConfig("scans", "db_fields"));
+                Scan.create( _filteredQR , function(insertId){
+                    _filteredQR.id = insertId;
+                    Attendee.create({scan_id: insertId});
+                    callback(_filteredQR);
+                });
+            });
+        };
         
         return function(callback){
             try{
@@ -82,7 +86,9 @@
                         /**
                          * success
                          */
-                        new ScanHandler(scanData.text, md5(scanData.text), callback);
+                        new ScanHandler(scanData.text, md5(scanData.text), function(QR){
+                            saveQRtoDB(QR, callback);
+                        });
                         /**
                          * success
                          */
@@ -93,21 +99,28 @@
                         alert("Scanning failed: " + error);
                     });
             }catch(e){
-                
+                /**
+                 * TEST MODE
+                 **/
                 return new ScanHandler({
                     fn : "dsadsa",
                     email: [{value: "igig@mail.ru"},
                             {value: "2222@mail.ru"}],
                     tel: [{value: "23213213231"},
                             {value: "2222@mail.ru"}],
-                }, "123", callback, true);
+                }, "123", function(QR){
+                    saveQRtoDB(QR, callback);
+                }, true);
                 
                 callback({error:e});
                 console.log(e);
                 alert("Scanning failed: " + e);
+                /**
+                 * TEST MODE
+                 **/
             }
         };
         
     }());
     
-}(App.Widgets, App.Resources.vCardParser, App.Models.Scan, App.Config.get, App.Session));
+}(App.Widgets, App.Resources.vCardParser, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));

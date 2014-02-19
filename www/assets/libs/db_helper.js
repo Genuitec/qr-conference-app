@@ -292,14 +292,21 @@ var SQLite = function(){ // works with local SQLite DB
             ++i;
         }
         if (where != "" && where != false) {
-            sql += " WHERE " + where;
+            if(typeof(where) === "string")
+                sql += " WHERE " + where;
+            else{//object
+                var _where = "";
+                for(var wi in where)
+                    _where += ( _where === "" ? (wi+'= "'+where[wi]+'"') : (' AND ' + wi+'="'+where[wi]+'"') );
+                sql += " WHERE "+_where;
+            }
         }
 
         return (
-                callback ? _executeSQL(sql, function() {
-            callback();
-        }) : _executeSQL(sql)
-                );
+            callback ? _executeSQL(sql, function() {
+                callback();
+            }) : _executeSQL(sql)
+        );
     },
     remove = function(table, where, callback) {
         var sql = 'DELETE FROM ' + table + ' WHERE ' + where;

@@ -51,9 +51,6 @@ function trim_ar_strings(ar){
     return ar;
 }
 
-
-
-
 String.prototype.trim = function(){
     return this.replace(/^\s+|\s+$/g, "");
 };
@@ -177,6 +174,15 @@ function group_objects(){
     return result;
 }
 
+var PrefixedEvent = (function(pfx){
+    return function(element, type, callback){
+        for (var p = 0; p < pfx.length; p++) {
+            if (!pfx[p]) type = type.toLowerCase();
+            element.addEventListener(pfx[p]+type, callback, false);
+        }
+    };
+}(["webkit", "moz", "MS", "o", ""]));
+
 /* JQUERY PLUGIN */
 $(document).ready(function(){
     
@@ -187,6 +193,21 @@ $(document).ready(function(){
                res[v.name] = v.value;
             });
             return res;
+        };
+        
+        $.fn.ham = function(){
+            switch(arguments.length){
+                case 0:
+                    return $(this).hammer();//element
+                case 1:
+                    return $(this).hammer().on("tap", arguments[0]);//event, callback
+                case 2:
+                    return $(this).hammer().on(arguments[0], arguments[1]);//event, callback
+                case 3:
+                    return $(this).hammer().on(arguments[0], arguments[1], arguments[2]);//event, global, callback
+                default:case 4:
+                    return $(this).hammer().on(arguments[0], arguments[1], arguments[2], arguments[3]);//event, global, params, callback
+            }
         };
     })(jQuery);
 });

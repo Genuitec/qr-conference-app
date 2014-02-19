@@ -62,7 +62,7 @@ h1 > span, h2 > span{
 /* #scannow_page */
 
 /* #scaninfo_page */
-#scaninfo_page, #scannow_page, #login_page, #chconf_page, #attendees, #eclipse2014, #sortattend {
+#scaninfo_page, #scannow_page, #login_page, #chconf_page, #attendees_page, #eclipse2014, #sortattend {
     background: white;
 }
 #scaninfo_page [role="main"]{
@@ -106,20 +106,20 @@ h1 > span, h2 > span{
     margin-top: 0;
 }
 #scaninfo_page .rating .rating-select label.cold{
-    padding-left: 40px;
-    padding-right: 30px;
+    /*padding-left: 40px;*/
+    /*padding-right: 30px;*/
     color: #1B75BB;
     background:white;
 }
 #scaninfo_page .rating .rating-select label.hot{
-    padding-left: 30px;
-    padding-right: 50px;
+    /*padding-left: 30px;*/
+    /*padding-right: 50px;*/
     color: #EB5359;
     background:white;
 }
 #scaninfo_page .rating .rating-select label.warm{
-    padding-left: 30px;
-    padding-right: 30px;
+    /*padding-left: 30px;*/
+    /*padding-right: 30px;*/
     color: #F7931D;
     background:white;
 }
@@ -182,5 +182,38 @@ h1 > span, h2 > span{
     background: #27A9E1!important;
     opacity: 1;
     color: #fff;
+}
+
+
+#scaninfo_page .notes [data-role="notes"]{
+    min-height: 30px;
+    height: 100%;
+    overflow-y: scroll;
+}
+#scaninfo_page .notes [data-role="notes"] form{
+    padding: 10% 0;
+    height: 100%;
+}
+#scaninfo_page .notes [data-role="notes"] textarea{
+    width: 100%;
+    resize: vertical;
+    display: none;
+    min-height: 200px;
+    margin: 0px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border-color: gray;
+}
+#scaninfo_page .notes [data-role="notes"] button{
+    display: none;
+}
+#scaninfo_page .notes [data-role="notes"] p{}
+#scaninfo_page .notes .active[data-role="notes"]{}
+#scaninfo_page .notes .active[data-role="notes"] textarea, #scaninfo_page .notes .active[data-role="notes"] button{
+    display: initial;
+}
+#scaninfo_page .notes .active[data-role="notes"] p{
+    display: none;
 }
 

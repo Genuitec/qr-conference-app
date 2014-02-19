@@ -20,10 +20,18 @@
         });
     };
     
+    Controller.attendees_page = function(params, load){        
+        Models.Attendee.read(function(data){
+            viewHelpers.attendees_page(data);
+            if(is_set(load))load();
+        });
+    };
+    
     Controller.scaninfo_page = function(params, load){
         if(empty(params) || empty(params.id))return Router.redirect("scannow_page", {switchPage:true});
         
-        Models.Scan.read({
+//        Models.Scan.read({
+        Models.Scan.info({
             id: params.id,
             conference_id: Session.get("conference_id")
         }, viewHelpers.scaninfo_page);
