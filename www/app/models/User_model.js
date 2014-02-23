@@ -1,12 +1,10 @@
 (function(Models, Session){
     
-    var _clearData = function(){
-        Session.clear;
-    };
-    
     Models.User = {
         
-        read : function(callback){},
+        read : function(callback){
+            callback(Session.get("user_data"));
+        },
         
         logIn : function(data, callback){
             Session.set("user_data", data) ?
@@ -19,7 +17,9 @@
             : callback({error: ""});
         },
         
-        logOut : _clearData,
+        logOut : function(){
+            Session.clear("user_data");
+        },
         
         signUp : function(data, callback){},
                 

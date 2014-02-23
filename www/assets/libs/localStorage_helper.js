@@ -23,8 +23,8 @@
                 return false;
             },
 
-            clear: function(){
-                Storage.clear();
+            clear: function(item){
+                return (arguments.length === 1 ? Storage.removeItem(item) : Storage.clear());
             }
         };
     };

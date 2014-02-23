@@ -1,7 +1,6 @@
 (function(Controller, viewHelpers, Models, Router, Session){
 
     Controller.login_page = function(params, load){
-        console.log("login_page");
         Models.User.isLogged(function(userLogged){
             if(userLogged === true)
                 Router.redirect("chooseconference_page", {switchPage: true});
@@ -10,6 +9,11 @@
                 if(is_set(load))load();
             }
         });
+    };
+    
+    Controller.logout = function(){
+        Models.User.logOut();
+        Router.redirect("login_page", {switchPage: true});
     };
 
     Controller.chooseconference_page = function(params, load){
@@ -35,7 +39,7 @@
         if(is_set(load))load();
     };
 
-    Controller.attendees_page = function(params, load){        
+    Controller.attendees_page = function(params, load){
         viewHelpers.attendees_page();
         if(is_set(load))load();
     };
