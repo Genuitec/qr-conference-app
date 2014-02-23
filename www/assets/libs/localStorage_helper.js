@@ -1,7 +1,7 @@
 //(function(local, session){
     
 //    var l_Storage = function(Storage){
-    myLocalStorage = function(Storage){
+    __adapterLocalStorage = function(Storage){
         return {
             set: function(k, v){
                 if(arguments.length !== 2)return false;

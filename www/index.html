@@ -7,7 +7,6 @@
         
         <link rel="stylesheet"  href="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css">
         <link rel="stylesheet"  href="assets/css/app.css">
-        <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">-->
         <link rel="stylesheet" href="assets/css/fonts.css">
         
         <script type="text/javascript" src="cordova.js"></script>
@@ -15,6 +14,7 @@
         <script type="text/javascript" src="childbrowser.js"></script>
         
         <script src="assets/libs/jquery-1.10.2.min.js"></script>
+        <script src="assets/bundles/jquery.mobile-1.4.0/config_jquerymobile.js"></script>
         <script src="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
         
         <script src="assets/libs/hammer.js"></script>
@@ -24,14 +24,9 @@
         <script src="assets/libs/async.js"></script>
         <script src="assets/libs/localStorage_helper.js"></script>
         <script src="assets/libs/db_helper.js"></script>
-<!--        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/myHelpers.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/async.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/localStorage_helper.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/db_helper.js"></script>-->
         
         <script src="assets/libs/handlebars-v1.3.0.js"></script>
         <script src="assets/libs/handlebars_helpers.js"></script>
-        <!--<script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/assets/libs/handlebars_helpers.js"></script>-->
         
         <script src="assets/bundles/vcardjs/src/Math.uuid.js"></script>
         <script src="assets/bundles/vcardjs/src/vcard.js"></script>
@@ -41,44 +36,68 @@
         <script src="app/db.js"></script>
         <script src="app/config/autoload.js"></script>
         <script src="app/config/config.js"></script>
+        <script src="app/models/User_model.js"></script>
         <script src="app/models/Attendee_model.js"></script>
         <script src="app/models/Scan_model.js"></script>
         <script src="app/models/Conference_model.js"></script>
+        <script src="app/resources/barcodeScanner.js"></script>
         <script src="app/resources/vCardParser.js"></script>
         <script src="app/widgets/loader.js"></script>
         <script src="app/widgets/QRscanner.js"></script>
         <script src="app/widgets/attendeeNotes.js"></script>
+        <script src="app/widgets/logIn.js"></script>
         <script src="app/widgets/voteAttendeeForm.js"></script>
-        <script src="app/viewHelpers/scannow_page.js"></script>
+        <script src="app/viewHelpers/login_page.js"></script>
         <script src="app/viewHelpers/scaninfo_page.js"></script>
         <script src="app/viewHelpers/chooseconference_page.js"></script>
         <script src="app/viewHelpers/conference_page.js"></script>
+        <script src="app/viewHelpers/attendees_page.js"></script>
+        <script src="app/viewHelpers/attendeeslist_page.js"></script>
         <script src="app/controller.js"></script>
         <script src="app/router.js"></script>
-<!--        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/app.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/db.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/autoload.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/config.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Scan_model.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/models/Conference_model.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/resources/vCardParser.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/loader.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/QRscanner.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/notes.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/scannow_page.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/scaninfo_page.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/chooseconference_page.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/viewHelpers/conference_page.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/controller.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/router.js"></script>-->
     </head>
     <body>
         
-        <!-- chconf_page -->
-        <!-- chconf_page -->
+        <!-- login_page -->
+        <!-- login_page -->
+        <div id="login_page" data-role="page">
+            <div data-role="header">
+                <h2>QR Conference Buddy</h2>
+            </div>
+            <!-- /header -->
+            <div role="main" class="ui-content recent-scans">
+                <h2>Log in to your company's server:</h2>
+                <div class="form">
+                    <form method="post" action="#chooseconference_page">
+                        <div>
+                         <label for="hosturl">Host URL:</label>
+                         <input type="text" name="hosturl" id="hosturl" value="http://">
+                         <label for="userid">User ID:</label>
+                         <input type="text" name="userid" id="userid">
+                         <label for="password">Password:</label>
+                         <input type="password" name="password" id="password">
+                        </div>
+                        <div>
+                            <input type="submit" id="submit" value="Login">
+                        </div>
+                    </form>
+                    <div class="text">
+                        <p>For information on setting up your own server, go to genuitec.com/confbuddy or you can try out the example server at http:// confbuddy.github.com/example/</p>
+                    </div>
+                </div>
+            </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+        <!-- /login_page -->
+        <!-- /login_page -->  
+        
+        
+        <!-- chooseconference_page -->
+        <!-- chooseconference_page -->
         <div id="chooseconference_page" data-role="page">
             <div data-role="header">
-                <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>QR Conference Buddy</h1>
             </div>
             <!-- /header -->
@@ -100,47 +119,8 @@
                 <h4>Page Footer</h4>
             </div><!-- /footer -->
         </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->
-        
-        <!-- login_page -->
-        <!-- login_page -->
-        <div id="login_page" data-role="page">
-            <div data-role="header">
-                <h2>QR Conference Buddy</h2>
-            </div>
-            <!-- /header -->
-            <div role="main" class="ui-content recent-scans">
-                <!--<p>Scanner</p>-->
-                <h2>Log in to your company's server:</h2>
-                <div class="form">
-                    <form method="post" action="#chooseconference_page">
-                        <div>
-                         <label for="hosturl">Host URL:</label>
-                         <input type="text" name="hosturl" id="hosturl" value="http://">
-                         <label for="userid">User ID:</label>
-                         <input type="text" name="userid" id="userid">
-                         <label for="password">Password:</label>
-                         <input type="password" name="password" id="password">
-                        </div>
-                        <div>
-                            <input type="submit" id="submit" value="Login">
-                        </div>
-                    </form>
-                    <div class="text">
-                        <p>For information on setting up your own server, go to genuitec.com/confbuddy or you can try out the example server at http:// confbuddy.github.com/example/</p>
-                    </div>
-                </div>
-                    
-                
-                
-            </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
-        </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->        
+        <!-- /chooseconference_page -->
+        <!-- /chooseconference_page -->      
         
         
         <!-- scannow_page -->
@@ -190,29 +170,27 @@
         <!-- eclipse2014_page -->
         <div id="attendees_page" data-role="page">
             <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>Browse Attendees</h1>
             </div>
             <!-- /header -->
             <div role="main" class="ui-content">
                 <div class="recent-scans">
                     <ul data-role="listview" class="ui-listview">
-                        <li class="ui-first-child"><a href="#alphabetical" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Alphabetical</a></li>
-                        <li><a href="#today" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Today</a></li>
-                        <li><a href="#follow" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Follow up</a></li>
-                        <li class="ui-last-child"><a href="#hotlead" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Hot Leads</a></li>
-                        <li class="ui-last-child"><a href="#warmlead" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Warm Leads</a></li>
+                        <li class="ui-first-child"><a href="#attendeeslist_page?order=asc" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Alphabetical</a></li>
+                        <li><a href="#attendeeslist_page?time=today" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Today</a></li>
+                        <li><a href="#attendeeslist_page?followup=true" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Follow up</a></li>
+                        <li class="ui-last-child"><a href="#attendeeslist_page?rating=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Hot Leads</a></li>
+                        <li class="ui-last-child"><a href="#attendeeslist_page?rating=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Warm Leads</a></li>
                     </ul>
                 </div>
                 <div class="attend">
                     <h2>By Contact Tags</h2>
-                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Eclipse IDE</a>
-                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mobile</a>
-                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">RCP</a>
+                    <a href="#attendeeslist_page?tags=Eclipse IDE" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Eclipse IDE</a>
+                    <a href="#attendeeslist_page?tags=Mobile" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mobile</a>
+                    <a href="#attendeeslist_page?tags=RCP" class="ui-btn ui-btn-icon-right ui-icon-carat-r">RCP</a>
                 </div>
             </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
         </div><!-- /page -->
         <!-- /login_page -->
         <!-- /login_page -->
@@ -227,21 +205,15 @@
         
         <!-- eclipse2014_page -->
         <!-- eclipse2014_page -->
-        <div id="sortattend" data-role="page">
+        <div id="attendeeslist_page" data-role="page">
             <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>Today</h1>
             </div>
             <!-- /header -->
             <div role="main" class="ui-content">
-                <div class="recent-scans">
-                    <ul data-role="listview" class="ui-listview">
-                        <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">John Watersmith<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                        <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Appleseed<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
-                        <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Fitzgerald<br /><span class="scanned">Scanned by Jane today at 15:21</span></a></li>
-                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Paul Scotty<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                        <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mary Jane<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                        <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Makrus Kraus<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-                    </ul>
+                <div class="attendeeslist">
+                    <ul data-role="listview" class="ui-listview"></ul>
                 </div>
             </div><!-- /content -->
             <div data-role="footer">
@@ -274,6 +246,20 @@
             {{/each}}
         </script>
         
+        <script id="attendeeslist-template" type="text/x-handlebars-template">
+            {{#each attendees}}
+                <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
+            {{/each}}
+            <!--
+            <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">John Watersmith<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+            <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Appleseed<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
+            <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Fitzgerald<br /><span class="scanned">Scanned by Jane today at 15:21</span></a></li>
+            <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Paul Scotty<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+            <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mary Jane<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+            <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Makrus Kraus<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
+            -->
+        </script>
+        
         <script id="chooseconference_page-template" type="text/x-handlebars-template">
             {{#each this}}
                 <a href="#conference_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{name}}</a>
@@ -289,60 +275,63 @@
             <div role="main" class="ui-content">
                 <!--<p>Scanner</p>-->
                 <div class="main">
-                    <a href="#scannow_page?conferenceid={{conference.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Scan Now</a>
+                
+                    <div class="scan-area" id="scanner" tabindex="0">
+                        <div class="scan-inner">
+                            <div class="scan-inside">
+                                <h1><span>S</span>c<span>a</span>n n<span>o</span>w</h1>
+                            </div>
+                            <div class="scan-corner-lt scan-corner"></div> 
+                            <div class="scan-corner-rt scan-corner"></div> 
+                            <div class="scan-corner-lb scan-corner"></div> 
+                            <div class="scan-corner-rb scan-corner"></div> 
+                        </div>
+                    </div>
+                
+                    <!-- 
+                        <a href="#scannow_page?conferenceid={{!conference.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Scan Now</a>
+                    -->
                 </div>
                 <div class="recent-scans">
                     <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
                     <ul data-role="listview" class="ui-listview">
-                        
                         {{#each scans}}
-                            <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">name</a></li>
+                            <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}</a></li>
                         {{/each}}
-                                
-                        <!--      
-                        <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Simpeton</a></li>
-                        <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Walker</a></li>
-                        <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">That guy</a></li>
-                        <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Yo man</a></li>
-                        -->
                     </ul>
                 </div>
                 <div class="attend">
                     <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Browse Attendees</a>
                 </div>
-                <div>
-                <h2>Conference Stats</h2>
-                    <table id="my-table">
+                <div class="blueline-block-wrapper stats-links">
+                    <h2><span>C</span>on<span>f</span>er<span>e</span>nce <span>S</span>t<span>a</span>ts</h2>
+                    <table class="blueline-block">
                         <tbody>
-                          <tr>
-                              <td>Total scans</td>
-                              <td class="right"><a href="#" data-rel="external">{{stat.scans.total}}({{stat.scans.offline}} offline)</a></td>
-                          </tr>
-                          <tr>
-                              <td>Top Leads</td>
-                              <td class="right"><a href="#" data-rel="external">{{stat.top_leads.hot}} hot & {{stat.top_leads.warm}} warm</a></td>
-                          </tr>
-                          <tr>
-                              <td>Followups</td>
-                              <td class="right"><a href="#" data-rel="external">{{stat.followups.needed}} needed({{stat.followups.done}} done)</a></td>
-                          </tr>
-                          <tr>
-                              <td>Last Sync</td>
-                              <td class="right">{{stat.lastSync}} minutes ago</td>
-                          </tr>
-                          
-                          </tbody>
+                            <tr>
+                                <td>Total scans</td>
+                                <td class="right"><a href="#attendeeslist_page?sync=all">{{stat.scans.total}}({{stat.scans.offline}} offline)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Top Leads</td>
+                                <td class="right"><a href="#attendeeslist_page?rating=top">{{stat.top_leads.hot}} hot & {{stat.top_leads.warm}} warm</a></td>
+                            </tr>
+                            <tr>
+                                <td>Followups</td>
+                                <td class="right"><a href="#attendeeslist_page?followup=true">{{stat.followups.needed}} needed({{stat.followups.done}} done)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Last Sync</td>
+                                <td class="right">{{stat.lastSync}} minutes ago</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div><!-- /content -->
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
         </script>
         
         <script id="scaninfo_page-template" type="text/x-handlebars-template">
             <div data-role="header">
-                <a href="#" data-role="button" data-rel="back">Go Back</a>
+                <a href="#" data-role="button" data-rel="back" class="ui-btn ui-btn-inline">Go Back</a>
                 <h1>{{fn}}</h1>
                 {{#each email}}
                     <p class="email">{{this}}</p>
@@ -357,11 +346,11 @@
                             <div class="form-part-wrapper">
                                 <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
                                     <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
-                                    <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" {{#is rating "cold"}}checked="checked"{{/is}}>
+                                    <input type="radio" name="rating" id="radio-choice-h-2a" value=1 {{#is rating 1}}checked="checked"{{/is}}>
                                     <label class="cold" for="radio-choice-h-2a">Cold</label>
-                                    <input type="radio" name="rating" id="radio-choice-h-2b" value="warm" {{#is rating "warm"}}checked="checked"{{/is}}>
+                                    <input type="radio" name="rating" id="radio-choice-h-2b" value=2 {{#is rating 2}}checked="checked"{{/is}}>
                                     <label class="warm" for="radio-choice-h-2b">Warm</label>
-                                    <input type="radio" name="rating" id="radio-choice-h-2c" value="hot" {{#is rating "hot"}}checked="checked"{{/is}}>
+                                    <input type="radio" name="rating" id="radio-choice-h-2c" value=3 {{#is rating 3}}checked="checked"{{/is}}>
                                     <label class="hot" for="radio-choice-h-2c">Hot</label>
                                 </fieldset>
 
@@ -474,7 +463,7 @@
                                             <ul>
                                                 {{#if tel.[0]}}<li><a href="tel:{{tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
                                                 {{#if email.[0]}}<li><a href="mailto:{{email.[0]}}">Email</a></li>{{/if}}
-                                                {{#if org}}<li><a href="{{org}}" target="_blank" onclick="window.open('http://{{org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
+                                                {{#if org}}<li><a href="{{org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
                                             </ul>
                                         </div><!-- /navbar -->
                                     </li>

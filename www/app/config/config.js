@@ -8,7 +8,8 @@
             db_fields : ["id", "md5", "conference_id", "fn", "title", "org" , "email", "tel", "adr", "type", "version"],
             error_already_exist : "Already Scanned"
         },
-        home_page : "chooseconference_page"
+        home_page : "login_page"
+//        home_page : "chooseconference_page"
     };
     
     Config.get = function(){

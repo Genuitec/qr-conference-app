@@ -1,4 +1,4 @@
-(function(Widgets, vCardParser, Scan, Attendee, getConfig, Session){
+(function(Widgets, vCardParser, BarcodeScanner, Scan, Attendee, getConfig, Session){
     
     var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
@@ -15,8 +15,6 @@
         },
         handleQRdata = function(vCard){
             /** final parse data **/
-            console.log("vCard");
-            console.log(vCard);
             returnCallback( (function(o){
                 var oo = {}, field = "";
                 for(var i in o){
@@ -78,7 +76,8 @@
         
         return function(callback){
             try{
-                cordova.plugins.barcodeScanner.scan(
+//                cordova.plugins.barcodeScanner.scan(
+                BarcodeScanner.scan(
                     function (scanData) {
                         console.log(scanData);
                         console.log("scanData.text");
@@ -123,4 +122,4 @@
         
     }());
     
-}(App.Widgets, App.Resources.vCardParser, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));
+}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));

@@ -18,14 +18,18 @@
     
     _passParams = false,
     
+    pageInited = false,
+    
     _action = function(route, params, history_need, callback){
         if(route.controller in Controller){
             Controller[route.controller](params, callback);
+//            Controller[route.controller](params);
             if(history_need !== false)
                 _history.push({
                     route: route,
                     params: params
                 });
+//            callback();
             return true;
         }
         return false;
@@ -54,22 +58,12 @@
         }
     },
             
+//    SwitchPage = function(params, firstStart){
     SwitchPage = function(params){
-        console.log("params")
-//        console.log("params")
-        console.log(params)
-//        console.log("SwitchPage");
-//        console.log(params);
+        if(pageInited === false)
+            $.mobile.initializePage();
         $.mobile.changePage("#"+params.page);
-        
-//        params.hash = params.hash.replace(/^#/,"");
-
-//        $(".app_page").hide();
-//        window.scrollTo(0,0);
-//        $("#"+params.page).show();
-//        _last_hash = "#"+params.hash;
-//        window.location.hash= "#"+params.hash;
-//        Loader.stop();
+        pageInited = true;
     },
             
     _check_params = function(params){
@@ -79,10 +73,8 @@
         return true;
     };
     
-    
     Router.redirect = function(page, prms){
-        /**
-         * var prms = {
+        /* * var prms = {
          *      params: 
          *      history_need:
          *      callback:
@@ -100,7 +92,6 @@
                 app_page : page_and_params.app_page,
                 controller : page_and_params.app_page
             };
-                                
         if( !is_array(params) ){
             //adding params
             if(_check_params(params)){
@@ -125,9 +116,12 @@
             return _action(route, params, history_need, function(){
                 if(is_set(prms) && is_set(prms.switchPage))
                     SwitchPage({page: route.app_page, hash:page});
+//                if(is_set(prms) && is_set(prms.switchPage))
+//                    SwitchPage({page: route.app_page, hash:page}, prms.firstStart);
             });
         }
-        return Router.redirect(getConfig("home_page"));
+        console.warn("NOT VALID URL");
+        return Router.redirect(getConfig("home_page"), prms);
     };   
     
     Router.show_history = function(){
@@ -173,19 +167,21 @@
         });
         
         window.location.hash === "" ?
-            Router.redirect(getConfig("home_page")) : 
-            Router.redirect(window.location.hash.replace("#", ""),{switchPage: true}); //start the app
-//        window.location.hash === "" ?
-//            routetogo("scannow_page", true, true) : 
-//            routetogo(window.location.hash.replace("#", ""),true,true); //start the app
-//            
-        function routetogo(r, params, go){
-//            console.log("dasdas")
-            if(params === true)
-                _passParams = _get_page_params( (r.replace("#", "")) );
-            if(go === true)
-                return Router.redirect(r.match(/^#{0,1}(.[^\?]+)\?*/)[1]);
-        }
+            Router.redirect(getConfig("home_page"), {
+//                firstStart: true,
+                switchPage: true
+            }) : 
+            Router.redirect(window.location.hash.replace("#", ""), {
+//                firstStart: true,
+                switchPage: true
+            }); //start the app
+ 
+//        function routetogo(r, params, go){
+//            if(params === true)
+//                _passParams = _get_page_params( (r.replace("#", "")) );
+//            if(go === true)
+//                return Router.redirect(r.match(/^#{0,1}(.[^\?]+)\?*/)[1]);
+//        }
        
     });
     

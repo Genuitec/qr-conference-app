@@ -21,12 +21,10 @@ var Async = (function(){
     return {
         //parallel
         parallel : function(funcs, callback){
-            var result = {}, funcs_length = 0, counter = 0, interval = new Interval(result, callback);
-            for(var i in funcs){
-                ++funcs_length;
+            var result = {}, funcs_length = Object.keys(funcs).length, counter = 0, interval = new Interval(result, callback);
+            for(var i in funcs)
                 funcs[i](
                     (function(k){
-                    
                         return function(data){
                             result[k] = data;
                             ++counter;
@@ -37,10 +35,8 @@ var Async = (function(){
                                     return callback(result);
                             }
                         };
-
                     }(i))
                 );
-            }
         }//parallel
         
     };

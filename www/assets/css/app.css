@@ -1,8 +1,42 @@
-/* #scannow_page */
+/* COLORS */
 h1 > span, h2 > span{
     color: #27A9E1;
 }
+#scannow_page, #login_page .recent-scans h2, #conference_page{
+    color: #D1D2D4;
+}
+#scaninfo_page .form-part h2:first-letter,
+#scannow_page .recent-scans h2:first-letter,
+#conference_page .recent-scans h2:first-letter,
+#scannow_page .recent-scans h2 span{
+    color: #27A9E1;
+}
+#scaninfo_page, #scannow_page, #login_page, #chooseconference_page, #attendees_page, #conference_page, #attendeeslist_page {
+    background: white;
+}
+#conference_page{
+    background: #E6E7E8;
+}
+#conference_page div[role="main"].ui-content{
+    background: white;
+    padding-bottom: 0;
+}
+/* COLORS */
 
+
+.blueline-block-wrapper h2{
+    color: #D1D2D4;
+    margin-bottom: 5px;
+    margin-left: 23px;
+}
+.blueline-block-wrapper .blueline-block{
+    background: #E6E7E8;
+    border-top: 6px solid #27A9E1;
+    padding: 10px 20px;
+}
+
+
+/* #scannow_page */
 #scannow_page .scan-area {
     width: 70%;
     margin: 20px auto;
@@ -62,11 +96,11 @@ h1 > span, h2 > span{
 /* #scannow_page */
 
 /* #scaninfo_page */
-#scaninfo_page, #scannow_page, #login_page, #chconf_page, #attendees_page, #eclipse2014, #sortattend {
-    background: white;
-}
 #scaninfo_page [role="main"]{
     padding: 0;
+}
+#scaninfo_page [data-role="header"] h1{
+    margin-top: 10px;
 }
 #scaninfo_page [data-role="header"] .email{
     text-align: center;
@@ -138,12 +172,6 @@ h1 > span, h2 > span{
     margin-bottom: 5px;
     margin-left: 23px;
 }
-#scaninfo_page .form-part h2:first-letter, #scannow_page .recent-scans h2:first-letter, #scannow_page .recent-scans h2 span{
-    color: #27A9E1;
-}
-#scannow_page,#login_page .recent-scans h2{
-    color: #D1D2D4;
-}
 /* #scaninfo_page */
 
 /*login_page*/
@@ -154,20 +182,95 @@ h1 > span, h2 > span{
     margin-top: 20px;
 }
 /*login_page*/
+
 /*chconf_page*/
 #chooseconference_page div.main {
     padding: 5% 0 65% 0;
 }
 /*chconf_page*/
+
 /*conference_page*/
+#conference_page .stats-links{
+    color: #333;
+    margin-left: -1em;
+    margin-right: -1em;
+}
 #conference_page table{
     width: 100%;
+    padding: 0 1em;
+}
+#conference_page table.blueline-block td{
+    padding: 6px 5px;
 }
 #conference_page td.right{
     text-align: right;
 }
 #conference_page div.attend{
     margin-top: 10%;
+    margin-left: -1em;
+    margin-right: -1em;
+}
+#conference_page div.attend > a{
+    color: #38c;
+    font-size: 22px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+#conference_page .scan-area {
+    width: 70%;
+    margin: 20px auto;
+    outline: 0;
+}
+#conference_page .scan-area:active .scan-corner{
+    border-color: #1EBD1E;
+}
+#conference_page .scan-area:active h1 > span{
+    color: #1EBD1E;
+}
+#conference_page .scan-area .scan-inner{
+    position: relative;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+}
+#conference_page .scan-area .scan-inner .scan-inside {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-size: 150%;
+}
+#conference_page .scan-area .scan-corner-lt,
+#conference_page .scan-area .scan-corner-rt,
+#conference_page .scan-area .scan-corner-lb,
+#conference_page .scan-area .scan-corner-rb{
+    width: 20%;
+    position: absolute;
+    height: 20%;
+}
+#conference_page .scan-area .scan-corner-lt{
+    border-top: 4px solid #27A9E1;
+    border-left: 4px solid #27A9E1;
+    left: 5px;
+    top: 5px;
+}
+#conference_page .scan-area .scan-corner-rt{
+    border-top: 4px solid #27A9E1;
+    border-right: 4px solid #27A9E1;
+    right: 5px;
+    top: 5px;
+}
+#conference_page .scan-area .scan-corner-lb{
+    border-bottom: 4px solid #27A9E1;
+    border-left: 4px solid #27A9E1;
+    left: 5px;
+    bottom: 5px;
+}
+#conference_page .scan-area .scan-corner-rb{
+    border-bottom: 4px solid #27A9E1;
+    border-right: 4px solid #27A9E1;
+    right: 5px;
+    bottom: 5px;
 }
 /*conference_page*/
 

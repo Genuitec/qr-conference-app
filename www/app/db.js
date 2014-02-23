@@ -19,11 +19,11 @@
                     adr TEXT NULL,\n\
                     type VARCHAR(255) NULL,\n\
                     version VARCHAR(255) NULL,\n\
-                    time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
+                    scantime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
         
                 'CREATE TABLE IF NOT EXISTS attendees(\n\
                     id INTEGER PRIMARY KEY AUTOINCREMENT NULL,\n\
-                    rating VARCHAR(255) NULL,\n\
+                    rating INTEGER NULL,\n\
                     notes TEXT NULL,\n\
                     tags TEXT NULL,\n\
                     followup INTEGER NULL,\n\
