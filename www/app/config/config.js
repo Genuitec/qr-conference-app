@@ -19,4 +19,8 @@
         return val;
     };
     
+    Config.set = function(k, v){
+        return configs[k] = v;
+    };
+    
 }(App.Config));

@@ -436,10 +436,33 @@ var SQLite = function(){ // works with local SQLite DB
                 col             : col,
                 insert          : insert,
                 update          : update,
+                remove          : remove,
                 recreate_db : function(){
                     _init_db(db_name, db_tables, db_tables_sql, true);
                 }
             };
+//            return function(){
+////                return {
+//                    this.select          = select,
+//                    this.from            = from,
+//                    this.where           = where,
+//                    this.where_in        = where_in,
+//                    this.order_by        = order_by,
+//                    this.order_by_desc   = order_by_desc,
+//                    this.limit           = limit,
+//                    this.join            = join,
+//                    this.left_join       = left_join,
+//                    this.query           = query,
+//                    this.row             = row,
+//                    this.col             = col,
+//                    this.insert          = insert,
+//                    this.update          = update,
+//                    this.remove          = remove,
+//                    this.recreate_db  = function(){
+//                        _init_db(db_name, db_tables, db_tables_sql, true);
+//                    };
+////                };
+//            };
         }else return false;
     };
 

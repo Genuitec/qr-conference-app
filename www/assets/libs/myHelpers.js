@@ -41,6 +41,13 @@ function clone_object(o, field_name, replace_with){
     return oo;
 }
 
+function clone_array(o){
+    var oo = [];
+    for(var i in o)
+        oo[i] = o[i];
+    return oo;
+}
+
 function trim_ar_strings(ar){
     for(var i = 0; i< ar.length; ++i)
         if(is_array(ar[i]))
