@@ -14,6 +14,8 @@
             vCardParser(scanData, handleQRdata);
         },
         handleQRdata = function(vCard){
+            console.log("parser");
+            console.log(vCard);
             /** final parse data **/
             returnCallback( (function(o){
                 var oo = {}, field = "";

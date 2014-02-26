@@ -437,6 +437,7 @@ var SQLite = function(){ // works with local SQLite DB
                 insert          : insert,
                 update          : update,
                 remove          : remove,
+                insert_batch_on_duplicate_update          : insert_batch_on_duplicate_update,
                 recreate_db : function(){
                     _init_db(db_name, db_tables, db_tables_sql, true);
                 }
