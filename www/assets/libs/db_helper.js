@@ -387,8 +387,9 @@ var SQLite = function(){ // works with local SQLite DB
                 );
     },
     insert_batch_on_duplicate_update = function(table, data, callback) {
+        console.log(table)
         var _this = this, len = data.length;
-        batch_insert_or_ignore(table, data, function() {
+        batch_insert_or_ignore(table, data, function(){
             data.forEach(function(row, i) {
                 if (i == len - 1) {
                     update(table, row, 'id = "' + row.id + '"', callback);

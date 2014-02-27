@@ -5,7 +5,7 @@
         create : function(data, callback){
             DB.insert("conferences", data, callback);
         },
-        read : function(where, callback){
+        read : function(where, callback){ //*
             DB.select();
             DB.from("conferences");
             if(arguments.length === 2)
@@ -14,7 +14,7 @@
             else callback = where;
             DB.query(callback);
         },
-        info: function(conference_id, callback){
+        info: function(conference_id, callback){//*
             Async.parallel({
                 conference : function(c){
                     DB.select();

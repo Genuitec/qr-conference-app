@@ -37,7 +37,38 @@ var Async = (function(){
                         };
                     }(i))
                 );
-        }//parallel
+        },//parallel
+        
+        forEach : function(data, func, callback){
+            var result = [], data_length = data.length, counter = 0, interval = new Interval(result, callback);
+            if(is_array(data))
+                data.forEach(function(k, v){
+                    func(k, v, function(res){
+                        result.push(res);
+                        ++counter;
+                        if(counter === data_length){
+                            interval.clearInterval();
+
+                            if(interval.checkInterval() === false)
+                                return callback(result);
+                        }
+                    });
+                });
+            else{
+                for(var k in data){
+                    func(data[k], k, function(res){
+                        result.push(res);
+                        ++counter;
+                        if(counter === data_length){
+                            interval.clearInterval();
+
+                            if(interval.checkInterval() === false)
+                                return callback(result);
+                        }
+                    });
+                }
+            }
+        }
         
     };
     

@@ -45,7 +45,9 @@
     };
     
     Controller.attendeeslist_page = function(params, load){
-        Models.Attendee.filter_read(params, function(data){
+        params.conference_id = Session.get("conference_id");
+//        Models.Attendee.filter_read(params, function(data){
+        Models.Scan.filter_read(params, function(data){
             viewHelpers.attendeeslist_page(data);
             if(is_set(load))load();
         });            

@@ -3,72 +3,77 @@
     var Sync = function(tablesToSync, callback){
         var tablesToSync = tablesToSync,
             callback = callback,
-            requestData = {info:{}, data:[]}, //data ==> table_name : [create:[],update:[]}
-
+            
 //        __getSyncUrl = Session.get("user_data").hosturl+"/sync.php",
         __getSyncUrl = Session.get("user_data").hosturl,
 
-        _syncClear = function(table) {
-            DB.remove(table, 'table_name = "' + table + '"', function(){
-                Session.set("sync_"+table, (new Date).getTime());//last sync time
-            });
+        _syncClear = function(time, table) {
+            if(is_array(table))
+                table.forEach(function(t){
+                    DB.remove("sync", 'table_name = "' + t + '"', function(){
+                        Session.set("sync_"+t, time);//last sync time
+                    });
+                });
+            else
         },
    
-        applyChanges = function(serverResponse){
-            serverResponse.data.forEach(function(values, table){
-                DB.insert_batch_on_duplicate_update(table, values, function(){
-                    _syncClear(table);
-                });
-            });
+        applyChanges = function(_serverResponse){
+            var serverResponse = JSON.parse(_serverResponse);
+            if(is_set(serverResponse) && is_set(serverResponse.data) && is_set(serverResponse.info) && is_set(serverResponse.info.time))
+                if(objectLenght(serverResponse.data) > 0)
+                    Async.forEach(serverResponse.data, function(values, table, c){
+                        DB.insert_batch_on_duplicate_update(table, values, function(){
+                            _syncClear(serverResponse.info.time, table);
+                            c();
+                        });
+                    }, function(){
+                        _syncClear(serverResponse.info.time, tablesToSync);
+                    });
+                else
+                    _syncClear(serverResponse.info.time, tablesToSync);
         },
         
-        makeRequest = function(table, changes){
-            requestData.data[table] = {create:[], update:[]};
-            changes.forEach(function(v){
-                v['rowcreated'] === 1 ? requestData.data[table].create.push(v) : requestData.data[table].update.push(v);
-            });
-            console.log(changes);
-            $.post(__getSyncUrl, {sync: requestData}, applyChanges);
+        preRequest = function(changes){
+            var finalData = {};
+            for(var tableName in changes){
+                finalData[tableName] = {create:[], update:[]};
+                changes[tableName].forEach(function(v, k){
+                    finalData[tableName].lastSyncTime = (empty(Session.get("sync_"+tableName)) ? 0 : Session.get("sync_"+tableName));
+                    v.rowcreated === 1 ? finalData[tableName].create.push(v) : finalData[tableName].update.push(v);
+                });
+            }
+            makeRequest(finalData);
+        },
+        
+        makeRequest = function(changes){
+            $.post(__getSyncUrl, {
+                sync: JSON.stringify({
+                    info:{
+                        time: (new Date).getTime()
+                    },
+                    data: changes
+                })
+            }, applyChanges);
         },
 
         getChanges = function(tables){
-            tables.forEach(function(table){
+            var obj = {};
+            Async.forEach(tables, function(table, val, c){
                 DB.select();
                 DB.from("sync as s ");
                 DB.join(table+" as t", "s.row_id = t.id");
                 DB.where('s.table_name = "'+table+'"');
-                DB.query(function(res){
-                    makeRequest(table, res);
+                DB.query(function(changes){
+                    obj[table]= changes;
+                    c( objectKeyValue(table, changes) );
                 });
+            }, function(){
+                preRequest(obj);
             });
         };
-//                Async.parallel({
-//                    create : function(c){
-//                        createChanges(table, values.create, c);
-//                    },
-//                    update : function(c){
-//                        updateChanges(table, values.update, c);
-//                    }
-//                }, function(){
-//                    _syncClear(table);
-//                });
-//            });
-//        },
-        
-//        updateChanges = function(table, data, callback){
-//            data.forEach(function(v, k){
-//                    
-//            });
-//        },
-//                
-//        createChanges = function(table, data, callback){
-//            data.forEach(function(v, k){
-//                    
-//            });
-//        };
         
         this.init = function(){
-            console.log("init")
+            console.log("init");
             if(is_array(tablesToSync) && is_set(callback))
                 getChanges(tablesToSync);
             else return false;
@@ -79,7 +84,6 @@
     Models.Sync = {
         
         sync : function(tables, callback){
-            console.log(checkArgs(arguments));
             var args = checkArgs(arguments);
             if(args === false)return false;
             

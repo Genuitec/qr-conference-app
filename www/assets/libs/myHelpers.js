@@ -24,6 +24,12 @@ function strfield_to_array(field, data){
     }
 };
 
+function objectKeyValue(k,v){
+    var obj = {};
+    obj[k] = v;
+    return obj;
+}
+
 function clone_object(o, field_name, replace_with){
     var oo = {};
     for(var i in o){
@@ -145,6 +151,10 @@ function is_set(){ //many arguments
     } catch(e) {
         return false;
     }
+}
+
+function objectLenght(obj){
+    return Object.keys(obj).length;
 }
 
 function empty(){
