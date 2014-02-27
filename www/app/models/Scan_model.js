@@ -105,11 +105,11 @@
             if(is_set(params.followup) && params.followup === "true")
                 DB.where('f.creator_id = "'+ Session.get("user_data").userid +'"'); //*
             if(is_set(params.rating) && params.rating !== "top")
-                DB.where('a.rating = '+params.rating+'');
+                DB.where('s.rating = '+params.rating+'');
             if(is_set(params.tags))
-                DB.where('a.rating = "'+params.tags+'"');
+                DB.where('s.rating = "'+params.tags+'"');
             if(is_set(params.rating) && params.rating === "top")
-                DB.where('a.rating > 1');
+                DB.where('s.rating > 1');
 
             DB.query(callback);
         }
