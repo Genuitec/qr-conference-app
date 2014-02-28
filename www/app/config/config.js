@@ -1,11 +1,12 @@
 (function(Config){
-    
+
     var configs = {
         recent_scans : {
             amount : 5
         },
         scans : {
-            db_fields : ["id", "md5", "conference_id", "fn", "title", "org" , "email", "tel", "adr", "type", "version"],
+            db_fields : ["id", "conference_id", "fn", "title", "org" , "email", "tel", "adr", "type", "version", "scantime",
+                "rating", "scannedby_id", "scannedby_name"],
             error_already_exist : "Already Scanned"
         },
         home_page : "login_page"

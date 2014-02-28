@@ -379,8 +379,8 @@
         <script id="scaninfo_page-template" type="text/x-handlebars-template">
             <div data-role="header">
                 <a href="#" data-role="button" data-rel="back" class="ui-btn ui-btn-inline">Go Back</a>
-                <h1>{{fn}}</h1>
-                {{#each email}}
+                <h1>{{scan.fn}}</h1>
+                {{#each scan.email}}
                     <p class="email">{{this}}</p>
                 {{/each}}
             </div><!-- /header -->
@@ -393,17 +393,17 @@
                             <div class="form-part-wrapper">
                                 <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
                                     <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
-                                    <input type="radio" name="rating" id="radio-choice-h-2a" value=1 {{#is rating 1}}checked="checked"{{/is}}>
+                                    <input type="radio" name="rating" id="radio-choice-h-2a" value=1 {{#is scan.rating 1}}checked="checked"{{/is}}>
                                     <label class="cold" for="radio-choice-h-2a">Cold</label>
-                                    <input type="radio" name="rating" id="radio-choice-h-2b" value=2 {{#is rating 2}}checked="checked"{{/is}}>
+                                    <input type="radio" name="rating" id="radio-choice-h-2b" value=2 {{#is scan.rating 2}}checked="checked"{{/is}}>
                                     <label class="warm" for="radio-choice-h-2b">Warm</label>
-                                    <input type="radio" name="rating" id="radio-choice-h-2c" value=3 {{#is rating 3}}checked="checked"{{/is}}>
+                                    <input type="radio" name="rating" id="radio-choice-h-2c" value=3 {{#is scan.rating 3}}checked="checked"{{/is}}>
                                     <label class="hot" for="radio-choice-h-2c">Hot</label>
                                 </fieldset>
 
                                 <fieldset data-role="controlgroup">
                                     <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
-                                    <input type="checkbox" name="followup" id="checkbox-2" {{#is followup 1}}checked="checked"{{/is}}>
+                                    <input type="checkbox" name="followup" id="checkbox-2" {{#is scan.followup 1}}checked="checked"{{/is}}>
                                 </fieldset>
                             </div>
                         </div>
@@ -438,14 +438,16 @@
                                 <div class="notes">
 
                                     <div data-role="notes">
-                                        <!-- <input type="hidden" name="notes" value="{{notes}}" /> -->
                                         <form data-role="note-form">
                                             {{#if notes}}
-                                                <p>{{notes}}</p>
+                                                {{#each notes}}
+                                                    <p>{{note}}</p>
+                                                    <textarea>{{note}}</textarea>
+                                                {{/each}}
                                             {{else}}
                                                 <p>No notes added yet. Double tap to edit notes</p>
+                                                <textarea></textarea>
                                             {{/if}}
-                                            <textarea>{{notes}}</textarea>
                                             <button type="submit">submit</button>
                                             <button type="button" data-role="note-reset">reset</button>
                                         </form>
@@ -459,58 +461,58 @@
                             <h2>Contact details</h2>
                             <div class="form-part-wrapper">
                                  <ul data-role="listview" data-inset="true">
-                                    {{#if fn}}
+                                    {{#if scan.fn}}
                                         <li class="ui-field-contain">
                                             <label>Name:</label>
-                                            <label>{{fn}}</label>
+                                            <label>{{scan.fn}}</label>
                                         </li>
                                     {{/if}}
-                                    {{#if title}}
+                                    {{#if scan.title}}
                                         <li class="ui-field-contain">
                                             <label>Title:</label>
                                             <label>Chief Engineer</label>
                                         </li>
                                     {{/if}}
-                                    {{#if org}}  
+                                    {{#if scan.org}}  
                                         <li class="ui-field-contain">
                                             <label>Company</label>
                                             <label>Yo</label>
                                         </li>
                                     {{/if}}
-                                    {{#if tel}}
+                                    {{#if scan.tel}}
                                         <li class="ui-field-contain">
                                             <label>Phone(s):</label>
-                                            {{#each tel}}
+                                            {{#each scan.tel}}
                                                 <label>{{this}}</label>
                                             {{/each}}
                                         </li>
                                     {{/if}}
-                                    {{#if email}}
+                                    {{#if scan.email}}
                                         <li class="ui-field-contain">
                                             <label>Email(s):</label>
-                                            {{#each email}}
+                                            {{#each scan.email}}
                                                 <label>{{this}}</label>
                                             {{/each}}
                                         </li>
                                     {{/if}}
-                                    {{#if adr}}  
+                                    {{#if scan.adr}}  
                                         <li class="ui-field-contain">
                                             <label>Address</label>
-                                            <label><p>{{adr}}</p></label>
+                                            <label><p>{{scan.adr}}</p></label>
                                         </li>
                                     {{/if}}
-                                    {{#if org}}
+                                    {{#if scan.org}}
                                         <li class="ui-field-contain">
                                             <label>Website</label>
-                                            <label>{{org}}</label>
+                                            <label>{{scan.org}}</label>
                                         </li>
                                     {{/if}}
                                     <li class="ui-body ui-body-b">
                                         <div data-role="navbar">
                                             <ul>
-                                                {{#if tel.[0]}}<li><a href="tel:{{tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
-                                                {{#if email.[0]}}<li><a href="mailto:{{email.[0]}}">Email</a></li>{{/if}}
-                                                {{#if org}}<li><a href="{{org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
+                                                {{#if scan.tel.[0]}}<li><a href="tel:{{scan.tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
+                                                {{#if scan.email.[0]}}<li><a href="mailto:{{scan.email.[0]}}">Email</a></li>{{/if}}
+                                                {{#if scan.org}}<li><a href="{{scan.org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{scan.org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
                                             </ul>
                                         </div><!-- /navbar -->
                                     </li>

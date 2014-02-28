@@ -15,6 +15,9 @@
                     });
                 });
             else
+                DB.remove("sync", 'table_name = "' + table + '"', function(){
+                    Session.set("sync_"+table, time);//last sync time
+                });
         },
    
         applyChanges = function(_serverResponse){
@@ -22,13 +25,17 @@
             if(is_set(serverResponse) && is_set(serverResponse.data) && is_set(serverResponse.info) && is_set(serverResponse.info.time))
                 if(objectLenght(serverResponse.data) > 0)
                     Async.forEach(serverResponse.data, function(values, table, c){
+//                        if(["scan_tags", "notes", "followups", ""].indeOf(table) >= 0)
+//                            values.forEach(function(vv){
+//                                console.log(vv);
+//                            });
                         DB.insert_batch_on_duplicate_update(table, values, function(){
                             _syncClear(serverResponse.info.time, table);
                             c();
                         });
                     }, function(){
                         _syncClear(serverResponse.info.time, tablesToSync);
-                    });
+                    }, false);
                 else
                     _syncClear(serverResponse.info.time, tablesToSync);
         },
@@ -63,13 +70,14 @@
                 DB.from("sync as s ");
                 DB.join(table+" as t", "s.row_id = t.id");
                 DB.where('s.table_name = "'+table+'"');
+                DB.order_by("s.time");
                 DB.query(function(changes){
                     obj[table]= changes;
                     c( objectKeyValue(table, changes) );
                 });
             }, function(){
                 preRequest(obj);
-            });
+            }, false);
         };
         
         this.init = function(){

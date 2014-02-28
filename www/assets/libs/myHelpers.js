@@ -1,3 +1,12 @@
+function generateId(str){
+    return ( empty(str) ? (new Date).getTime() : str+(new Date).getTime() );
+}
+
+function addGenId(data, str){
+    data.id = generateId(str);
+    return data;
+}
+
 function strfield_to_array(field, data){
     if(is_array(data)){
         var _data = [];

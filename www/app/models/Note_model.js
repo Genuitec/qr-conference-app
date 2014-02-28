@@ -3,7 +3,7 @@
     Models.Note = {
         
         create : function(data, callback){
-            DB.insert("attendees", data, callback);
+//            DB.insert("attendees", data, callback);
         },
                 
         read : function(where, callback){

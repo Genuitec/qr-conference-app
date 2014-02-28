@@ -399,6 +399,11 @@ var SQLite = function(){ // works with local SQLite DB
             });
         });
     },
+    insert_on_duplicate_update = function(table, data, callback) {
+        insert(table, data, function(){
+            update(table, data, 'id = "' + data.id + '"', callback);
+        });
+    },
     _init_db = function(db_name, db_tables, db_tables_sql, clear) {
         console.log("start init");
 
@@ -439,6 +444,7 @@ var SQLite = function(){ // works with local SQLite DB
                 update          : update,
                 remove          : remove,
                 insert_batch_on_duplicate_update          : insert_batch_on_duplicate_update,
+                insert_on_duplicate_update                : insert_on_duplicate_update,
                 recreate_db : function(){
                     _init_db(db_name, db_tables, db_tables_sql, true);
                 }

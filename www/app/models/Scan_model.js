@@ -32,7 +32,7 @@
             if(arguments.length !== 2 || empty(where) || empty(where.id))return false;
             Async.parallel({
                 scan: function(c){
-                    DB.select("s.id, s.conference_id, s.fn, s.title, s.org, s.email, s.tel, s.adr, s.type, s.version, s.scantime, s.rating, s.tags, a.followup");
+                    DB.select("s.id, s.conference_id, s.fn, s.title, s.org, s.email, s.tel, s.adr, s.type, s.version, s.scantime, s.rating");
                     DB.from("scans as s");
                     for(var i in where)
                         DB.where('s.'+i+' = "'+where[i]+'"');
@@ -70,8 +70,24 @@
 //                callback(strfield_to_array(["email", "tel"], data));
 //            });
         },
-        followup : function(scanId, callback){
-            
+        followup : function(data, callback){
+            /** data = {
+             *      scan_id: scan_id,
+             *      creator_id: user_id,
+             *      conference_id: conference_id
+             *      followup: 1 | 0
+             *  } **/
+            DB.select();
+            DB.from("followups");
+            DB.where('scan_id = "'+data.scan_id+'" AND creator_id = "'+data.creator_id+'" AND conference_id = "'+data.conference_id+'"');
+            DB.query(function(res){
+                if(res.length > 0)
+                    DB.update("followups", data, {id: res[0].id}, callback);
+                else
+                    DB.insert("followups", addGenId(data, data.creator_id), callback);
+            });
+//            console.log(data)
+//            DB.insert_on_duplicate_update("followups", data, callback);
         },
         list : function(conference_id, callback){//*
             DB.select();
@@ -80,7 +96,9 @@
             DB.order_by_desc("scantime");
             DB.query(callback);
         },
-        update : function(callback){},
+        update : function(where, data, callback){
+            DB.update("scans", data, where, callback);
+        },
         remove : function(callback){},
         recent: function(conference_id, callback){
             DB.select();
@@ -89,17 +107,14 @@
             DB.order_by_desc("scantime");
             DB.limit(getConfig("recent_scans", "amount"));
             DB.query(callback);
-        },
-                
+        },    
         filter_read : function(params, callback){
             DB.select();
-//            DB.from("attendees as a");
-//            DB.left_join("scans as s", "s.id = a.scan_id");
             DB.from("scans as s");
             DB.left_join("followups as f", "s.id = f.scan_id");
-            DB.where('f.conference_id = '+params.conference_id);
-//            DB.left_join("scans as s", "s.id = a.scan_id");
-
+            DB.left_join("scan_tags as st", "st.scan_id = s.id");
+            DB.left_join("tags as t", "t.id = st.tag_id");
+            DB.where('s.conference_id = '+params.conference_id);
             if(is_set(params.time) && params.time === "today")
                 DB.where('s.scantime >= "'+params.time+'"');
             if(is_set(params.followup) && params.followup === "true")
@@ -107,10 +122,9 @@
             if(is_set(params.rating) && params.rating !== "top")
                 DB.where('s.rating = '+params.rating+'');
             if(is_set(params.tags))
-                DB.where('s.rating = "'+params.tags+'"');
+                DB.where('t.tag = "'+params.tags+'"');
             if(is_set(params.rating) && params.rating === "top")
                 DB.where('s.rating > 1');
-
             DB.query(callback);
         }
 

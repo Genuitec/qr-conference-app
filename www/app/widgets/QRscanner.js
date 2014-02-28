@@ -1,4 +1,5 @@
-(function(Widgets, vCardParser, BarcodeScanner, Scan, Attendee, getConfig, Session){
+//(function(Widgets, vCardParser, BarcodeScanner, Scan, Attendee, getConfig, Session){
+(function(Widgets, vCardParser, BarcodeScanner, Scan, getConfig, Session){
     
     var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
@@ -45,7 +46,7 @@
         },
         returnCallback = function(data){
             /** save to db and call callback(last_parsed data) **/
-            data.md5 = _self.md5;
+            data.id = _self.md5;
             data.conference_id = Session.get("conference_id");
             console.log("returnCallback");
             console.log(data);
@@ -61,7 +62,7 @@
         
         var saveQRtoDB = function(QR, callback){
             Scan.read({
-                md5           :    QR.md5,
+                id           :    QR.id,
                 conference_id :    QR.conference_id
             }, function(checkData){
                 if(checkData.length > 0)
@@ -69,8 +70,8 @@
                 
                 var _filteredQR = filter_fields(QR, getConfig("scans", "db_fields"));
                 Scan.create( _filteredQR , function(insertId){
-                    _filteredQR.id = insertId;
-                    Attendee.create({scan_id: insertId});
+//                    _filteredQR.id = insertId;
+//                    Attendee.create({scan_id: insertId});
                     callback(_filteredQR);
                 });
             });
@@ -124,4 +125,5 @@
         
     }());
     
-}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));
+}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Config.get, App.Session));
+//}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));
