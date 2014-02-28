@@ -1,6 +1,11 @@
-(function(Config){
+(function(Config, Session){
 
     var configs = {
+        
+        sync_url : Session.get("user_data").hosturl+"/sync.php",
+        
+        login_url : Session.get("user_data").hosturl+"/login.php",
+        
         recent_scans : {
             amount : 5
         },
@@ -24,4 +29,4 @@
         return configs[k] = v;
     };
     
-}(App.Config));
+}(App.Config, App.Session));

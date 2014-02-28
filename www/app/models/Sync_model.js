@@ -5,7 +5,8 @@
             callback = callback,
             
 //        __getSyncUrl = Session.get("user_data").hosturl+"/sync.php",
-        __getSyncUrl = Session.get("user_data").hosturl,
+//        __getSyncUrl = Session.get("user_data").hosturl,
+        __getSyncUrl = getConfig("sync_url"),
 
         _syncClear = function(time, table) {
             if(is_array(table))

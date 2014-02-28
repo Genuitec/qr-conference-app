@@ -6,6 +6,21 @@
             callback(Session.get("user_data"));
         },
         
+        serverLogIn : function(data, callback){
+            $.post(getConfig("login_url"), data, function(){
+                callback({
+                    success     :   true,
+                    userdata    :   data
+                });
+            }).error(function(error){
+                callback({
+                    success     :   false,
+                    error       :   error
+                });
+            });
+            
+        },
+        
         logIn : function(data, callback){
             Session.set("user_data", data) ?
                 callback({

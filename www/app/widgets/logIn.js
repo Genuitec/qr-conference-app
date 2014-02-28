@@ -10,13 +10,22 @@
         return true;
     };
     
+    function serverLogIn(data, callback){
+        User.serverLogIn(data, callback);
+    }
+    
     Widgets.logIn = function(formEl, callback){
         
         formEl.submit(function(e){
             e.preventDefault();
             var formData = $(this).formData();
             if(validate(formData))
-                User.logIn(formData , callback);
+                serverLogIn(formData, function(result){
+                    if(result.success == true)
+                        User.logIn(formData , callback);
+                    else
+                        alert("LogIn error! Check internet connection");
+                });
             else
                 alert("Please fillUp the form");
         });

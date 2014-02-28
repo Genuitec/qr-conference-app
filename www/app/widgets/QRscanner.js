@@ -69,6 +69,8 @@
                     return alert(getConfig("scans", "error_already_exist"));
                 
                 var _filteredQR = filter_fields(QR, getConfig("scans", "db_fields"));
+                _filteredQR.scannedby_id = Session.get("user_data").userid;
+                _filteredQR.scannedby_name = Session.get("user_data").username;
                 Scan.create( _filteredQR , function(insertId){
 //                    _filteredQR.id = insertId;
 //                    Attendee.create({scan_id: insertId});
