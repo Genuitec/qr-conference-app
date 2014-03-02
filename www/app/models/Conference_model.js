@@ -28,7 +28,37 @@
                     });
                 },
                 stat: function(c){
-                    c([]);
+                    Async.parallel({
+                        hot       :     function(cc){
+                            Models.Scan.read({rating: 3}, function(hot){
+                                cc(hot.length);
+                            });
+                        },
+                        warm      :     function(cc){
+                            Models.Scan.read({rating: 2}, function(warm){
+                                cc(warm.length);
+                            });
+                        },
+                        followups :     function(cc){
+                            DB.select();
+                            DB.from("followups");
+                            DB.where('creator_id = "'+Session.get("user_data").userid+'" AND conference_id = "'+conference_id+'"');
+                            DB.query(function(res){
+                                cc({
+                                    needed : 9999,
+                                    done   : res.length
+                                });
+                            });
+                        }
+                    }, function(stres){
+                        c({
+                            top_leads: {
+                                hot     :   stres.hot,
+                                warm    :   stres.warm
+                            },
+                            followups: stres.followups
+                        });
+                    });
                 }
             }, function(result){
                 callback({
@@ -39,15 +69,17 @@
                             total   :   result.scans.amount,
                             offline :   result.scans.amount
                         },
-                        top_leads       : {
-                            hot     : 1,
-                            warm    : 1
-                        },
-                        followups       : {
-                            needed  : 3,
-                            done    : 3
-                        },
-                        lastSync        : 5
+                        top_leads   : result.stat.top_leads,
+                        followups   : result.stat.followups,
+//                        top_leads       : {
+//                            hot     : 1,
+//                            warm    : 1
+//                        },
+//                        followups       : {
+//                            needed  : 3,
+//                            done    : 3
+//                        },
+                        lastSync    : Math.floor( ( (new Date()).getTime() - Session.get("lastSync") ) / 1000 / 60 )
                     }
                 });
             });

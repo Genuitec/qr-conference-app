@@ -19,6 +19,8 @@
                 DB.remove("sync", 'table_name = "' + table + '"', function(){
                     Session.set("sync_"+table, time);//last sync time
                 });
+                
+            Session.set("lastSync", (new Date().getTime()));
         },
    
         applyChanges = function(_serverResponse){

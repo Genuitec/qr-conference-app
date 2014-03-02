@@ -79,7 +79,8 @@
     
     App.DB = (new SQLite())
         .init( DBconfig.DBname, DBconfig.tables, DBconfig.createSQL, DBconfig.recreateDB );
-
+    
+    Session.set("lastSync", (new Date().getTime()));
 
     App.DB.insert("conferences", {name: "MyEclipse2014"});
     App.DB.insert("conferences", {name: "test"});

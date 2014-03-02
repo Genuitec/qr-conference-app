@@ -2,9 +2,9 @@
 
     var configs = {
         
-        sync_url : Session.get("user_data").hosturl+"/sync.php",
+        sync_url : Session.get("user_data").hosturl+"/php/sync.php",
         
-        login_url : Session.get("user_data").hosturl+"/login.php",
+        login_url : "/php/login.php",
         
         recent_scans : {
             amount : 5

@@ -1,4 +1,4 @@
-(function(Models, Session){
+(function(Models, Session, getConfig){
     
     Models.User = {
         
@@ -7,7 +7,7 @@
         },
         
         serverLogIn : function(data, callback){
-            $.post(getConfig("login_url"), data, function(){
+            $.post(data.hosturl + getConfig("login_url"), data, function(){
                 callback({
                     success     :   true,
                     userdata    :   data
@@ -18,7 +18,6 @@
                     error       :   error
                 });
             });
-            
         },
         
         logIn : function(data, callback){
@@ -44,4 +43,4 @@
         
     };
     
-}(App.Models, App.Session));
+}(App.Models, App.Session, App.Config.get));
