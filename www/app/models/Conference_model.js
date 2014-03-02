@@ -45,7 +45,7 @@
                             DB.where('creator_id = "'+Session.get("user_data").userid+'" AND conference_id = "'+conference_id+'"');
                             DB.query(function(res){
                                 cc({
-                                    needed : 9999,
+                                    needed : 99,
                                     done   : res.length
                                 });
                             });
@@ -76,12 +76,8 @@
                 });
             });
         },
-        update : function(callback){
-            
-        },
-        remove : function(callback){
-            
-        }
+        update : function(callback){},
+        remove : function(callback){}
 
     };
     

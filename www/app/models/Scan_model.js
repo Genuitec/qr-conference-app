@@ -16,18 +16,6 @@
                 callback(strfield_to_array(["email", "tel"], data));
             });
         },
-//        info : function(where, callback){ 
-//            DB.select("s.id, s.conference_id, s.md5, s.fn, s.title, s.org, s.email, s.tel, s.adr, s.type, s.version, s.scantime, a.rating, a.notes, a.tags, a.followup");
-//            DB.from("scans as s");
-//            DB.left_join("attendees as a", "a.scan_id = s.id");
-//            if(arguments.length === 2)
-//                for(var i in where)
-//                    DB.where('s.'+i+' = "'+where[i]+'"');
-//            else callback = where;
-//            DB.query(function(data){
-//                callback(strfield_to_array(["email", "tel"], data));
-//            });
-//        },
         info : function(where, callback){ //*
             if(arguments.length !== 2 || empty(where) || empty(where.id))return false;
             Async.parallel({
@@ -57,18 +45,6 @@
                     DB.query(c);
                 }
             }, callback);
-            
-//            DB.select("s.id, s.conference_id, s.fn, s.title, s.org, s.email, s.tel, s.adr, s.type, s.version, s.scantime, s.rating, s.tags, a.followup, a.notes");
-//            DB.from("scans as s");
-//            DB.left_join("notes as n", "a.scan_id = s.id");
-////            DB.left_join("attendees as a", "a.scan_id = s.id");
-//            if(arguments.length === 2)
-//                for(var i in where)
-//                    DB.where('s.'+i+' = "'+where[i]+'"');
-//            else callback = where;
-//            DB.query(function(data){
-//                callback(strfield_to_array(["email", "tel"], data));
-//            });
         },
         followup : function(data, callback){
             /** data = {
@@ -86,8 +62,6 @@
                 else
                     DB.insert("followups", addGenId(data, data.creator_id), callback);
             });
-//            console.log(data)
-//            DB.insert_on_duplicate_update("followups", data, callback);
         },
         list : function(conference_id, callback){//*
             DB.select();
