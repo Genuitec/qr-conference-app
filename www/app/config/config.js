@@ -15,7 +15,6 @@
             error_already_exist : "Already Scanned"
         },
         home_page : "login_page"
-//        home_page : "chooseconference_page"
     };
     
     Config.get = function(){

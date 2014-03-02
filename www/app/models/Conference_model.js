@@ -30,12 +30,12 @@
                 stat: function(c){
                     Async.parallel({
                         hot       :     function(cc){
-                            Models.Scan.read({rating: 3}, function(hot){
+                            Models.Scan.read({rating: 3, conference_id: conference_id}, function(hot){
                                 cc(hot.length);
                             });
                         },
                         warm      :     function(cc){
-                            Models.Scan.read({rating: 2}, function(warm){
+                            Models.Scan.read({rating: 2, conference_id: conference_id}, function(warm){
                                 cc(warm.length);
                             });
                         },
@@ -71,14 +71,6 @@
                         },
                         top_leads   : result.stat.top_leads,
                         followups   : result.stat.followups,
-//                        top_leads       : {
-//                            hot     : 1,
-//                            warm    : 1
-//                        },
-//                        followups       : {
-//                            needed  : 3,
-//                            done    : 3
-//                        },
                         lastSync    : Math.floor( ( (new Date()).getTime() - Session.get("lastSync") ) / 1000 / 60 )
                     }
                 });

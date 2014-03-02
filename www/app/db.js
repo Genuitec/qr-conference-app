@@ -1,4 +1,4 @@
-(function(Config, Session){
+(function(_App, Config, Session){
     
     var DBconfig = {
         
@@ -74,15 +74,13 @@
     });
 
     DBconfig.tables.push('sync');
-    
-    console.log(DBconfig);
-    
-    App.DB = (new SQLite())
+        
+    _App.DB = (new SQLite())
         .init( DBconfig.DBname, DBconfig.tables, DBconfig.createSQL, DBconfig.recreateDB );
     
     Session.set("lastSync", (new Date().getTime()));
 
-    App.DB.insert("conferences", {name: "MyEclipse2014"});
-    App.DB.insert("conferences", {name: "test"});
+    _App.DB.insert("conferences", {name: "MyEclipse2014"});
+    _App.DB.insert("conferences", {name: "test"});
     
-}(App.Config, App.Session));
+}(App, App.Config, App.Session));
