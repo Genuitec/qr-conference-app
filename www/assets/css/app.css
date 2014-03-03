@@ -128,6 +128,7 @@ h1 > span, h2 > span{
     margin-top: 60px;
 }
 #scaninfo_page .form-part .form-part-wrapper.tags-wrapper{
+    width: 100%;
     float: left;
     margin-bottom: 60px;
 }
@@ -318,5 +319,28 @@ h1 > span, h2 > span{
 }
 #scaninfo_page .notes .active[data-role="notes"] p{
     display: none;
+}
+#scaninfo_page .tags .addtag{
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+#scaninfo_page .tags .addtag > div{
+    margin: 0;
+    top: -5px;
+    display: none;
+}
+#scaninfo_page .tags .addtag .canceltagbut,
+#scaninfo_page .tags .addtag .savetagbut{
+    display: none;
+}
+#scaninfo_page .tags .addtag > button{
+    top: -6px;
+    padding: 2px;
+    background: rgb(44, 183, 248);
+    border-color: rgb(44, 183, 248);
+}
+#scaninfo_page .tags .addtag > button:after{
+    background-color: rgb(44, 183, 248);
 }
 

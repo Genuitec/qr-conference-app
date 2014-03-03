@@ -16,7 +16,7 @@
                 callback(strfield_to_array(["email", "tel"], data));
             });
         },
-        info : function(where, callback){ //*
+        info : function(where, callback){
             if(arguments.length !== 2 || empty(where) || empty(where.id))return false;
             Async.parallel({
                 scan: function(c){
@@ -38,11 +38,10 @@
                     DB.col(c);
                 },
                 tags: function(c){
-                    DB.select("t.tag");
-                    DB.from("tags as t");
-                    DB.join("scan_tags as st", 't.id = st.tag_id');
-                    DB.where('st.conference_id = '+ where.conference_id +' AND st.scan_id = "'+ where.id+'"');
-                    DB.query(c);
+                    Models.Tag.read({conference_id: where.conference_id, scan_id: where.id}, c);
+                },
+                tags_available: function(c){
+                    Models.Tag.available({conference_id: where.conference_id, scan_id: where.id}, c);
                 }
             }, callback);
         },
@@ -96,7 +95,7 @@
             if(is_set(params.rating) && params.rating !== "top")
                 DB.where('s.rating = '+params.rating+'');
             if(is_set(params.tags))
-                DB.where('t.tag = "'+params.tags+'"');
+                DB.where('t.id = "'+params.tags+'"');
             if(is_set(params.rating) && params.rating === "top")
                 DB.where('s.rating > 1');
             DB.query(callback);

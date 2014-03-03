@@ -86,6 +86,7 @@
         <script src="app/models/Scan_model.js"></script>
         <script src="app/models/Sync_model.js"></script>
         <script src="app/models/Conference_model.js"></script>
+        <script src="app/models/Tag_model.js"></script>
         <script src="app/resources/barcodeScanner.js"></script>
         <script src="app/resources/vCardParser.js"></script>
         <script src="app/widgets/loader.js"></script>
@@ -93,6 +94,7 @@
         <script src="app/widgets/attendeeNotes.js"></script>
         <script src="app/widgets/logIn.js"></script>
         <script src="app/widgets/voteAttendeeForm.js"></script>
+        <script src="app/widgets/tags.js"></script>
         <script src="app/viewHelpers/login_page.js"></script>
         <script src="app/viewHelpers/scaninfo_page.js"></script>
         <script src="app/viewHelpers/chooseconference_page.js"></script>
@@ -273,6 +275,13 @@
         
         
         <!-- templates -->
+        <script id="attendees-template" type="text/x-handlebars-template">
+            <h2>By Contact Tags</h2>
+            {{#each tags}}
+                <a href="#attendeeslist_page?tags={{this.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{this.tag}}</a>
+            {{/each}}
+        </script>
+        
         <script id="scannow-template" type="text/x-handlebars-template">
             <div class="scan-area" id="scanner" tabindex="0">
                 <div class="scan-inner">
@@ -295,16 +304,8 @@
         
         <script id="attendeeslist-template" type="text/x-handlebars-template">
             {{#each attendees}}
-                <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
+                <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}<br /><span class="scanned">Scanned by {{scannedby_name}} <!-- today at 14:01 --></span></a></li>
             {{/each}}
-            <!--
-            <li class="ui-first-child"><a href="#scaninfo_page?id=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">John Watersmith<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-            <li><a href="#scaninfo_page?id=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Jane Appleseed<br /><span class="scanned">Scanned by Bob today at 14:01</span></a></li>
-            <li><a href="#scaninfo_page?id=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Bob Fitzgerald<br /><span class="scanned">Scanned by Jane today at 15:21</span></a></li>
-            <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Paul Scotty<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-            <li><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mary Jane<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-            <li class="ui-last-child"><a href="#scaninfo_page?id=4" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Makrus Kraus<br /><span class="scanned">Scanned by Bob today at 15:21</span></a></li>
-            -->
         </script>
         
         <script id="chooseconference_page-template" type="text/x-handlebars-template">
@@ -413,20 +414,21 @@
                             <div class="form-part-wrapper tags-wrapper">
                                 <div class="tags">
                                     <ul>
-                                        <li>RCP</li>
-                                        <li>Call</li>
-                                        <li>Eclipse IDE</li>
-                                        <li>Large Op</li>
-                                        <li>My Eclipse</li>
-                                        <li>Cool</li>
-                                        <li>Friendly</li>
-                                        <li>RCP</li>
-                                        <li>Call</li>
-                                        <li>Eclipse IDE</li>
-                                        <li>Large Op</li>
-                                        <li>My Eclipse</li>
-                                        <li>Cool</li>
-                                        <li>Friendly</li>
+                                        {{#each tags}}
+                                            <li tagid="{{id}}">{{tag}}</li>
+                                        {{/each}}
+                                        <li class="addtag">
+                                            <select class="addtagselect" name="select-choice-mini" id="select-choice-mini" data-mini="true" data-inline="true">
+                                                {{#each tags_available}}
+                                                    <option value="{{id}}">{{tag}}</option>
+                                                {{/each}}
+                                            </select>
+                                            <button class="addtagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">+ Add</button>
+                                            <button class="savetagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">Save</button>
+                                            <button class="canceltagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b ui-mini">Delete</button>
+                                        </li>
+                                
+                                        
                                     </ul>
                                 </div>
                             </div>
