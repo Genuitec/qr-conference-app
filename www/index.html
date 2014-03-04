@@ -82,7 +82,6 @@
         <script src="app/db.js"></script>
         <script src="app/models/User_model.js"></script>
         <script src="app/models/Note_model.js"></script>
-        <!--<script src="app/models/Attendee_model.js"></script>-->
         <script src="app/models/Scan_model.js"></script>
         <script src="app/models/Sync_model.js"></script>
         <script src="app/models/Conference_model.js"></script>
@@ -95,6 +94,7 @@
         <script src="app/widgets/logIn.js"></script>
         <script src="app/widgets/voteAttendeeForm.js"></script>
         <script src="app/widgets/tags.js"></script>
+        <script src="app/widgets/sync.js"></script>
         <script src="app/viewHelpers/login_page.js"></script>
         <script src="app/viewHelpers/scaninfo_page.js"></script>
         <script src="app/viewHelpers/chooseconference_page.js"></script>
@@ -388,141 +388,143 @@
             <div role="main" class="ui-content">
                 
                 <form>
-                    <!-- <section data-role="templates"> -->
-                        <div class="rating form-part first-form-part">
-                            <h2>Rapid Rating</h2>
-                            <div class="form-part-wrapper">
-                                <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
-                                    <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
-                                    <input type="radio" name="rating" id="radio-choice-h-2a" value=1 {{#is scan.rating 1}}checked="checked"{{/is}}>
-                                    <label class="cold" for="radio-choice-h-2a">Cold</label>
-                                    <input type="radio" name="rating" id="radio-choice-h-2b" value=2 {{#is scan.rating 2}}checked="checked"{{/is}}>
-                                    <label class="warm" for="radio-choice-h-2b">Warm</label>
-                                    <input type="radio" name="rating" id="radio-choice-h-2c" value=3 {{#is scan.rating 3}}checked="checked"{{/is}}>
-                                    <label class="hot" for="radio-choice-h-2c">Hot</label>
-                                </fieldset>
+                    <div class="rating form-part first-form-part">
+                        <h2>Rapid Rating</h2>
+                        <div class="form-part-wrapper">
+                            <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
+                                <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
+                                <input type="radio" name="rating" id="radio-choice-h-2a" value=1 {{#is scan.rating 1}}checked="checked"{{/is}}>
+                                <label class="cold" for="radio-choice-h-2a">Cold</label>
+                                <input type="radio" name="rating" id="radio-choice-h-2b" value=2 {{#is scan.rating 2}}checked="checked"{{/is}}>
+                                <label class="warm" for="radio-choice-h-2b">Warm</label>
+                                <input type="radio" name="rating" id="radio-choice-h-2c" value=3 {{#is scan.rating 3}}checked="checked"{{/is}}>
+                                <label class="hot" for="radio-choice-h-2c">Hot</label>
+                            </fieldset>
 
-                                <fieldset data-role="controlgroup">
-                                    <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
-                                    <input type="checkbox" name="followup" id="checkbox-2" {{#is scan.followup 1}}checked="checked"{{/is}}>
-                                </fieldset>
-                            </div>
+                            <fieldset data-role="controlgroup">
+                                <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
+                                <input type="checkbox" name="followup" id="checkbox-2" {{#is scan.followup 1}}checked="checked"{{/is}}>
+                            </fieldset>
                         </div>
+                    </div>
                 </form>
-                        <div class="form-part">
-                            <h2>Contact Tags</h2>
-                            <div class="form-part-wrapper tags-wrapper">
-                                <div class="tags">
-                                    <ul>
-                                        {{#each tags}}
-                                            <li tagid="{{id}}">{{tag}}</li>
+                <div class="form-part">
+                    <h2>Contact Tags</h2>
+                    <div class="form-part-wrapper tags-wrapper">
+                        <div class="tags">
+                            <ul>
+                                {{#each tags}}
+                                    <li tagid="{{id}}">{{tag}}</li>
+                                {{/each}}
+                                <li class="addtag">
+                                    <select class="addtagselect" name="select-choice-mini" id="select-choice-mini" data-mini="true" data-inline="true">
+                                        {{#each tags_available}}
+                                            <option value="{{id}}">{{tag}}</option>
                                         {{/each}}
-                                        <li class="addtag">
-                                            <select class="addtagselect" name="select-choice-mini" id="select-choice-mini" data-mini="true" data-inline="true">
-                                                {{#each tags_available}}
-                                                    <option value="{{id}}">{{tag}}</option>
-                                                {{/each}}
-                                            </select>
-                                            <button class="addtagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">+ Add</button>
-                                            <button class="savetagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">Save</button>
-                                            <button class="canceltagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b ui-mini">Delete</button>
-                                        </li>
-                                
-                                        
-                                    </ul>
-                                </div>
-                            </div>
+                                    </select>
+                                    <button class="addtagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">+ Add</button>
+                                    <button class="savetagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">Save</button>
+                                    <button class="canceltagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b ui-mini">Delete</button>
+                                </li>
+
+
+                            </ul>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="form-part">
-                            <h2>Notes</h2>
-                            <div class="form-part-wrapper">
-                                <div class="notes">
+                <div class="form-part">
+                    <h2>Notes</h2>
+                    <div class="form-part-wrapper">
+                        <div class="notes">
 
-                                    <div data-role="notes">
-                                        <form data-role="note-form">
-                                            {{#if notes}}
-                                                {{#each notes}}
-                                                    <p>{{note}}</p>
-                                                    <textarea>{{note}}</textarea>
-                                                {{/each}}
-                                            {{else}}
-                                                <p>No notes added yet. Double tap to edit notes</p>
-                                                <textarea></textarea>
-                                            {{/if}}
+                            <div data-role="notes">
+                                {{#if notes}}
+                                    {{#each notes}}
+                                        <form data-role="note-form" noteid="{{id}}" creatorid="{{creator_id}}">
+                                            <p>{{note}}</p>
+                                            <textarea>{{note}}</textarea>
                                             <button type="submit">submit</button>
                                             <button type="button" data-role="note-reset">reset</button>
                                         </form>
-                                    </div>
-
-                                </div>
+                                    {{/each}}
+                                {{else}}
+                                    <p>No notes added yet. Double tap to edit notes</p>
+                                {{/if}}
+                                <form data-role="addnote-form">
+                                    <textarea></textarea>
+                                    <button type="submit">submit</button>
+                                    <button type="button" data-role="note-reset">reset</button>
+                                </form>
+                                <button data-role="addnote">Add</button>
                             </div>
-                        </div>
 
-                        <div class="form-part">
-                            <h2>Contact details</h2>
-                            <div class="form-part-wrapper">
-                                 <ul data-role="listview" data-inset="true">
-                                    {{#if scan.fn}}
-                                        <li class="ui-field-contain">
-                                            <label>Name:</label>
-                                            <label>{{scan.fn}}</label>
-                                        </li>
-                                    {{/if}}
-                                    {{#if scan.title}}
-                                        <li class="ui-field-contain">
-                                            <label>Title:</label>
-                                            <label>Chief Engineer</label>
-                                        </li>
-                                    {{/if}}
-                                    {{#if scan.org}}  
-                                        <li class="ui-field-contain">
-                                            <label>Company</label>
-                                            <label>Yo</label>
-                                        </li>
-                                    {{/if}}
-                                    {{#if scan.tel}}
-                                        <li class="ui-field-contain">
-                                            <label>Phone(s):</label>
-                                            {{#each scan.tel}}
-                                                <label>{{this}}</label>
-                                            {{/each}}
-                                        </li>
-                                    {{/if}}
-                                    {{#if scan.email}}
-                                        <li class="ui-field-contain">
-                                            <label>Email(s):</label>
-                                            {{#each scan.email}}
-                                                <label>{{this}}</label>
-                                            {{/each}}
-                                        </li>
-                                    {{/if}}
-                                    {{#if scan.adr}}  
-                                        <li class="ui-field-contain">
-                                            <label>Address</label>
-                                            <label><p>{{scan.adr}}</p></label>
-                                        </li>
-                                    {{/if}}
-                                    {{#if scan.org}}
-                                        <li class="ui-field-contain">
-                                            <label>Website</label>
-                                            <label>{{scan.org}}</label>
-                                        </li>
-                                    {{/if}}
-                                    <li class="ui-body ui-body-b">
-                                        <div data-role="navbar">
-                                            <ul>
-                                                {{#if scan.tel.[0]}}<li><a href="tel:{{scan.tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
-                                                {{#if scan.email.[0]}}<li><a href="mailto:{{scan.email.[0]}}">Email</a></li>{{/if}}
-                                                {{#if scan.org}}<li><a href="{{scan.org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{scan.org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
-                                            </ul>
-                                        </div><!-- /navbar -->
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
-                   <!--  </section> -->
-               <!-- </form> -->
+                    </div>
+                </div>
+
+                <div class="form-part">
+                    <h2>Contact details</h2>
+                    <div class="form-part-wrapper">
+                         <ul data-role="listview" data-inset="true">
+                            {{#if scan.fn}}
+                                <li class="ui-field-contain">
+                                    <label>Name:</label>
+                                    <label>{{scan.fn}}</label>
+                                </li>
+                            {{/if}}
+                            {{#if scan.title}}
+                                <li class="ui-field-contain">
+                                    <label>Title:</label>
+                                    <label>Chief Engineer</label>
+                                </li>
+                            {{/if}}
+                            {{#if scan.org}}  
+                                <li class="ui-field-contain">
+                                    <label>Company</label>
+                                    <label>Yo</label>
+                                </li>
+                            {{/if}}
+                            {{#if scan.tel}}
+                                <li class="ui-field-contain">
+                                    <label>Phone(s):</label>
+                                    {{#each scan.tel}}
+                                        <label>{{this}}</label>
+                                    {{/each}}
+                                </li>
+                            {{/if}}
+                            {{#if scan.email}}
+                                <li class="ui-field-contain">
+                                    <label>Email(s):</label>
+                                    {{#each scan.email}}
+                                        <label>{{this}}</label>
+                                    {{/each}}
+                                </li>
+                            {{/if}}
+                            {{#if scan.adr}}  
+                                <li class="ui-field-contain">
+                                    <label>Address</label>
+                                    <label><p>{{scan.adr}}</p></label>
+                                </li>
+                            {{/if}}
+                            {{#if scan.org}}
+                                <li class="ui-field-contain">
+                                    <label>Website</label>
+                                    <label>{{scan.org}}</label>
+                                </li>
+                            {{/if}}
+                            <li class="ui-body ui-body-b">
+                                <div data-role="navbar">
+                                    <ul>
+                                        {{#if scan.tel.[0]}}<li><a href="tel:{{scan.tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
+                                        {{#if scan.email.[0]}}<li><a href="mailto:{{scan.email.[0]}}">Email</a></li>{{/if}}
+                                        {{#if scan.org}}<li><a href="{{scan.org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{scan.org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
+                                    </ul>
+                                </div><!-- /navbar -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 
             </div><!-- /content -->
             

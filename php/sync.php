@@ -34,7 +34,7 @@
         echo json_encode(
             array(
                 "info"  =>  array(
-                    "time"  => 1231
+                    "time"  => 1393918311584
                 ),
                 "data"  =>  array(
                     //dbObjects just dump the data after last sync time
@@ -42,7 +42,7 @@
                         array("id"    =>  1, "name"   =>  "MyEclipse2014"),
                         array("id"    =>  2, "name"   =>  "testNumber Two")
                     ),
-                    "tags"   =>  array(
+                    "tags"      =>      array(
                         array("id"    =>  1, "tag"   =>  "RCP"),
                         array("id"    =>  2, "tag"   =>  "Eclipse IDE"),
                         array("id"    =>  3, "tag"   =>  "Large Op"),
@@ -58,7 +58,7 @@
                         array("id"    =>  13, "tag"   =>  "RCP"),
                         array("id"    =>  14, "tag"   =>  "Call")
                     ),
-                    "scans"     =>  array(
+                    "scans"     =>      array(
                         array(
                             "id"                =>  2,
                             "conference_id"     =>  1,
@@ -121,8 +121,37 @@
                             "creator_id"    =>  "2",
                             "tag_id"    =>  "2"
                         )
+                    ),
+                    "notes"     =>      array(
+                        array(
+                            "id"              =>  "sdsadas222",
+                            "scan_id"         =>  2,
+                            "conference_id"   =>  1,
+                            "creator_id"      =>  "2222",
+                            "note"            =>  "22222"
+                        ),
+                        array(
+                            "id"              =>  "1111",
+                            "scan_id"         =>  2,
+                            "conference_id"   =>  1,
+                            "creator_id"      =>  "2",
+                            "note"            =>  "111sd1sadsas"
+                        ),
+                        array(
+                            "id"              =>  "23232",
+                            "scan_id"         =>  1,
+                            "conference_id"   =>  1,
+                            "creator_id"      =>  "iiii",
+                            "note"            =>  "testrrr"
+                        ),
+                        array(
+                            "id"              =>  "22222",
+                            "scan_id"         =>  1,
+                            "conference_id"   =>  1,
+                            "creator_id"      =>  "2",
+                            "note"            =>  "dsdasdas"
+                        )
                     )
-                    
                 )
             )
         );

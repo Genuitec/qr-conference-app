@@ -11,6 +11,7 @@
     };
     
     function serverLogIn(data, callback){
+        console.log("serverLog")
         User.serverLogIn(data, callback);
     }
     

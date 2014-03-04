@@ -2,7 +2,12 @@
 
     var configs = {
         
-        sync_url : Session.get("user_data").hosturl+"/php/sync.php",
+        sync_url : function(){ return (Session.get("user_data").hosturl+"/php/sync.php"); },
+        
+        sync : {
+            auto     :  true,
+            interval :  60000 //in miliseconds
+        },
         
         login_url : "/php/login.php",
         
@@ -20,7 +25,7 @@
     Config.get = function(){
         var val = configs;
         for(var i = 0; i<arguments.length; ++i)
-            val = val[arguments[i]];
+            val = (typeof(val[arguments[i]]) === "function" ? val[arguments[i]]() : val[arguments[i]] );
         return val;
     };
     

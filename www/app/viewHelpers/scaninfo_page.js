@@ -6,7 +6,9 @@
         $('#scaninfo_page').html(template(data)).trigger('create');
 
         attendeeNotesWidget(data.scan.id, $("#scaninfo_page .notes"));
+        
         voteAttendeeForm(data.scan.id, $("#scaninfo_page form"));
+        
         Tags({
             scan_id        : data.scan.id,
             tags_available : data.tags_available

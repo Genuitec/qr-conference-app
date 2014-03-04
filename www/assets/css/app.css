@@ -295,7 +295,7 @@ h1 > span, h2 > span{
     overflow-y: scroll;
 }
 #scaninfo_page .notes [data-role="notes"] form{
-    padding: 10% 0;
+    /*padding: 10% 0;*/
     height: 100%;
 }
 #scaninfo_page .notes [data-role="notes"] textarea{
@@ -313,11 +313,14 @@ h1 > span, h2 > span{
     display: none;
 }
 #scaninfo_page .notes [data-role="notes"] p{}
+
 #scaninfo_page .notes .active[data-role="notes"]{}
-#scaninfo_page .notes .active[data-role="notes"] textarea, #scaninfo_page .notes .active[data-role="notes"] button{
+
+#scaninfo_page .notes [data-role="notes"] form.active textarea,
+#scaninfo_page .notes [data-role="notes"] form.active button{
     display: initial;
 }
-#scaninfo_page .notes .active[data-role="notes"] p{
+#scaninfo_page .notes [data-role="notes"] form.active p{
     display: none;
 }
 #scaninfo_page .tags .addtag{
