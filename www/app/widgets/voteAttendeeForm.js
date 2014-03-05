@@ -7,7 +7,6 @@
             Scan.update({id: scanId}, {rating: $(this).val()});
         });
         formEl.find('input[type="checkbox"]').change(function(){
-//            Attendee.update({scan_id: scanId}, {followup: ($(this).prop("checked") ? 1 : 0)});
             Scan.followup({
                 scan_id: scanId,
                 creator_id: Session.get("user_data").userid,

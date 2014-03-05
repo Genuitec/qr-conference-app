@@ -9,11 +9,11 @@
         };
     };
     
-//    document.addEventListener("deviceready", function(){
+    document.addEventListener("deviceready", function(){
         
         Resources.barcodeScanner = new cordovaQR();
         
-//    }, false);
+    }, false);
 
     
 }(App.Resources));

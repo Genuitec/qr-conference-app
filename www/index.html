@@ -398,20 +398,8 @@
                         <div class="tags">
                             <ul>
                                 {{#each tags}}
-                                    <li tagid="{{id}}">{{tag}}</li>
+                                    <li{{#is selected '===' 1}} class="selected"{{/is}}><span>{{tag}}</span></li>
                                 {{/each}}
-                                <li class="addtag">
-                                    <select class="addtagselect" name="select-choice-mini" id="select-choice-mini" data-mini="true" data-inline="true">
-                                        {{#each tags_available}}
-                                            <option value="{{id}}">{{tag}}</option>
-                                        {{/each}}
-                                    </select>
-                                    <button class="addtagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">+ Add</button>
-                                    <button class="savetagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">Save</button>
-                                    <button class="canceltagbut ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b ui-mini">Delete</button>
-                                </li>
-
-
                             </ul>
                         </div>
                     </div>
@@ -423,24 +411,34 @@
                         <div class="notes">
 
                             <div data-role="notes">
-                                {{#if notes}}
-                                    {{#each notes}}
-                                        <form data-role="note-form" noteid="{{id}}" creatorid="{{creator_id}}">
-                                            <p>{{note}}</p>
-                                            <textarea>{{note}}</textarea>
+                                {{#if scan.notes}}
+                                    {{!#each notes}}
+                                        <form data-role="note-form" noteid="{{!id}}" creatorid="{{!creator_id}}">
+                                            <p>{{scan.notes}}</p>
+                                            <textarea>{{scan.notes}}</textarea>
                                             <button type="submit">submit</button>
                                             <button type="button" data-role="note-reset">reset</button>
                                         </form>
-                                    {{/each}}
+                                    {{!/each}}
                                 {{else}}
-                                    <p>No notes added yet. Double tap to edit notes</p>
+                                    
+                                    <form data-role="note-form" >
+                                        <p>No notes added yet. Double tap to edit notes</p>
+                                        <textarea></textarea>
+                                        <button type="submit">submit</button>
+                                        <button type="button" data-role="note-reset">reset</button>
+                                    </form>
+                                <!--
+                                    
+                                    <form data-role="addnote-form">
+                                        <p>No notes added yet. Double tap to edit notes</p>
+                                        <textarea></textarea>
+                                        <button type="submit">submit</button>
+                                        <button type="button" data-role="note-reset">reset</button>
+                                    </form>
+                            -->
+                                    <!-- <button data-role="addnote">Add</button> -->
                                 {{/if}}
-                                <form data-role="addnote-form">
-                                    <textarea></textarea>
-                                    <button type="submit">submit</button>
-                                    <button type="button" data-role="note-reset">reset</button>
-                                </form>
-                                <button data-role="addnote">Add</button>
                             </div>
 
                         </div>

@@ -7,7 +7,7 @@ var SQLite = function(){ // works with local SQLite DB
     _sql = "",
 
     _executeSQL = function(sql, callback) { // main DB method which makes query to DB
-//        console.log(sql);
+        console.log(sql);
         _db.transaction(function(tx){
             _queryDB(tx, sql, callback);
         }, function(err){

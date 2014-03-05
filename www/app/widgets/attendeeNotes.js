@@ -4,8 +4,8 @@
         var _self = this;
         
         this.formEl = formEl;
-        this.id = params.id;
-        this.creator_id = params.creator_id;
+//        this.id = params.id;
+//        this.creator_id = params.creator_id;
         this.scan_id = params.scan_id;
         this.conference_id = params.conference_id;
 
@@ -31,10 +31,10 @@
             $(_self.p).text(_self.last_val);
             
             NoteModel.update({
-                id: _self.id,
-                scan_id: _self.scan_id,
+//                id: _self.id,
+                id: _self.scan_id,
                 conference_id: _self.conference_id
-            }, {note:_self.last_val});
+            }, {notes:_self.last_val});
             return false;
         });
         
@@ -110,24 +110,24 @@
     };
 
     Widgets.attendeeNotes = function(scan_id, el){
-        el.find('form[data-role="note-form"]').each(function(k,v){
-            if($(v).attr("creatorid") == Session.get("user_data").userid)
-                new NoteEL({
-                    scan_id         :    scan_id,
-                    id              :    $(v).attr("noteid"),
-                    creator_id      :    $(v).attr("creatorid"),
-                    conference_id   :    Session.get("conference_id")
-                }, $(this));
+        el.find('form[data-role="note-form"]').each(function(k, v){
+//            if($(v).attr("creatorid") == Session.get("user_data").userid)
+            new NoteEL({
+                scan_id         :    scan_id,
+//                id              :    $(v).attr("noteid"),
+//                creator_id      :    $(v).attr("creatorid"),
+                conference_id   :    Session.get("conference_id")
+            }, $(this));
         });
         
 //        var addbutton = el.find('[data-role="addnote"]'),
 //            addform = el.find('[data-role="addnote-form"]');
     
-        new AddNoteEL({
-            scan_id         :    scan_id,
-            creator_id      :    Session.get("user_data").userid,
-            conference_id   :    Session.get("conference_id")
-        }, el.find('[data-role="addnote-form"]'), el.find('[data-role="addnote"]'));
+//        new AddNoteEL({
+//            scan_id         :    scan_id,
+//            creator_id      :    Session.get("user_data").userid,
+//            conference_id   :    Session.get("conference_id")
+//        }, el.find('[data-role="addnote-form"]'), el.find('[data-role="addnote"]'));
 
     };    
     

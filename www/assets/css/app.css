@@ -115,9 +115,16 @@ h1 > span, h2 > span{
     margin-right: 15px;
     margin-bottom: 10px;
     padding: 10px;
+    border-radius: 5px;
+    background: white;
+    color: rgb(44, 183, 248);
+}
+#scaninfo_page .tags > ul > li.selected{
     background: rgb(44, 183, 248);
     color: white;
-    border-radius: 5px;
+}
+#scaninfo_page .tags > ul > li.selected > span{
+    border-bottom: 2px solid white;
 }
 #scaninfo_page [data-role="header"] > a{
     margin-top: 11px;
@@ -311,6 +318,9 @@ h1 > span, h2 > span{
 }
 #scaninfo_page .notes [data-role="notes"] button{
     display: none;
+}
+#scaninfo_page .notes [data-role="notes"] button[data-role="addnote"]{
+    /*display: block;*/
 }
 #scaninfo_page .notes [data-role="notes"] p{}
 

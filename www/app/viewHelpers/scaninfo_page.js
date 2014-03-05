@@ -10,9 +10,10 @@
         voteAttendeeForm(data.scan.id, $("#scaninfo_page form"));
         
         Tags({
-            scan_id        : data.scan.id,
-            tags_available : data.tags_available
-        }, $("#scaninfo_page .tags"));
+            scan_id   : data.scan.id,
+            tags      : data.tags
+//            tags_available : data.tags_available
+        }, $("#scaninfo_page .tags > ul > li"));
     };
     
 }(App.viewHelpers, App.Widgets.attendeeNotes, App.Widgets.voteAttendeeForm, App.Widgets.tags, App.Router));

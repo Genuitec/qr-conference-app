@@ -7,17 +7,28 @@
         },
                 
         read : function(where, callback){
-            DB.select();
-            DB.from("notes");
+            DB.select("notes");
+            DB.from("scans");
             if(arguments.length === 2)
                 for(var i in where)
                     DB.where(i+' = "'+where[i]+'"');
             else callback = where;
-            DB.query(callback);
+            DB.col(callback);
+//            DB.query(callback);
         },
+//        read : function(where, callback){
+//            DB.select();
+//            DB.from("notes");
+//            if(arguments.length === 2)
+//                for(var i in where)
+//                    DB.where(i+' = "'+where[i]+'"');
+//            else callback = where;
+//            DB.query(callback);
+//        },
                 
         update : function(where, data, callback){
-            DB.update("notes", data, where, callback);
+            DB.update("scans", data, where, callback);
+//            DB.update("notes", data, where, callback);
         },
 
         add : function(data, callback){
