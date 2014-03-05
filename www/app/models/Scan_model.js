@@ -134,23 +134,50 @@
         },    
         filter_read : function(params, callback){
             DB.select();
-            DB.from("scans as s");
-            DB.left_join("followups as f", "s.id = f.scan_id");
-            DB.left_join("scan_tags as st", "st.scan_id = s.id");
-            DB.left_join("tags as t", "t.id = st.tag_id");
-            DB.where('s.conference_id = '+params.conference_id);
+            DB.from("scans");
+//            DB.left_join("followups as f", "s.id = f.scan_id");
+//            DB.left_join("scan_tags as st", "st.scan_id = s.id");
+//            DB.left_join("tags as t", "t.id = st.tag_id");
+            DB.where('conference_id = '+params.conference_id);
             if(is_set(params.time) && params.time === "today")
-                DB.where('s.scantime >= "'+params.time+'"');
+                DB.where('scantime >= "'+(function(){
+                    var year = new Date().getFullYear(),
+                        month = new Date().getMonth(),
+                        date = new Date().getDate();
+                    if(month < 10)month = "0"+month;
+                    if(date < 10)date = "0"+date;
+                    
+                    return ( year+"-"+month+"-"+date+" "+"00:00:00" );
+                }())+'"');
             if(is_set(params.followup) && params.followup === "true")
-                DB.where('f.creator_id = "'+ Session.get("user_data").userid +'"'); //*
+                DB.where('followup = 1'); //*
             if(is_set(params.rating) && params.rating !== "top")
-                DB.where('s.rating = '+params.rating+'');
+                DB.where('rating = '+params.rating+'');
             if(is_set(params.tags))
-                DB.where('t.id = "'+params.tags+'"');
+                DB.where('tags REGEXP "'+params.tags+'"');
             if(is_set(params.rating) && params.rating === "top")
-                DB.where('s.rating > 1');
+                DB.where('rating > 1');
             DB.query(callback);
         }
+//        filter_read : function(params, callback){
+//            DB.select();
+//            DB.from("scans as s");
+//            DB.left_join("followups as f", "s.id = f.scan_id");
+//            DB.left_join("scan_tags as st", "st.scan_id = s.id");
+//            DB.left_join("tags as t", "t.id = st.tag_id");
+//            DB.where('s.conference_id = '+params.conference_id);
+//            if(is_set(params.time) && params.time === "today")
+//                DB.where('s.scantime >= "'+params.time+'"');
+//            if(is_set(params.followup) && params.followup === "true")
+//                DB.where('f.creator_id = "'+ Session.get("user_data").userid +'"'); //*
+//            if(is_set(params.rating) && params.rating !== "top")
+//                DB.where('s.rating = '+params.rating+'');
+//            if(is_set(params.tags))
+//                DB.where('t.id = "'+params.tags+'"');
+//            if(is_set(params.rating) && params.rating === "top")
+//                DB.where('s.rating > 1');
+//            DB.query(callback);
+//        }
 
     };
     
