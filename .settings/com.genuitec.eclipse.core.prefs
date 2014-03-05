@@ -1,8 +1,6 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=f905da1ab19b607d485045a4b004e7e75f9e3edc
 eclipse.preferences.version=1
-<<<<<<< HEAD
-validator.Checked=
-validator.Unchecked=www/rte,bin
-=======
-validator.Checked=www/rte,bin
+validator.Checked=www/assets/libs/jquery.hammer.js,www/rte,www/assets/libs/html5-qrcode.min.js,bin,www/assets/bundles/jquery.mobile-1.4.0,www/assets/libs/jquery-1.10.2.min.js
 validator.Unchecked=
->>>>>>> f905da1ab19b607d485045a4b004e7e75f9e3edc
