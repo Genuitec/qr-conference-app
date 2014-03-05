@@ -1,5 +1,5 @@
 //(function(Widgets, vCardParser, BarcodeScanner, Scan, Attendee, getConfig, Session){
-(function(Widgets, vCardParser, BarcodeScanner, Scan, getConfig, Session){
+(function(Widgets, Resources, vCardParser, BarcodeScanner, Scan, getConfig, Session){
     
     var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
@@ -82,7 +82,8 @@
         return function(callback){
             try{
 //                cordova.plugins.barcodeScanner.scan(
-                BarcodeScanner.scan(
+//                BarcodeScanner.scan(
+                Resources.barcodeScanner.scan(
                     function (scanData) {
                         console.log(scanData);
                         console.log("scanData.text");
@@ -127,5 +128,5 @@
         
     }());
     
-}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Config.get, App.Session));
+}(App.Widgets, App.Resources, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Config.get, App.Session));
 //}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));
