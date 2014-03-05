@@ -7,13 +7,13 @@
         if(params.auto)
             setInterval(function(){
                 Sync.sync(function(rs){
-//                    console.log(rs);
+                    console.log("sync");
                 });
             }, params.interval);
         
         if(now)
             Sync.sync(function(rs){
-//                console.log(rs);
+                console.log("sync");
             });
     };
     

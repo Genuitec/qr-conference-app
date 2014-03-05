@@ -22,6 +22,8 @@
                 rating INTEGER NULL,\n\
                 scannedby_id TEXT NULL,\n\
                 scannedby_name VARCHAR(255) NULL,\n\
+                tags TEXT NULL,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 UNIQUE(id, conference_id))',
 
             'CREATE TABLE IF NOT EXISTS scan_tags(\n\
@@ -29,14 +31,17 @@
                 scan_id TEXT NOT NULL,\n\
                 conference_id INTEGER NOT NULL,\n\
                 creator_id TEXT NOT NULL,\n\
-                tag_id INTEGER NOT NULL)',
+                tag_id INTEGER NOT NULL,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
+                UNIQUE(id, scan_id, conference_id))',
 
             'CREATE TABLE IF NOT EXISTS notes(\n\
                 id TEXT NOT NULL,\n\
                 scan_id TEXT NOT NULL,\n\
                 conference_id INTEGER NOT NULL,\n\
                 creator_id TEXT NOT NULL,\n\
-                note TEXT NULL)',
+                note TEXT NULL,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
 
             'CREATE TABLE IF NOT EXISTS followups(\n\
                 id TEXT NOT NULL,\n\
@@ -44,23 +49,28 @@
                 creator_id TEXT NOT NULL,\n\
                 conference_id INTEGER NOT NULL,\n\
                 followup INTEGER NULL DEFAULT 0,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 UNIQUE(scan_id, creator_id, conference_id))',
 
             'CREATE TABLE IF NOT EXISTS conferences(\n\
                 id INTEGER PRIMARY KEY AUTOINCREMENT NULL,\n\
                 name VARCHAR(255) NOT NULL,\n\
-                time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
+                time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
 
             'CREATE TABLE IF NOT EXISTS tags(\n\
                 id INTEGER PRIMARY KEY AUTOINCREMENT NULL,\n\
-                tag VARCHAR(255) NOT NULL)',
+                tag VARCHAR(255) NOT NULL,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
 
             'CREATE TABLE IF NOT EXISTS sync (\n\
                 sid INTEGER NOT NULL PRIMARY KEY,\n\
                 table_name VARCHAR( 255 ) NOT NULL,\n\
                 time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 rowcreated INTEGER DEFAULT 0,\n\
-                row_id varchar(255) NOT NULL)'],
+                row_id varchar(255) NOT NULL,\n\
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)'
+        ],
 
         recreateDB : true
     };
