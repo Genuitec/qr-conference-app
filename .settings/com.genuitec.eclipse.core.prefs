@@ -1,3 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 validator.Checked=
 validator.Unchecked=www/rte,bin
+=======
+validator.Checked=www/rte,bin
+validator.Unchecked=
+>>>>>>> f905da1ab19b607d485045a4b004e7e75f9e3edc

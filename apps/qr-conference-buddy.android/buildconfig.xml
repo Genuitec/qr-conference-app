@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration xmlns="http://schemas.genuitec.com/myeclipse/mobile"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="0.2"
+	xsi:schemaLocation="http://schemas.genuitec.com/myeclipse/mobile http://schemas.genuitec.com/myeclipse/mobile/buildconfig_0_2.xsd">
+	<configId>399e0660f0ff4942b33283462b9ab480</configId>
+	<appId>qr-test.android</appId>
+	<appName>QR Conference Buddy</appName>
+	<packageName>com.genuitec.qr.confernece.buddy</packageName>
+	<outputFileName>qr-conference-buddy.apk</outputFileName>
+	<appVersion>1.0.0</appVersion>
+	<appLanguage>USA</appLanguage>
+	<author email="" name="" />
+	<supportedOrientation>ALL</supportedOrientation>
+	<platform>
+		<android>
+			<targetDisplaySizes>
+				<item>S</item>
+				<item>M</item>
+				<item>L</item>
+				<item>XL</item>
+			</targetDisplaySizes>
+			<permissions>
+				<item>NETWORK</item>
+			</permissions>
+		</android>
+	</platform>
+	<sourceFolders>
+		<item exclusionPatterns="" inclusionPatterns="www/" />
+	</sourceFolders>
+	<startupURI>index.html</startupURI>
+	<brandingImages>
+		<app-image image-path="apps/qr-test.android/images/36.png"
+			image-size="36x36" image-type="ICON" />
+		<app-image image-path="apps/qr-test.android/images/48.png"
+			image-size="48x48" image-type="ICON" />
+		<app-image image-path="apps/qr-test.android/images/72.png"
+			image-size="72x72" image-type="ICON" />
+		<app-image image-path="apps/qr-test.android/images/96.png"
+			image-size="96x96" image-type="ICON" />
+	</brandingImages>
+</configuration>
