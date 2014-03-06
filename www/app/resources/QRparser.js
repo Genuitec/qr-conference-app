@@ -6,18 +6,31 @@
             vCardParser(scanData, callback);
         }else if(scanData.match("END:MECARD")){
             //MECARD
-            var parsedData = {};
-            parsedData.fn = scanData.match(/N:(.+);ADR:/);
-            var nameAr = parsedData.fn.split(" ");
-            parsedData.firstName = nameAr[0];
-            parsedData.lastName = nameAr[1];
-            var addrTelAr = ((scanData.match(/ADR:(.+);TEL:/i)[1]).split(";TEL:"));
-            parsedData.address = addrTelAr[0];
-            addrTelAr.splice(0,1);
-            parsedData.tel = addrTelAr.join();
-            parsedData.email = scanData.match(/EMAIL:(.+);URL/)[1];
-            parsedData.website = scanData.match(/URL:(.+);;/)[1];
-            callback(parsedData);
+            var parsedData = {
+                fn: "",
+                firstName: "",
+                lastName: "",
+                address: "",
+                tel: [],
+                email: "",
+                website: ""
+            };
+//            parsedData.fn = scanData.match(/N:(.+);ADR:/);
+//            var nameAr = parsedData.fn.split(" ");
+//            parsedData.firstName = nameAr[0];
+//            parsedData.lastName = nameAr[1];
+//            var addrTelAr = ((scanData.match(/ADR:(.+);TEL:/i)[1]).split(";TEL:"));
+//            parsedData.address = addrTelAr[0];
+//            addrTelAr.splice(0,1);
+//            parsedData.tel = addrTelAr.join();
+//            parsedData.email = scanData.match(/EMAIL:(.+);URL/)[1];
+//            parsedData.website = scanData.match(/URL:(.+);;/)[1];
+//            callback(parsedData);
+
+            var ar = scanData.split(";");
+            ar.forEach(function(v){
+                
+            });
         }
     };
     

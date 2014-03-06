@@ -278,7 +278,7 @@
         
         <script id="attendeeslist-template" type="text/x-handlebars-template">
             {{#each attendees}}
-                <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}<br /><span class="scanned">Scanned by {{scannedby_name}} <!-- today at 14:01 --></span></a></li>
+                <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}<br /><span class="scanned">Scanned by {{scannedby_id}} {{scantime}}<!-- today at 14:01 --></span></a></li>
             {{/each}}
         </script>
         

@@ -21,7 +21,6 @@
                 scantime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 rating INTEGER NULL,\n\
                 scannedby_id TEXT NULL,\n\
-                scannedby_name VARCHAR(255) NULL,\n\
                 tags TEXT NULL,\n\
                 notes TEXT NULL,\n\
                 followup INTEGER NULL DEFAULT 0,\n\
