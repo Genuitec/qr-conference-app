@@ -19,13 +19,15 @@
     View.chooseconference_page = function(data){
         var template = Handlebars.compile($("#chooseconference_page-template").html());
         $("#chooseconference_page .main").html(template(data));
-        $("#chooseconference_page .refresh").ham("tap", function(){
+        
+        $("#chooseconference_page .refresh").ham("click", function(){
             Sync(true, function(){
                 Conference.read(function(d){
                     $("#chooseconference_page .main").html(template(d));
                 });
             });
         });
+        
         $(document).ready(function(){
             SyncScroll(function(){
                 Conference.read(function(d){

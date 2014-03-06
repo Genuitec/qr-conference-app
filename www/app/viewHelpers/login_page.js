@@ -1,4 +1,4 @@
-(function(View, LogInForm, Router){
+(function(View, LogInForm, Router, Sync){
     
     var initLogIn = false;
     
@@ -8,10 +8,12 @@
                 if(logged.error)
                     return alert("logIn error");
 
-                Router.redirect("chooseconference_page", {switchPage: true});
+                Sync(true, function(){
+                    Router.redirect("chooseconference_page", {switchPage: true});
+                });
             });
             initLogIn = true;
         }
     };
     
-}(App.viewHelpers, App.Widgets.logIn, App.Router));
+}(App.viewHelpers, App.Widgets.logIn, App.Router, App.Widgets.sync));

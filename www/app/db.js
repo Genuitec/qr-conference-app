@@ -35,6 +35,7 @@
                 time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 tags TEXT NULL,\n\
                 updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
+                endtime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 synctime LONG NOT NULL DEFAULT 0)',
 
             'CREATE TABLE IF NOT EXISTS sync (\n\
@@ -43,7 +44,7 @@
                 time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 rowcreated INTEGER DEFAULT 0,\n\
                 row_id varchar(255) NOT NULL,\n\
-                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)'
+                syncupdatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)'
         ],
 
         recreateDB : true
