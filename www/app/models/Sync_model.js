@@ -11,14 +11,14 @@
                 table.forEach(function(t){
                     DB.remove("sync", 'table_name = "' + t + '"', function(){
                         Session.set("sync_"+t, time);//last sync time
+                        Session.set("lastSync", time);
                     });
                 });
             else
                 DB.remove("sync", 'table_name = "' + table + '"', function(){
                     Session.set("sync_"+table, time);//last sync time
+                    Session.set("lastSync", time);
                 });
-                
-            Session.set("lastSync", (new Date().getTime()));
         },
    
         applyChanges = function(_serverResponse){
@@ -26,10 +26,6 @@
             if(is_set(serverResponse) && is_set(serverResponse.data) && is_set(serverResponse.info) && is_set(serverResponse.info.time))
                 if(objectLenght(serverResponse.data) > 0)
                     Async.forEach(serverResponse.data, function(values, table, c){
-//                        if(["scan_tags", "notes", "followups", ""].indeOf(table) >= 0)
-//                            values.forEach(function(vv){
-//                                console.log(vv);
-//                            });
                         DB.insert_batch_on_duplicate_update(table, values, function(){
                             _syncClear(serverResponse.info.time, table);
                             c();
@@ -44,9 +40,9 @@
         preRequest = function(changes){
             var finalData = {};
             for(var tableName in changes){
-                finalData[tableName] = {create:[], update:[]};
+                finalData[tableName] = {create:[], update:[], lastSyncTime : (empty(Session.get("sync_"+tableName)) ? 0 : Session.get("sync_"+tableName))};
                 changes[tableName].forEach(function(v, k){
-                    finalData[tableName].lastSyncTime = (empty(Session.get("sync_"+tableName)) ? 0 : Session.get("sync_"+tableName));
+//                    finalData[tableName].lastSyncTime = (empty(Session.get("sync_"+tableName)) ? 0 : Session.get("sync_"+tableName));
                     v.rowcreated === 1 ? finalData[tableName].create.push(v) : finalData[tableName].update.push(v);
                 });
             }
@@ -57,7 +53,7 @@
             $.post(__getSyncUrl, {
                 sync: JSON.stringify({
                     info:{
-                        time: (new Date).getTime()
+                        time: Session.get("lastSync")
                     },
                     data: changes
                 })
