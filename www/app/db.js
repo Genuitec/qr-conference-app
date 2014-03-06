@@ -27,6 +27,7 @@
                 notes TEXT NULL,\n\
                 followup INTEGER NULL DEFAULT 0,\n\
                 updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
+                synctime LONG NOT NULL DEFAULT 0,\n\
                 UNIQUE(id, conference_id))',
 
 //            'CREATE TABLE IF NOT EXISTS scan_tags(\n\
@@ -60,7 +61,8 @@
                 name VARCHAR(255) NOT NULL,\n\
                 time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 tags TEXT NULL,\n\
-                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)',
+                updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
+                synctime LONG NOT NULL DEFAULT 0)',
 
 //            'CREATE TABLE IF NOT EXISTS tags(\n\
 //                id INTEGER PRIMARY KEY AUTOINCREMENT NULL,\n\
