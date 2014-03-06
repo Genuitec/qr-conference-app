@@ -101,8 +101,6 @@
         sync : function(tables, callback){
             var args = checkArgs(arguments);
             if(args === false)return false;
-            console.log(args);
-            console.log(args[1]);
             (new Sync(args[0], args[1])).init();
         }
     };

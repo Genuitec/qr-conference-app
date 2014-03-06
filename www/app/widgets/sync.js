@@ -5,7 +5,6 @@
         var autoInited = false;
         
         return function(now, callback){
-            console.log("presync")
             var params = getConfig("sync"),
                 defaultInterval = 5000;
             if(empty(params.interval)) params.interval = defaultInterval;
