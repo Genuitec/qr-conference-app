@@ -40,7 +40,7 @@
     };
 
     Controller.attendees_page = function(params, load){
-        Models.Tag.read({conference_id: Session.get("conference_id")}, viewHelpers.attendees_page);
+        Models.Tag.conferenceTags({conference_id: Session.get("conference_id")}, viewHelpers.attendees_page);
         if(is_set(load))load();
     };
     

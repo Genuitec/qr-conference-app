@@ -12,7 +12,6 @@
         Tags({
             scan_id   : data.scan.id,
             tags      : data.tags
-//            tags_available : data.tags_available
         }, $("#scaninfo_page .tags > ul > li"));
     };
     

@@ -8,27 +8,22 @@
             if(empty(where) || empty(where.conference_id))callback(false);
             DB.select("tags");
             DB.from("scans");
-//            DB.join("scan_tags as st", 't.id = st.tag_id');
             DB.where('conference_id = "'+ where.conference_id +'"');
             if(is_set(where.scan_id))
                 DB.where('id = "'+ where.scan_id+'"');
-//            DB.query(callback);
             DB.col(function(data){
-                console.log(data);
                 callback( empty(data) ? [] : data.split(",") );
-//                callback(data.split(","));
             });
         },
-//        read : function(where, callback){
-//            if(empty(where) || empty(where.conference_id))callback(false);
-//            DB.select("t.id, t.tag");
-//            DB.from("tags as t");
-//            DB.join("scan_tags as st", 't.id = st.tag_id');
-//            DB.where('st.conference_id = "'+ where.conference_id +'"');
-//            if(is_set(where.scan_id))
-//                DB.where('st.scan_id = "'+ where.scan_id+'"');
-//            DB.query(callback);
-//        },
+        conferenceTags : function(where, callback){
+            if(empty(where) || empty(where.conference_id)) return false;
+            DB.select("tags");
+            DB.from("conferences");
+            DB.where('id = "'+ where.conference_id +'"');
+            DB.col(function(data){
+                callback( empty(data) ? [] : data.split(",") );
+            });
+        },
                 
         available : function(where, callback){
             if(empty(where) || empty(where.scan_id) || empty(where.conference_id))callback(false);
@@ -36,19 +31,9 @@
             DB.from("conferences");
             DB.where('id = '+ where.conference_id);
             DB.col(function(data){
-                console.log(data);
-//                callback(data.split(","));
                 callback( empty(data) ? [] : data.split(",") );
             });
         },
-//        available : function(where, callback){
-//            if(empty(where) || empty(where.scan_id) || empty(where.conference_id))callback(false);
-//            DB.select("t.id, t.tag");
-//            DB.from("tags as t");
-//            DB.join("scan_tags as st", 't.id = st.tag_id');
-//            DB.where('st.conference_id = '+ where.conference_id +' AND st.scan_id <> "'+ where.scan_id+'"');
-//            DB.query(callback);
-//        },
                 
         add : function(data, callback){
             /** data = {tag_id, scan_id, conference_id} **/
@@ -57,8 +42,6 @@
             DB.from("scans");
             DB.where('id = "'+data.scan_id+'" AND conference_id ="'+data.conference_id+'"');
             DB.col(function(tags){
-                console.log(data.tag);
-                console.log(tags.split(","));
                 if( ( tags.split(",") ).indexOf(data.tag) === -1  )
                     DB.update("scans", {
                         tags: (tags+","+data.tag)
@@ -67,8 +50,6 @@
                         id : data.scan_id
                     }, callback);
             });
-//            data.creator_id = Session.get("user_data").userid;
-//            DB.insert("scan_tags", addGenId(data, data.creator_id), callback);
         },
                 
         remove : function(data, callback){
@@ -91,13 +72,6 @@
                     }, callback);
             });
         },
-//        add : function(data, callback){
-//            /** data = {tag_id, scan_id, conference_id} **/
-//            if(empty(data) || empty(data.tag_id, data.scan_id, data.conference_id))return false;
-//
-//            data.creator_id = Session.get("user_data").userid;
-//            DB.insert("scan_tags", addGenId(data, data.creator_id), callback);
-//        },
                 
         update : function(where, data, callback){}
 

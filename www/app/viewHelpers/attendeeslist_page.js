@@ -4,9 +4,7 @@
         console.log(data);
         var template = Handlebars.compile($("#attendeeslist-template").html());
 
-        $('#attendeeslist_page [role="main"] .attendeeslist > [data-role="listview"]').html(template({attendees: data}));
-//        $('#attendeeslist_page [role="main"] .attendeeslist > [data-role="listview"]').listview('refresh');
-        
+        $('#attendeeslist_page [role="main"] .attendeeslist > [data-role="listview"]').html(template({attendees: data}));        
     };
     
 }(App.viewHelpers, App.Router));

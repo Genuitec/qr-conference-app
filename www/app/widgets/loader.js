@@ -11,16 +11,8 @@
         };
         
         return {
-            start: function(){
-//                initLoader();
-//                body.style.overflow = "hidden";
-//                loader.style.display = "block";
-            },
-            stop: function(){
-//                initLoader();
-//                body.style.overflow = "";
-//                loader.style.display = "none";
-            }     
+            start: function(){},
+            stop: function(){}     
         }; 
     }());
     

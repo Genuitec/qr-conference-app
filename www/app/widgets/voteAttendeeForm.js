@@ -3,7 +3,6 @@
 
     Widgets.voteAttendeeForm = function(scanId, formEl){
         formEl.find('input:radio').change(function(){
-//            Attendee.update({scan_id: scanId}, {rating: $(this).val()});
             Scan.update({id: scanId}, {rating: $(this).val()});
         });
         formEl.find('input[type="checkbox"]').change(function(){
