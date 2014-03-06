@@ -11,11 +11,19 @@
                 id TEXT NOT NULL,\n\
                 conference_id INTEGER NOT NULL,\n\
                 fn VARCHAR(255) NOT NULL,\n\
+                lastname VARCHAR(255) NULL,\n\
+                firstname VARCHAR(255) NULL,\n\
                 title VARCHAR(255) NULL,\n\
                 org VARCHAR(255) NULL,\n\
                 email VARCHAR(255) NULL,\n\
                 tel VARCHAR(255) NULL,\n\
                 adr TEXT NULL,\n\
+                postcode VARCHAR(255) NULL,\n\
+                street VARCHAR(255) NULL,\n\
+                city VARCHAR(255) NULL,\n\
+                state VARCHAR(255) NULL,\n\
+                postcode VARCHAR(255) NULL,\n\
+                country VARCHAR(255) NULL,\n\
                 type VARCHAR(255) NULL,\n\
                 version VARCHAR(255) NULL,\n\
                 scantime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\

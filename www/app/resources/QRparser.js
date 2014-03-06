@@ -5,39 +5,99 @@
         if(scanData.match("END:VCARD")){
             console.log("VCARD");
             //VCARD
-            vCardParser(scanData, callback);
+//            vCardParser(scanData, callback);
+            /*
+            fn VARCHAR(255) NOT NULL,\n\
+            lastname VARCHAR(255) NULL,\n\
+            firstname VARCHAR(255) NULL,\n\
+            title VARCHAR(255) NULL,\n\
+            org VARCHAR(255) NULL,\n\
+            email VARCHAR(255) NULL,\n\
+            tel VARCHAR(255) NULL,\n\
+            adr TEXT NULL,\n\
+            postcode VARCHAR(255) NULL,\n\
+            street VARCHAR(255) NULL,\n\
+            city VARCHAR(255) NULL,\n\
+            state VARCHAR(255) NULL,\n\
+            postcode VARCHAR(255) NULL,\n\
+            country VARCHAR(255) NULL,\n\
+            type VARCHAR(255) NULL,\n\
+            version VARCHAR(255) NULL,\n\
+            */
+            var parsedData = {
+                fn          : "",
+                firstname   : "",
+                lastname    : "",
+                adr         : "",
+                tel         : "",
+                cel         : "",
+                email       : "",
+                website     : ""
+            },
+
+            re = /\r\n|\n\r|\n|\r/g,
+
+            ar = scanData.replace(re,"\n").split("\n");
+            ar.forEach(function(v){
+                if(v.match(/^N:/)){
+                    parsedData.fn = v.match(/^N:(.*)/)[1];
+                    var fnAr = parsedData.fn.split(";");
+                    fnAr.forEach(function(vv, k){
+                        if(k === 0)
+                            parsedData.lastname = vv;
+                        if(k === 1)
+                            parsedData.firstname = vv;
+                    });
+                }
+                if(v.match(/^TITLE:/))
+                    parsedData.title = v.match(/^TITLE:(.*)/)[1];
+                if(v.match(/^ORG:/))
+                    parsedData.title = v.match(/^ORG:(.*)/)[1];
+                if(v.match(/^ADR:/)){
+//                    var adr = v.match(/^ORG:(.*)/)[1];
+//                    parsedData.title = v.match(/^ORG:(.*)/)[1];
+                }
+            });
+            /*
+            'BEGIN:VCARD\n\
+            VERSION:2.1\n\
+            N:Izraylevych;Igor;S.;Mr;PHD\n\
+            FN:Mr Igor S. Izraylevych PHD\n\
+            TITLE:FOunder\n\
+            ORG:Smartsolutions;coding\n\
+            ADR;WORK:;Suite 1;Maykovskiy;Zaporizhzhya;ZP;69000;Ukraine\n\
+            TEL;WORK;VOICE:31299999\n\
+            TEL;WORK;FAX:232\n\
+            TEL;CELL;VOICE:0961155555\n\
+            URL;WORK:http://website.com\n\
+            EMAIL;PREF;INTERNET:igorizr1@gmail.com\n\
+            END:VCARD'.replace(re,"\n").split("\n");
+            
+            */
+
+
         }else if(scanData.match("MECARD:")){
             console.log("MECARD");
             //MECARD
             var parsedData = {
-                fn: "",
-                firstName: "",
-                lastName: "",
-                address: "",
-                tel: "",
-                email: "",
-                website: ""
+                fn          : "",
+                firstname   : "",
+                lastname    : "",
+                adr         : "",
+                tel         : "",
+                cel         : "",
+                email       : "",
+                website     : ""
             };
-//            parsedData.fn = scanData.match(/N:(.+);ADR:/);
-//            var nameAr = parsedData.fn.split(" ");
-//            parsedData.firstName = nameAr[0];
-//            parsedData.lastName = nameAr[1];
-//            var addrTelAr = ((scanData.match(/ADR:(.+);TEL:/i)[1]).split(";TEL:"));
-//            parsedData.address = addrTelAr[0];
-//            addrTelAr.splice(0,1);
-//            parsedData.tel = addrTelAr.join();
-//            parsedData.email = scanData.match(/EMAIL:(.+);URL/)[1];
-//            parsedData.website = scanData.match(/URL:(.+);;/)[1];
-//            callback(parsedData);
 
             var ar = scanData.split(";");
             ar.forEach(function(v){
                 if(v.match(/MECARD:N:/)){
                     parsedData.fn = v.match(/MECARD:N:(.*)/)[1];
                     var fnAr = parsedData.fn.split(",");
-                    parsedData.firstName = fnAr[0];
+                    parsedData.firstname = fnAr[0];
                     if(fnAr.length > 1)
-                        parsedData.lastName = fnAr[1];
+                        parsedData.lastname = fnAr[1];
                 }
                 if(v.match(/TEL:/)){
                     var telmatch = v.match(/TEL:(.*)/)[1];
@@ -53,12 +113,25 @@
                 }
                 if(v.match(/ADR:/)){
                     var ADRmatch = v.match(/ADR:(.*)/)[1];
-                    parsedData.address += (parsedData.address === "" ? ADRmatch : (","+ADRmatch));
+                    parsedData.adr += (parsedData.adr === "" ? ADRmatch : (","+ADRmatch));
+                    var addrAR = parsedData.adr.split(",");
+                    addrAR.forEach(function(vv, k){
+                        if(k === 1)
+                            parsedData.street = vv;
+                        if(k === 2)
+                            parsedData.city = vv;
+                        if(k === 3)
+                            parsedData.state = vv;
+                        if(k === 4)
+                            parsedData.postcode = vv;
+                        if(k === 5)
+                            parsedData.country = vv; 
+                    });
                 }
                 if(v.match(/NOTE:/)){
                     var NOTEmatch = v.match(/NOTE:(.*)/)[1],
                         noteAr = NOTEmatch.split(",");
-                    noteAr.forEach(function(v, k){
+                    noteAr.forEach(function(vv, k){
                         if(k === 0)
                             parsedData.title = noteAr[0];
                         if(k === 1)
