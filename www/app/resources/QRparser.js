@@ -1,17 +1,20 @@
 (function(Resources, vCardParser){
     
     Resources.QRparser = function(scanData, callback){
+            console.log("QRparser");
         if(scanData.match("END:VCARD")){
+            console.log("VCARD");
             //VCARD
             vCardParser(scanData, callback);
-        }else if(scanData.match("END:MECARD")){
+        }else if(scanData.match("MECARD:")){
+            console.log("MECARD");
             //MECARD
             var parsedData = {
                 fn: "",
                 firstName: "",
                 lastName: "",
                 address: "",
-                tel: [],
+                tel: "",
                 email: "",
                 website: ""
             };
@@ -29,8 +32,43 @@
 
             var ar = scanData.split(";");
             ar.forEach(function(v){
-                
+                if(v.match(/MECARD:N:/)){
+                    parsedData.fn = v.match(/MECARD:N:(.*)/)[1];
+                    var fnAr = parsedData.fn.split(",");
+                    parsedData.firstName = fnAr[0];
+                    if(fnAr.length > 1)
+                        parsedData.lastName = fnAr[1];
+                }
+                if(v.match(/TEL:/)){
+                    var telmatch = v.match(/TEL:(.*)/)[1];
+                    parsedData.tel += (parsedData.tel === "" ? telmatch : (","+telmatch));
+                }
+                if(v.match(/EMAIL:/)){
+                    var emailmatch = v.match(/EMAIL:(.*)/)[1];
+                    parsedData.email += (parsedData.email === "" ? emailmatch : (","+emailmatch));
+                }
+                if(v.match(/URL:/)){
+                    var URLmatch = v.match(/URL:(.*)/)[1];
+                    parsedData.website += (parsedData.website === "" ? URLmatch : (","+URLmatch));
+                }
+                if(v.match(/ADR:/)){
+                    var ADRmatch = v.match(/ADR:(.*)/)[1];
+                    parsedData.address += (parsedData.address === "" ? ADRmatch : (","+ADRmatch));
+                }
+                if(v.match(/NOTE:/)){
+                    var NOTEmatch = v.match(/NOTE:(.*)/)[1],
+                        noteAr = NOTEmatch.split(",");
+                    noteAr.forEach(function(v, k){
+                        if(k === 0)
+                            parsedData.title = noteAr[0];
+                        if(k === 1)
+                            parsedData.org = noteAr[1];
+//                        if(k === 2)
+//                            parsedData.pos = noteAr[2];
+                    });   
+                }
             });
+            callback(parsedData);
         }
     };
     
