@@ -2,14 +2,16 @@
 
     var configs = {
         
-        sync_url : function(){ return (Session.get("user_data").hosturl+"/php/sync.php"); },
+        sync_url : function(){ return (Session.get("server_url")+"/ws/mobile/sync"); },
         
         sync : {
             auto     :  true,
             interval :  120000 //in miliseconds
         },
-        
-        login_url : "/php/login.php",
+
+        prepare_login_url : "/ws/mobile/login",
+
+        login_url : "/j_security_check",
         
         recent_scans : {
             amount : 5
