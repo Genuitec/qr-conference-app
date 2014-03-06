@@ -11,7 +11,6 @@
     };
     
     function serverLogIn(data, callback){
-        console.log("serverLog")
         User.serverLogIn(data, callback);
     }
     
@@ -25,10 +24,10 @@
                     if(result.success == true)
                         User.logIn(formData , callback);
                     else
-                        alert("LogIn error! Check internet connection");
+                        alert("Invalid credentials. Confirm URL, username and password.");
                 });
             else
-                alert("Please fillUp the form");
+                alert("You must complete the form.");
         });
         
     };

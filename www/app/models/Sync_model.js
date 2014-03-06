@@ -33,8 +33,7 @@
                 });
         },
    
-        applyChanges = function(_serverResponse){
-            var serverResponse = JSON.parse(_serverResponse);
+        applyChanges = function(serverResponse){
             if(is_set(serverResponse) && is_set(serverResponse.data) && is_set(serverResponse.info) && is_set(serverResponse.info.time))
                 if(objectLenght(serverResponse.data) > 0)
                     Async.forEach(serverResponse.data, function(values, table, c){
@@ -61,14 +60,18 @@
         },
         
         makeRequest = function(changes){
-            $.post(__getSyncUrl, {
-                sync: JSON.stringify({
+        	$.ajax({
+                type: "POST",
+                url: __getSyncUrl,
+                contentType: "application/json",
+                success: applyChanges,
+                data: JSON.stringify({
                     info:{
                         time: Session.get("lastSync")
                     },
                     data: changes
                 })
-            }, applyChanges);
+            });
         },
 
         getChanges = function(tables){
