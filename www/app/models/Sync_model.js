@@ -10,20 +10,26 @@
             Session.set("serverTimeDifference", (time - (new Date()).getTime() )); //InMiliseconds
         },
 
-        _syncClear = function(time, table) {
+        _syncClear = function(time, table, final) {
             if(is_array(table))
-                table.forEach(function(t){
+                Async.forEach(table, function(t, k, c){
                     DB.remove("sync", 'table_name = "' + t + '"', function(){
                         Session.set("sync_"+t, time);//last sync time
                         Session.set("lastSync", time);
                         __setServerTime(time);
+                        c();
                     });
+                }, function(){
+                    if(final === true)
+                        callback();
                 });
             else
                 DB.remove("sync", 'table_name = "' + table + '"', function(){
                     Session.set("sync_"+table, time);//last sync time
                     Session.set("lastSync", time);
                     __setServerTime(time);
+                    if(final === true)
+                        callback();
                 });
         },
    
@@ -37,10 +43,10 @@
                             c();
                         });
                     }, function(){
-                        _syncClear(serverResponse.info.time, tablesToSync);
+                        _syncClear(serverResponse.info.time, tablesToSync, true);
                     }, false);
                 else
-                    _syncClear(serverResponse.info.time, tablesToSync);
+                    _syncClear(serverResponse.info.time, tablesToSync, true);
         },
         
         preRequest = function(changes){
@@ -95,7 +101,8 @@
         sync : function(tables, callback){
             var args = checkArgs(arguments);
             if(args === false)return false;
-            
+            console.log(args);
+            console.log(args[1]);
             (new Sync(args[0], args[1])).init();
         }
     };
