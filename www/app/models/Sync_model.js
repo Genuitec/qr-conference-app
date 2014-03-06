@@ -6,18 +6,24 @@
 
         __getSyncUrl = getConfig("sync_url"),
 
+        __setServerTime = function(time){
+            Session.set("serverTimeDifference", (time - (new Date()).getTime() )); //InMiliseconds
+        },
+
         _syncClear = function(time, table) {
             if(is_array(table))
                 table.forEach(function(t){
                     DB.remove("sync", 'table_name = "' + t + '"', function(){
                         Session.set("sync_"+t, time);//last sync time
                         Session.set("lastSync", time);
+                        __setServerTime(time);
                     });
                 });
             else
                 DB.remove("sync", 'table_name = "' + table + '"', function(){
                     Session.set("sync_"+table, time);//last sync time
                     Session.set("lastSync", time);
+                    __setServerTime(time);
                 });
         },
    
@@ -42,7 +48,6 @@
             for(var tableName in changes){
                 finalData[tableName] = {create:[], update:[], lastSyncTime : (empty(Session.get("sync_"+tableName)) ? 0 : Session.get("sync_"+tableName))};
                 changes[tableName].forEach(function(v, k){
-//                    finalData[tableName].lastSyncTime = (empty(Session.get("sync_"+tableName)) ? 0 : Session.get("sync_"+tableName));
                     v.rowcreated === 1 ? finalData[tableName].create.push(v) : finalData[tableName].update.push(v);
                 });
             }
@@ -87,14 +92,12 @@
     };
     
     Models.Sync = {
-        
         sync : function(tables, callback){
             var args = checkArgs(arguments);
             if(args === false)return false;
             
             (new Sync(args[0], args[1])).init();
         }
-        
     };
     
     function checkArgs(args){

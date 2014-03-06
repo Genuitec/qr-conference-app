@@ -6,7 +6,7 @@
         
         sync : {
             auto     :  true,
-            interval :  60000 //in miliseconds
+            interval :  120000 //in miliseconds
         },
         
         login_url : "/php/login.php",

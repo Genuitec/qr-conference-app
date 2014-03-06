@@ -69,7 +69,7 @@
                         },
                         top_leads   : result.stat.top_leads,
                         followups   : result.stat.followups,
-                        lastSync    : Math.floor( ( (new Date()).getTime() - Session.get("lastSync") ) / 1000 / 60 )
+                        lastSync    : Math.floor( ( ( (new Date()).getTime() + parseInt(Session.get("serverTimeDifference"),10) ) - parseInt(Session.get("lastSync"),10) ) /1000 /60 )
                     }
                 });
             });
