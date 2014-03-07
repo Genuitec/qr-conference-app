@@ -53,7 +53,7 @@
                 syncupdatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)'
         ],
 
-        recreateDB : true
+        recreateDB : false
     };
 
     Config.set("dbTables", clone_array(DBconfig.tables));
