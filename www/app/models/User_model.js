@@ -7,60 +7,28 @@
         },
         
         serverLogIn : function(formdata, callback){
-        	$.ajax({
-                type: "GET",
-                url: formdata.hosturl + getConfig("prepare_login_url"),
-                dataType: "text",
-                success: function(responsedata){
-                	if (responsedata.indexOf("already-logged-in") != -1) {
-                		// success indicated by already-logged-in instead of login form
+        	$.post(formdata.hosturl + getConfig("login_url"),
+                {
+                    j_username: formdata.userid,
+                    j_password: formdata.password
+                },
+                function(responsedata){
+                	if (responsedata.loggedIn == true) {
+                		Session.set("session_id", responsedata.session);
                     	Session.set("server_url", formdata.hosturl);
-                        callback({
+                    	Session.set("user_data", formdata);
+                        console.log("Finished logging in");
+                    	callback({
                             success     :   true,
                             userdata    :   formdata
                         });
                 	} else {
-	                	$.ajax({
-	                        type: "POST",
-	                        url: formdata.hosturl + getConfig("login_url"),
-	                        dataType: "text",
-	                        data: {
-	                            j_username: formdata.userid,
-	                            j_password: formdata.password
-	                        },
-	                        success: function(loginresponse){
-	                        	// on success, we get redirected back to prepare_login_url
-	                        	if (loginresponse.indexOf("already-logged-in") != -1) {
-	                        		// success indicated by redirect
-	                            	Session.set("server_url", formdata.hosturl);
-	                                callback({
-	                                    success     :   true,
-	                                    userdata    :   formdata
-	                                });
-	                        	} else {
-		                        	// html response indicates not logged in
-		                            callback({
-		                                success     :   false,
-		                                error       :   "Invalid username or password."
-		                            });
-	                        	}
-	                        },
-	                        error: function(error){
-	                            callback({
-	                                success     :   false,
-	                                error       :   error
-	                            });
-	                        }
-	                    });
+                        callback({
+                            success     :   false,
+                            error       :   "Invalid username or password."
+                        });
                 	}
-                },
-                error: function(error){
-                    callback({
-                        success     :   false,
-                        error       :   error
-                    });
-                }
-            });
+                });
         },
         
         logIn : function(data, callback){

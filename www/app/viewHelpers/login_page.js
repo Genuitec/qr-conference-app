@@ -6,8 +6,10 @@
         if(initLogIn === false){
             LogInForm($("#login_page .form form"), function(logged){
                 if(logged.error)
-                    return alert("logIn error");
+                    return alert("login error");
 
+                console.log("Running initial sync");
+                
                 Sync(true, function(){
                     Router.redirect("chooseconference_page", {switchPage: true});
                 });

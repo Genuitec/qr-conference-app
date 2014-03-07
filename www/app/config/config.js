@@ -9,16 +9,14 @@
             interval :  120000 //in miliseconds
         },
 
-        prepare_login_url : "/ws/mobile/login",
+        login_url : "/ws/mobile/login",
 
-        login_url : "/j_security_check",
-        
         recent_scans : {
             amount : 5
         },
         scans : {
             db_fields : ["id", "conference_id", "fn", "title", "org" , "email", "tel", "adr", "type", "version", "scantime",
-                "rating", "scannedby_id", "scannedby_name"],
+                "rating", "scannedby_id"],
             error_already_exist : "Already Scanned"
         },
         home_page : "login_page"

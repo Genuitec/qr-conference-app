@@ -62,7 +62,7 @@
         makeRequest = function(changes){
         	$.ajax({
                 type: "POST",
-                url: __getSyncUrl,
+                url: __getSyncUrl + ";jsessionid="+Session.get("session_id"),
                 contentType: "application/json",
                 success: applyChanges,
                 data: JSON.stringify({

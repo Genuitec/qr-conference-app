@@ -180,8 +180,8 @@
                         <li class="ui-first-child"><a href="#attendeeslist_page?order=asc" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Alphabetical</a></li>
                         <li><a href="#attendeeslist_page?time=today" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Today</a></li>
                         <li><a href="#attendeeslist_page?followup=true" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Follow up</a></li>
-                        <li class="ui-last-child"><a href="#attendeeslist_page?rating=3" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Hot Leads</a></li>
-                        <li class="ui-last-child"><a href="#attendeeslist_page?rating=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Warm Leads</a></li>
+                        <li class="ui-last-child"><a href="#attendeeslist_page?rating=2" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Hot Leads</a></li>
+                        <li class="ui-last-child"><a href="#attendeeslist_page?rating=1" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Warm Leads</a></li>
                     </ul>
                 </div>
                 <div class="attend">
@@ -341,11 +341,11 @@
                         <div class="form-part-wrapper">
                             <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
                                 <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
-                                <input type="radio" name="rating" id="radio-choice-h-2a" value=1 {{#is scan.rating 1}}checked="checked"{{/is}}>
+                                <input type="radio" name="rating" id="radio-choice-h-2a" value=0 {{#is scan.rating 0}}checked="checked"{{/is}}>
                                 <label class="cold" for="radio-choice-h-2a">Cold</label>
-                                <input type="radio" name="rating" id="radio-choice-h-2b" value=2 {{#is scan.rating 2}}checked="checked"{{/is}}>
+                                <input type="radio" name="rating" id="radio-choice-h-2b" value=1 {{#is scan.rating 1}}checked="checked"{{/is}}>
                                 <label class="warm" for="radio-choice-h-2b">Warm</label>
-                                <input type="radio" name="rating" id="radio-choice-h-2c" value=3 {{#is scan.rating 3}}checked="checked"{{/is}}>
+                                <input type="radio" name="rating" id="radio-choice-h-2c" value=2 {{#is scan.rating 2}}checked="checked"{{/is}}>
                                 <label class="hot" for="radio-choice-h-2c">Hot</label>
                             </fieldset>
 

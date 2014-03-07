@@ -71,7 +71,6 @@
                 
                 var _filteredQR = filter_fields(QR, getConfig("scans", "db_fields"));
                 _filteredQR.scannedby_id = Session.get("user_data").userid;
-                _filteredQR.scannedby_name = Session.get("user_data").username;
                 Scan.create( _filteredQR , function(insertId){
 //                    _filteredQR.id = insertId;
 //                    Attendee.create({scan_id: insertId});
@@ -109,11 +108,11 @@
                  * TEST MODE
                  **/
                 return new ScanHandler({
-                    fn : "dsadsa",
-                    email: [{value: "igig@mail.ru"},
-                            {value: "2222@mail.ru"}],
-                    tel: [{value: "23213213231"},
-                            {value: "2222@mail.ru"}],
+                    fn : "Test User",
+                    email: [{value: "test@gmail.com"},
+                            {value: "other@gmail.com"}],
+                    tel: [{value: "555-1212"},
+                            {value: "555-3952"}],
                 }, "123", function(QR){
                     saveQRtoDB(QR, callback);
                 }, true);

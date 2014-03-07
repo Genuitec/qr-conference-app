@@ -18,7 +18,6 @@
                 email VARCHAR(255) NULL,\n\
                 tel VARCHAR(255) NULL,\n\
                 adr TEXT NULL,\n\
-                postcode VARCHAR(255) NULL,\n\
                 street VARCHAR(255) NULL,\n\
                 city VARCHAR(255) NULL,\n\
                 state VARCHAR(255) NULL,\n\
@@ -54,7 +53,7 @@
                 syncupdatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)'
         ],
 
-        recreateDB : false
+        recreateDB : true
     };
 
     Config.set("dbTables", clone_array(DBconfig.tables));
