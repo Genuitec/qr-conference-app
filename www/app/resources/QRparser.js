@@ -34,13 +34,20 @@
                 email       : "",
                 website     : ""
             },
-
+                    
             re = /\r\n|\n\r|\n|\r/g,
 
             ar = scanData.replace(re,"\n").split("\n");
+    
+            console.log(parsedData);
+            
             ar.forEach(function(v){
+                console.log(parsedData);
+                console.log(v);
+                var v = v.trim();
                 if(v.match(/^N:/)){
                     parsedData.fn = v.match(/^N:(.*)/)[1];
+                    console.log(v.match(/^N:(.*)/)[1]);
                     var fnAr = parsedData.fn.split(";");
                     fnAr.forEach(function(vv, k){
                         if(k === 0)
@@ -53,10 +60,38 @@
                     parsedData.title = v.match(/^TITLE:(.*)/)[1];
                 if(v.match(/^ORG:/))
                     parsedData.title = v.match(/^ORG:(.*)/)[1];
-                if(v.match(/^ADR:/)){
-//                    var adr = v.match(/^ORG:(.*)/)[1];
-//                    parsedData.title = v.match(/^ORG:(.*)/)[1];
+                if(v.match(/^ADR;/)){
+                    parsedData.adr = v.match(/^ADR;.*:;(.*)/)[1];
+                    var adrAr = parsedData.adr.split(";");
+                    adrAr.forEach(function(vv, k){
+                        switch(k){
+                            case 1:
+                                parsedData.street = vv;
+                                break;
+                            case 2:
+                                parsedData.city = vv;
+                                break;
+                            case 3:
+                                parsedData.state = vv;
+                                break;
+                            case 4:
+                                parsedData.postcode = vv;
+                                break;
+                            case 5:
+                                parsedData.country = vv; 
+                                break;
+                        } 
+                    });
                 }
+                if(v.match(/^TEL;/))
+                    if(v.match(/CELL;/))
+                        parsedData.cel = v.match(/^TEL;CELL;.*:(.*)/)[1];
+                    if(v.match(/WORK;/))
+                        parsedData.tel = v.match(/^TEL;WORK;.*:(.*)/)[1];
+                if(v.match(/^URL;/))
+                    parsedData.website = v.match(/^URL;.*:(.*)/)[1];
+                if(v.match(/^EMAIL;/))
+                    parsedData.email = v.match(/^EMAIL;.*:(.*)/)[1];
             });
             /*
             'BEGIN:VCARD\n\
