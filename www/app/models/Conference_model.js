@@ -25,6 +25,17 @@
                         c({recent:list.slice(0, getConfig("recent_scans", "amount")), amount:list.length});
                     });
                 },
+                scansOffline: function(c){
+                    DB.select("sid");
+                    DB.from("sync");
+                    DB.where('table_name = "scans"');
+                    DB.group_by("row_id");
+                    DB.having('table_name = "scans"');
+                    DB.query(function(offline){
+                        c(offline.length);
+                    });
+//                    SELECT sid from sync WHERE table_name = "scans" GROUP BY row_id HAVING table_name = "scans"
+                },
                 stat: function(c){
                     Async.parallel({
                         hot       :     function(cc){
@@ -65,7 +76,7 @@
                     stat       : {
                         scans:{
                             total   :   result.scans.amount,
-                            offline :   result.scans.amount
+                            offline :   result.scansOffline
                         },
                         top_leads   : result.stat.top_leads,
                         followups   : result.stat.followups,

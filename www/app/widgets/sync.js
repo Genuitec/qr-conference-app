@@ -8,13 +8,15 @@
             var params = getConfig("sync"),
                 defaultInterval = 5000;
             if(empty(params.interval)) params.interval = defaultInterval;
-            if(params.auto && autoInited === false)
+            if(params.auto && autoInited === false){
                 setInterval(function(){
                     Sync.sync(function(rs){
                         console.log("sync");
                         if(callback)callback();
                     });
                 }, params.interval);
+                autoInited = true;
+            }
 
             if(now)
                 Sync.sync(function(rs){

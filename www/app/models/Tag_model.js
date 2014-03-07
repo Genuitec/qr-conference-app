@@ -42,6 +42,7 @@
             DB.from("scans");
             DB.where('id = "'+data.scan_id+'" AND conference_id ="'+data.conference_id+'"');
             DB.col(function(tags){
+                if(empty(tags))var tags = "";
                 if( ( tags.split(",") ).indexOf(data.tag) === -1  )
                     DB.update("scans", {
                         tags: (tags+","+data.tag)
