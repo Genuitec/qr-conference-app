@@ -7,7 +7,7 @@ var SQLite = function(){ // works with local SQLite DB
     _sql = "",
 
     _executeSQL = function(sql, callback) { // main DB method which makes query to DB
-//        console.log(sql);
+        console.log(sql);
         _db.transaction(function(tx){
             _queryDB(tx, sql, callback);
         }, function(err){
@@ -179,12 +179,12 @@ var SQLite = function(){ // works with local SQLite DB
                     if (ijk != 0) {
                         sql += ",";
                     }
-                    sql += '"' + data[j][ij] + '" as ' + ij + ''
+                    sql += (data[j][ij] === null ? (data[j][ij] + ' as ' + ij) : ('"' + data[j][ij] + '" as ' + ij + '') );
                 } else {
                     if (ijk != 0) {
                         sql += ",";
                     }
-                    sql += '"' + data[j][ij] + '"';
+                    sql += (data[j][ij] === null ? data[j][ij] : ('"' + data[j][ij] + '"'));
                 }
                 ++i;
                 ++ijk;
@@ -286,7 +286,7 @@ var SQLite = function(){ // works with local SQLite DB
                                 if (data[key] == 'datetime()') {
                                         sql += key + '=' + data[key];
                                 } else {
-                                        sql += key + '="' + data[key] + '"';
+                                        sql += (key + '='+ ( data[key] === null ? data[key] : ('"' + data[key] + '"')) );
                                 }
                                 // ---
             ++i;
