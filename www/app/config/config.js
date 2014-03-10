@@ -15,8 +15,9 @@
             amount : 5
         },
         scans : {
-            db_fields : ["id", "conference_id", "fn", "title", "org" , "email", "tel", "adr", "type", "version", "scantime",
-                "rating", "scannedby_id"],
+            db_fields : ["id", "conference_id", "fn", "title", "org" , "email", "tel", 
+                "adr", "type", "version", "scantime", "rating", "scannedby_id", "cel",
+                "city", "firstname", "lastname", "postcode", "state", "street", "website"],
             error_already_exist : "Already Scanned"
         },
         home_page : "login_page"
