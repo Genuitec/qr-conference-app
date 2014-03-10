@@ -421,13 +421,13 @@
                             {{#if scan.title}}
                                 <li class="ui-field-contain">
                                     <label>Title:</label>
-                                    <label>Chief Engineer</label>
+                                    <label>{{scan.title}}</label>
                                 </li>
                             {{/if}}
                             {{#if scan.org}}  
                                 <li class="ui-field-contain">
                                     <label>Company</label>
-                                    <label>Yo</label>
+                                    <label>{{scan.org}}</label>
                                 </li>
                             {{/if}}
                             {{#if scan.tel}}
@@ -436,7 +436,26 @@
                                     {{#each scan.tel}}
                                         <label>{{this}}</label>
                                     {{/each}}
+                                    {{#if scan.cel}}
+                                        {{#each scan.cel}}
+                                            <label>{{this}}</label>
+                                        {{/each}}
+                                    {{/if}}
                                 </li>
+                            {{else}}  
+                                {{#if scan.cel}}
+                                    <li class="ui-field-contain">
+                                        <label>Phone(s):</label>
+                                        {{#if scan.tel}}
+                                            {{#each scan.tel}}
+                                                <label>{{this}}</label>
+                                            {{/each}}
+                                        {{/if}}
+                                        {{#each scan.cel}}
+                                            <label>{{this}}</label>
+                                        {{/each}}
+                                    </li>
+                                {{/if}}
                             {{/if}}
                             {{#if scan.email}}
                                 <li class="ui-field-contain">
@@ -455,13 +474,19 @@
                             {{#if scan.org}}
                                 <li class="ui-field-contain">
                                     <label>Website</label>
-                                    <label>{{scan.org}}</label>
+                                    <label>{{scan.website}}</label>
                                 </li>
                             {{/if}}
                             <li class="ui-body ui-body-b">
                                 <div data-role="navbar">
                                     <ul>
-                                        {{#if scan.tel.[0]}}<li><a href="tel:{{scan.tel.[0]}}" class="ui-btn-active">Call</a></li>{{/if}}
+                                        {{#if scan.tel.[0]}}
+                                            <li><a href="tel:{{scan.tel.[0]}}" class="ui-btn-active">Call</a></li>
+                                        {{else}}
+                                            {{#if scan.cel.[0]}}
+                                                <li><a href="tel:{{scan.cel.[0]}}" class="ui-btn-active">Call</a></li>
+                                            {{/if}}
+                                        {{/if}}
                                         {{#if scan.email.[0]}}<li><a href="mailto:{{scan.email.[0]}}">Email</a></li>{{/if}}
                                         {{#if scan.org}}<li><a href="{{scan.org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{scan.org}}', '_blank', 'location=yes');">Web</a></li>{{/if}}
                                     </ul>

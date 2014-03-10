@@ -20,12 +20,12 @@
             if(arguments.length !== 2 || empty(where) || empty(where.id))return false;
             Async.parallel({
                 scan: function(c){
-                    DB.select("s.id, s.conference_id, s.fn, s.title, s.org, s.email, s.tel, s.adr, s.type, s.version, s.scantime, s.rating, s.followup, s.notes");
+                    DB.select("s.id, s.conference_id, s.fn, s.title, s.org, s.email, s.tel, s.adr, s.type, s.version, s.scantime, s.rating, s.followup, s.notes, s.scannedby_id, s.cel, s.city, s.firstname, s.lastname, s.postcode, s.state, s.street, s.website");
                     DB.from("scans as s");
                     for(var i in where)
                         DB.where('s.'+i+' = "'+where[i]+'"');
                     DB.row(function(data){
-                        c(strfield_to_array(["email", "tel"], data));
+                        c(strfield_to_array(["email", "tel", "cel"], data));
                     });
                 },
                 tags: function(c){

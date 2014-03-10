@@ -17,7 +17,7 @@
         scans : {
             db_fields : ["id", "conference_id", "fn", "title", "org" , "email", "tel", 
                 "adr", "type", "version", "scantime", "rating", "scannedby_id", "cel",
-                "city", "firstname", "lastname", "postcode", "state", "street", "website"],
+                "city", "firstname", "lastname", "postcode", "state", "street", "website", "qrcodetext"],
             error_already_exist : "Already Scanned"
         },
         home_page : "login_page"
