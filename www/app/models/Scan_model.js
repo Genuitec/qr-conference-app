@@ -88,12 +88,12 @@
             if(is_set(params.time) && params.time === "today")
                 DB.where('scantime >= "'+(function(){
                     var year = new Date().getFullYear(),
-                        month = new Date().getMonth(),
+                        month = (new Date().getMonth()+1),
                         date = new Date().getDate();
                     if(month < 10)month = "0"+month;
                     if(date < 10)date = "0"+date;
                     
-                    return ( year+"-"+month+"-"+date+" "+"00:00:00" );
+                    return ( year+"-"+month+"-"+date+" "+"00:00" );
                 }())+'"');
             if(is_set(params.followup) && params.followup === "true")
                 DB.where('followup = 1'); //*

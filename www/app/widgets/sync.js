@@ -11,7 +11,7 @@
             if(params.auto && autoInited === false){
                 setInterval(function(){
                     Sync.sync(function(rs){
-                        console.log("sync");
+                        console.log("syncInBackground");
                         if(callback)callback();
                     });
                 }, params.interval);
@@ -20,7 +20,7 @@
 
             if(now)
                 Sync.sync(function(rs){
-                    console.log("sync");
+                    console.log("syncnow");
                     if(callback)callback();
                 });
         };
