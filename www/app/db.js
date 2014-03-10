@@ -17,6 +17,7 @@
                 org VARCHAR(255) NULL,\n\
                 email VARCHAR(255) NULL,\n\
                 tel VARCHAR(255) NULL,\n\
+                cel VARCHAR(255) NULL,\n\
                 adr TEXT NULL,\n\
                 street VARCHAR(255) NULL,\n\
                 city VARCHAR(255) NULL,\n\
