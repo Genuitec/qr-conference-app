@@ -1,4 +1,4 @@
-(function(Models, Session, getConfig){
+(function(Models, Session, getConfig, DB){
     
     Models.User = {
         
@@ -43,7 +43,8 @@
         },
         
         logOut : function(){
-            Session.clear("user_data");
+            Session.clear();
+            DB.recreate_db();
         },
         
         signUp : function(data, callback){},
@@ -54,4 +55,4 @@
         
     };
     
-}(App.Models, App.Session, App.Config.get));
+}(App.Models, App.Session, App.Config.get, App.DB));
