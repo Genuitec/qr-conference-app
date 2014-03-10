@@ -1,28 +1,47 @@
 (function(Widgets, Sync, getConfig){
     
-    Widgets.sync = (function(){
+    Widgets.sync = function(now, callback){
+        Sync.sync(function(rs){
+            console.log("syncnow");
+            if(callback)callback();
+        });
+    };
+    
+    Widgets.bgSync = (function(){
         
-        var autoInited = false;
-        
-        return function(now, callback){
+        var BackgroundSync = (function(){
             var params = getConfig("sync"),
-                defaultInterval = 5000;
-            if(empty(params.interval)) params.interval = defaultInterval;
-            if(params.auto && autoInited === false){
-                setInterval(function(){
-                    Sync.sync(function(rs){
-                        console.log("syncInBackground");
-                        if(callback)callback();
-                    });
-                }, params.interval);
-                autoInited = true;
-            }
+            autoInited = false,
+            defaultInterval = 5000,
+            interval;
 
-            if(now)
-                Sync.sync(function(rs){
-                    console.log("syncnow");
-                    if(callback)callback();
-                });
+            return {
+                start: function(callback){
+                    if(params.auto && autoInited === false){
+                        interval = setInterval(function(){
+                            Sync.sync(function(rs){
+                                console.log("syncInBackground");
+//                                if(callback)callback();
+                            });
+                        }, (empty(params.interval) ? defaultInterval : params.interval));
+                        autoInited = true;
+                        Sync.sync(function(rs){
+                            console.log("NOWsyncInBackground");
+                            if(callback)callback();
+                        });
+                    }
+                },
+                stop: function(){
+                    clearInterval(interval);
+                    autoInited = false;
+                }
+            };
+
+        }());
+        
+        return {
+            start : BackgroundSync.start,
+            stop  : BackgroundSync.stop
         };
         
     }());

@@ -64,7 +64,7 @@
                 type: "POST",
                 url: __getSyncUrl + ";jsessionid="+Session.get("session_id"),
                 contentType: "application/json",
-                success: applyChanges,
+                success: applyChanges,  /// here
                 data: JSON.stringify({
                     info:{
                         time: Session.get("lastSync")

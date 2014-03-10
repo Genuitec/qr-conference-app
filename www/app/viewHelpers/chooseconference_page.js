@@ -16,10 +16,7 @@
         };
     }());
     
-    View.chooseconference_page = function(data){
-        var template = Handlebars.compile($("#chooseconference_page-template").html());
-        $("#chooseconference_page .main").html(template(data));
-        
+    $(document).ready(function(){
         $("#chooseconference_page .refresh").ham("click", function(){
             Sync(true, function(){
                 Conference.read(function(d){
@@ -27,6 +24,11 @@
                 });
             });
         });
+    });
+    
+    View.chooseconference_page = function(data){
+        var template = Handlebars.compile($("#chooseconference_page-template").html());
+        $("#chooseconference_page .main").html(template(data));
         
         $(document).ready(function(){
             SyncScroll(function(){

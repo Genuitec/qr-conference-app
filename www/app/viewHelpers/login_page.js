@@ -1,4 +1,4 @@
-(function(View, LogInForm, Router, Sync){
+(function(View, LogInForm, Router, bgSync){
     
     var initLogIn = false;
     
@@ -10,7 +10,7 @@
 
                 console.log("Running initial sync");
                 
-                Sync(true, function(){
+                bgSync.start(function(){
                     Router.redirect("chooseconference_page", {switchPage: true});
                 });
             });
@@ -18,4 +18,5 @@
         }
     };
     
-}(App.viewHelpers, App.Widgets.logIn, App.Router, App.Widgets.sync));
+}(App.viewHelpers, App.Widgets.logIn, App.Router, App.Widgets.bgSync));
+//}(App.viewHelpers, App.Widgets.logIn, App.Router, App.Widgets.sync));

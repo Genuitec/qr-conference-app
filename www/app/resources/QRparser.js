@@ -39,15 +39,16 @@
 
             ar = scanData.replace(re,"\n").split("\n");
     
-            console.log(parsedData);
+            console.log("ar ar");
+            console.log(ar);
             
             ar.forEach(function(v){
                 console.log(parsedData);
                 console.log(v);
                 var v = v.trim();
-                if(v.match(/^N:/)){
-                    parsedData.fn = v.match(/^N:(.*)/)[1];
-                    console.log(v.match(/^N:(.*)/)[1]);
+                if(v.match(/^N.*:/)){
+                    parsedData.fn = v.match(/^N.*:(.*)/)[1];
+                    console.log(v.match(/^N.*:(.*)/)[1]);
                     var fnAr = parsedData.fn.split(";");
                     fnAr.forEach(function(vv, k){
                         if(k === 0)
