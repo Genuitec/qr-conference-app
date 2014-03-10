@@ -47,8 +47,9 @@
                 console.log(v);
                 var v = v.trim();
                 if(v.match(/^N.*:/)){
-                    parsedData.fn = v.match(/^N.*:(.*)/)[1];
+                    console.log("name");
                     console.log(v.match(/^N.*:(.*)/)[1]);
+                    parsedData.fn = v.match(/^N.*:(.*)/)[1];
                     var fnAr = parsedData.fn.split(";");
                     fnAr.forEach(function(vv, k){
                         if(k === 0)
@@ -56,13 +57,14 @@
                         if(k === 1)
                             parsedData.firstname = vv;
                     });
+                    console.log(parsedData);
                 }
-                if(v.match(/^TITLE:/))
-                    parsedData.title = v.match(/^TITLE:(.*)/)[1];
-                if(v.match(/^ORG:/))
-                    parsedData.title = v.match(/^ORG:(.*)/)[1];
+                if(v.match(/^TITLE.*:/))
+                    parsedData.title = v.match(/^TITLE.*:(.*)/)[1];
+                if(v.match(/^ORG.*:/))
+                    parsedData.title = v.match(/^ORG.*:(.*)/)[1];
                 if(v.match(/^ADR;/)){
-                    parsedData.adr = v.match(/^ADR;.*:;(.*)/)[1];
+                    parsedData.adr = v.match(/^ADR.*:;(.*)/)[1];
                     var adrAr = parsedData.adr.split(";");
                     adrAr.forEach(function(vv, k){
                         switch(k){
@@ -85,16 +87,32 @@
                     });
                 }
                 if(v.match(/^TEL;/))
-                    if(v.match(/CELL;/))
-                        parsedData.cel = v.match(/^TEL;CELL;.*:(.*)/)[1];
-                    if(v.match(/WORK;/))
-                        parsedData.tel = v.match(/^TEL;WORK;.*:(.*)/)[1];
-                if(v.match(/^URL;/))
-                    parsedData.website = v.match(/^URL;.*:(.*)/)[1];
-                if(v.match(/^EMAIL;/))
-                    parsedData.email = v.match(/^EMAIL;.*:(.*)/)[1];
+                    if(v.match(/CELL.*:/))
+                        parsedData.cel = v.match(/^TEL;CELL.*:(.*)/)[1];
+                    if(v.match(/WORK.*:/))
+                        parsedData.tel = v.match(/^TEL;WORK.*:(.*)/)[1];
+                if(v.match(/^URL.*:/))
+                    parsedData.website = v.match(/^URL.*:(.*)/)[1];
+                if(v.match(/^EMAIL.*:/))
+                    parsedData.email = v.match(/^EMAIL.*:(.*)/)[1];
             });
             /*
+              
+            BEGIN:VCARD
+            N;CHARSET=utf-8:Izraylevych;Igor;;;
+            FN;CHARSET=utf-8:Igor Izraylevych
+            ORG;CHARSET=utf-8:org
+            TITLE;CHARSET=utf-8:developer
+            TEL;WORK:343967
+            TEL;CELL:0961155555
+            TEL;WORK;FAX:2323
+            EMAIL;INTERNET;WORK;CHARSET=utf-8:igorizr1@gmail.com
+            ADR;WORK;CHARSET=utf-8:;;Prvdy 3;Zaporizhzhya;Zp;69000;Ukraine
+            URL;WORK;CHARSET=utf-8:http://2727 Duke st
+            VERSION:2.1
+            END:VCARD
+ 
+             
             'BEGIN:VCARD\n\
             VERSION:2.1\n\
             N:Izraylevych;Igor;S.;Mr;PHD\n\
@@ -110,7 +128,8 @@
             END:VCARD'.replace(re,"\n").split("\n");
             
             */
-
+           console.log(parsedData);
+           callback(parsedData);
 
         }else if(scanData.match("MECARD:")){
             console.log("MECARD");
