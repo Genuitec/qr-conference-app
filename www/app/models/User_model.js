@@ -7,6 +7,10 @@
         },
         
         serverLogIn : function(formdata, callback){
+            if(!empty(Session.get("server_url")) && Session.get("server_url") !== formdata.hosturl){
+                this.clearLocalData();
+                alert("You are accessing another server. All local data will be removed");
+            }
             $.post(formdata.hosturl + getConfig("login_url"),
             {
                 j_username: formdata.userid,
@@ -33,25 +37,33 @@
         
         logIn : function(data, callback){
             Session.set("user_data", data) ?
-                callback({
-                    success: {
-                        isLogged: true,
-                        userData: data
-                    }
-                })
+                (function(){
+                    callback({
+                        success: {
+                            isLogged: true,
+                            userData: data
+                        }
+                    });
+                    Session.set("islogged", true);
+                }())
             : callback({error: ""});
         },
         
         logOut : function(){
+            Widgets.bgSync.stop();
+            Session.clear("islogged");
+        },
+        
+        clearLocalData : function(){
             Session.clear();
             DB.recreate_db();
-            Widgets.bgSync.stop();
         },
         
         signUp : function(data, callback){},
                 
         isLogged: function(callback){
-            callback(empty(Session.get("user_data")) ? false : true);
+            callback(empty(Session.get("islogged")) ? false : true);
+//            callback(empty(Session.get("user_data")) ? false : true);
         }
         
     };

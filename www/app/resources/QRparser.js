@@ -89,7 +89,6 @@
             VERSION:2.1
             END:VCARD
  
-             
             'BEGIN:VCARD\n\
             VERSION:2.1\n\
             N:Izraylevych;Igor;S.;Mr;PHD\n\

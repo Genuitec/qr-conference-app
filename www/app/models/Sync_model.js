@@ -1,4 +1,4 @@
-(function(Models, DB, Session, getConfig){
+(function(Models, DB, Session, getConfig, Router){
     
     var Sync = function(tablesToSync, callback){
         var tablesToSync = tablesToSync,
@@ -34,6 +34,8 @@
         },
    
         applyChanges = function(serverResponse){
+            if(is_set(serverResponse.status) && serverResponse.status === 403) return Router.redirect("logout");
+    
             if(is_set(serverResponse) && is_set(serverResponse.data) && is_set(serverResponse.info) && is_set(serverResponse.info.time))
                 if(objectLenght(serverResponse.data) > 0)
                     Async.forEach(serverResponse.data, function(values, table, c){
@@ -60,7 +62,7 @@
         },
         
         makeRequest = function(changes){
-        	$.ajax({
+            $.ajax({
                 type: "POST",
                 url: __getSyncUrl + ";jsessionid="+Session.get("session_id"),
                 contentType: "application/json",
@@ -118,4 +120,4 @@
         else return false;
     }
  
-}(App.Models, App.DB, App.Session, App.Config.get));
+}(App.Models, App.DB, App.Session, App.Config.get, App.Router));
