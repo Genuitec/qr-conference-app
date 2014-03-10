@@ -147,6 +147,7 @@
                     parsedData.website += (parsedData.website === "" ? URLmatch : (","+URLmatch));
                 }
                 if(v.match(/ADR:/)){
+                    console.log("match adr")
                     var ADRmatch = v.match(/ADR:(.*)/)[1];
                     parsedData.adr += (parsedData.adr === "" ? ADRmatch : (","+ADRmatch));
                     var addrAR = parsedData.adr.split(",");
