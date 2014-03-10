@@ -11,40 +11,13 @@
                 
         MakeObjectFromText = function(scanData){
             if(test)
-                return handleQRdata(scanData);
+                return returnCallback(scanData);
+//                return handleQRdata(scanData);
 //            vCardParser(scanData, handleQRdata);
-            QRparser(scanData, handleQRdata);
-        },
-        handleQRdata = function(vCard){
-            console.log("parser");
-            console.log(vCard);
-            returnCallback(vCard);
-            /** final parse data **/
-//            returnCallback( (function(o){
-//                var oo = {}, field = "";
-//                for(var i in o){
-//                    oo[i] = o[i];
-//                    if( (i === "email" || i === "tel") && is_array(o[i])){
-//                        o[i].forEach(function(arEl){
-//                            if(typeof(arEl) === "object")
-//                                for(var k in arEl)
-//                                    if(k === "value")
-//                                        field+= (field === "" ? arEl[k] : (","+arEl[k]));
-//                        });
-//                        oo[i] = field.trim();
-//                        field = "";
-//                    }
-//                    if(i === "org")
-//                        oo[i] = o[i][0]['organization-name'];
-//                    if(i === "adr")
-//                        oo[i] = o[i]['value'];
-//                    if(i === "title")
-//                        oo[i] = o[i][0];
-//                    if(i === "fn")
-//                        oo[i] = o[i];
-//                }
-//                return oo;
-//            }(vCard)) );
+            QRparser(scanData, function(scannedQR){
+                scannedQR.qrcodetext = scanData;
+                returnCallback(scannedQR);
+            });
         },
         returnCallback = function(data){
             /** save to db and call callback(last_parsed data) **/

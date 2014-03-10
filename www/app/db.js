@@ -35,6 +35,7 @@
                 updatetime TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n\
                 synctime LONG NOT NULL DEFAULT 0,\n\
             	website VARCHAR(255) NULL,\n\
+                qrcodetext TEXT NULL,\n\
                 UNIQUE(id, conference_id))',
 
             'CREATE TABLE IF NOT EXISTS conferences(\n\

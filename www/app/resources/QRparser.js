@@ -1,29 +1,8 @@
 (function(Resources, vCardParser){
     
     Resources.QRparser = function(scanData, callback){
-            console.log("QRparser");
         if(scanData.match("END:VCARD")){
             console.log("VCARD");
-            //VCARD
-//            vCardParser(scanData, callback);
-            /*
-            fn VARCHAR(255) NOT NULL,\n\
-            lastname VARCHAR(255) NULL,\n\
-            firstname VARCHAR(255) NULL,\n\
-            title VARCHAR(255) NULL,\n\
-            org VARCHAR(255) NULL,\n\
-            email VARCHAR(255) NULL,\n\
-            tel VARCHAR(255) NULL,\n\
-            adr TEXT NULL,\n\
-            postcode VARCHAR(255) NULL,\n\
-            street VARCHAR(255) NULL,\n\
-            city VARCHAR(255) NULL,\n\
-            state VARCHAR(255) NULL,\n\
-            postcode VARCHAR(255) NULL,\n\
-            country VARCHAR(255) NULL,\n\
-            type VARCHAR(255) NULL,\n\
-            version VARCHAR(255) NULL,\n\
-            */
             var parsedData = {
                 fn          : "",
                 firstname   : "",
@@ -38,17 +17,11 @@
             re = /\r\n|\n\r|\n|\r/g,
 
             ar = scanData.replace(re,"\n").split("\n");
-    
-            console.log("ar ar");
-            console.log(ar);
             
             ar.forEach(function(v){
-                console.log(parsedData);
-                console.log(v);
                 var v = v.trim();
+                console.log(v);
                 if(v.match(/^N.*:/)){
-                    console.log("name");
-                    console.log(v.match(/^N.*:(.*)/)[1]);
                     parsedData.fn = v.match(/^N.*:(.*)/)[1];
                     var fnAr = parsedData.fn.split(";");
                     fnAr.forEach(function(vv, k){
@@ -57,12 +30,13 @@
                         if(k === 1)
                             parsedData.firstname = vv;
                     });
-                    console.log(parsedData);
+                    parsedData.fn = parsedData.fn.replace(/;/g, " ");
+                    parsedData.fn = parsedData.fn.trim();
                 }
                 if(v.match(/^TITLE.*:/))
                     parsedData.title = v.match(/^TITLE.*:(.*)/)[1];
                 if(v.match(/^ORG.*:/))
-                    parsedData.title = v.match(/^ORG.*:(.*)/)[1];
+                    parsedData.org = v.match(/^ORG.*:(.*)/)[1];
                 if(v.match(/^ADR;/)){
                     parsedData.adr = v.match(/^ADR.*:;(.*)/)[1];
                     var adrAr = parsedData.adr.split(";");
@@ -85,14 +59,17 @@
                                 break;
                         } 
                     });
+                    parsedData.adr = parsedData.adr.replace(/;/g, " ");
+                    parsedData.adr = parsedData.adr.trim();
                 }
-                if(v.match(/^TEL;/))
+                if(v.match(/^TEL;/)){
                     if(v.match(/CELL.*:/))
                         parsedData.cel = v.match(/^TEL;CELL.*:(.*)/)[1];
                     if(v.match(/WORK.*:/))
                         parsedData.tel = v.match(/^TEL;WORK.*:(.*)/)[1];
+                }
                 if(v.match(/^URL.*:/))
-                    parsedData.website = v.match(/^URL.*:(.*)/)[1];
+                    parsedData.website = v.match(/^URL.*:(http:\/\/.*)/)[1];
                 if(v.match(/^EMAIL.*:/))
                     parsedData.email = v.match(/^EMAIL.*:(.*)/)[1];
             });
@@ -128,6 +105,7 @@
             END:VCARD'.replace(re,"\n").split("\n");
             
             */
+           console.log("VCARD parsedData");
            console.log(parsedData);
            callback(parsedData);
 
@@ -167,7 +145,6 @@
                     parsedData.website += (parsedData.website === "" ? URLmatch : (","+URLmatch));
                 }
                 if(v.match(/ADR:/)){
-                    console.log("match adr");
                     var ADRmatch = v.match(/ADR:(.*)/)[1];
                     parsedData.adr += (parsedData.adr === "" ? ADRmatch : (","+ADRmatch));
                     var addrAR = parsedData.adr.split(",");
