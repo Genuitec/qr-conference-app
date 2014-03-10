@@ -1,5 +1,4 @@
-//(function(Widgets, vCardParser, BarcodeScanner, Scan, Attendee, getConfig, Session){
-(function(Widgets, Resources, vCardParser, QRparser, BarcodeScanner, Scan, getConfig, Session){
+(function(Widgets, Resources, QRparser, Scan, getConfig, Session){
     
     var ScanHandler = function(scanData, md5, callback, test){
         this.test = test;
@@ -12,8 +11,6 @@
         MakeObjectFromText = function(scanData){
             if(test)
                 return returnCallback(scanData);
-//                return handleQRdata(scanData);
-//            vCardParser(scanData, handleQRdata);
             QRparser(scanData, function(scannedQR){
                 scannedQR.qrcodetext = scanData;
                 returnCallback(scannedQR);
@@ -46,8 +43,6 @@
                 var _filteredQR = filter_fields(QR, getConfig("scans", "db_fields"));
                 _filteredQR.scannedby_id = Session.get("user_data").userid;
                 Scan.create( _filteredQR , function(insertId){
-//                    _filteredQR.id = insertId;
-//                    Attendee.create({scan_id: insertId});
                     callback(_filteredQR);
                 });
             });
@@ -55,8 +50,6 @@
         
         return function(callback){
             try{
-//                cordova.plugins.barcodeScanner.scan(
-//                BarcodeScanner.scan(
                 Resources.barcodeScanner.scan(
                     function (scanData) {
                         console.log(scanData);
@@ -81,18 +74,18 @@
                 /**
                  * TEST MODE
                  **/
-                return new ScanHandler({
-                    fn : "Test User",
-                    email: [{value: "test@gmail.com"},
-                            {value: "other@gmail.com"}],
-                    tel: [{value: "555-1212"},
-                            {value: "555-3952"}],
-                }, "1234", function(QR){
-                    saveQRtoDB(QR, callback);
-                }, true);
+//                return new ScanHandler({
+//                    fn : "Test User",
+//                    email: [{value: "test@gmail.com"},
+//                            {value: "other@gmail.com"}],
+//                    tel: [{value: "555-1212"},
+//                            {value: "555-3952"}],
+//                }, "1234", function(QR){
+//                    saveQRtoDB(QR, callback);
+//                }, true);
                 
-                callback({error:e});
-                console.log(e);
+//                callback({error:e});
+//                console.log(e);
                 alert("Scanning failed: " + e);
                 /**
                  * TEST MODE
@@ -102,5 +95,4 @@
         
     }());
     
-}(App.Widgets, App.Resources, App.Resources.vCardParser, App.Resources.QRparser, App.Resources.barcodeScanner, App.Models.Scan, App.Config.get, App.Session));
-//}(App.Widgets, App.Resources.vCardParser, App.Resources.barcodeScanner, App.Models.Scan, App.Models.Attendee, App.Config.get, App.Session));
+}(App.Widgets, App.Resources, App.Resources.QRparser, App.Models.Scan, App.Config.get, App.Session));

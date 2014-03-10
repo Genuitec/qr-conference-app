@@ -34,7 +34,7 @@
                         
         <script src="app/app.js"></script>
         <script src="app/config/autoload.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/config/config.js"></script>
+        <script src="app/config/config.js"></script>
         <script src="app/db.js"></script>
         <script src="app/models/User_model.js"></script>
         <script src="app/models/Note_model.js"></script>
@@ -42,11 +42,10 @@
         <script src="app/models/Sync_model.js"></script>
         <script src="app/models/Conference_model.js"></script>
         <script src="app/models/Tag_model.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/resources/QRparser.js"></script>
+        <script src="app/resources/QRparser.js"></script>
         <script src="app/resources/barcodeScanner.js"></script>
-        <script src="app/resources/vCardParser.js"></script>
         <script src="app/widgets/loader.js"></script>
-        <script src="http://igorizr.url.ph/qr/home/u116803453/public_html/www/app/widgets/QRscanner.js"></script>
+        <script src="app/widgets/QRscanner.js"></script>
         <script src="app/widgets/attendeeNotes.js"></script>
         <script src="app/widgets/logIn.js"></script>
         <script src="app/widgets/voteAttendeeForm.js"></script>
@@ -63,7 +62,6 @@
     </head>
     <body>
         
-        <!-- login_page -->
         <!-- login_page -->
         <div id="login_page" data-role="page">
             <div data-role="header">
@@ -93,10 +91,8 @@
             </div><!-- /content -->
         </div><!-- /page -->
         <!-- /login_page -->
-        <!-- /login_page -->  
         
         
-        <!-- chooseconference_page -->
         <!-- chooseconference_page -->
         <div id="chooseconference_page" data-role="page">
             <div class="hook" id="hook"></div>
@@ -105,9 +101,7 @@
                 <h1>QR Conference Buddy</h1>
                 <button class="refresh ui-btn ui-btn-inline">Refresh</button>
             </div>
-            <!-- /header -->
             <div role="main" class="ui-content">
-                <!--<p>Scanner</p>-->
                 <div class="main">
                     <!-- templates -->
                 </div>
@@ -122,10 +116,8 @@
             </div><!-- /content -->
         </div><!-- /page -->
         <!-- /chooseconference_page -->
-        <!-- /chooseconference_page -->      
         
         
-        <!-- scannow_page -->
         <!-- scannow_page -->
         <div id="scannow_page" data-role="page">
             <div data-role="header">
@@ -155,17 +147,13 @@
             </div><!-- /content -->
         </div><!-- /page -->
         <!-- /scannow_page -->
-        <!-- /scannow_page -->
         
         
-        <!-- scaninfo_page -->
         <!-- scaninfo_page -->
         <div id="scaninfo_page" data-role="page"></div><!-- /page -->
         <!-- /scaninfo_page -->
-        <!-- /scaninfo_page -->
         
         
-        <!-- eclipse2014_page -->
         <!-- eclipse2014_page -->
         <div id="attendees_page" data-role="page">
             <div data-role="header">
@@ -192,17 +180,13 @@
             </div><!-- /content -->
         </div><!-- /page -->
         <!-- /login_page -->
-        <!-- /login_page -->
         
         
-        <!-- eclipse2014_page -->
         <!-- eclipse2014_page -->
         <div id="conference_page" data-role="page"></div><!-- /page -->
         <!-- /login_page -->
-        <!-- /login_page -->
         
         
-        <!-- eclipse2014_page -->
         <!-- eclipse2014_page -->
         <div id="attendeeslist_page" data-role="page">
             <div data-role="header">
@@ -216,9 +200,7 @@
                 </div>
             </div><!-- /content -->
         </div><!-- /page -->
-        <!-- /login_page -->
-        <!-- /login_page -->
-        
+        <!-- /login_page -->        
         
         
         <!-- templates -->
@@ -266,9 +248,7 @@
                 <a href="#" data-role="button" data-rel="back">Go Back</a>
                 <h1>{{conference.name}}</h1>
             </div>
-            <!-- /header -->
             <div role="main" class="ui-content">
-                <!--<p>Scanner</p>-->
                 <div class="main">
                 
                     <div class="scan-area" id="scanner" tabindex="0">
@@ -282,10 +262,7 @@
                             <div class="scan-corner-rb scan-corner"></div> 
                         </div>
                     </div>
-                
-                    <!-- 
-                        <a href="#scannow_page?conferenceid={{!conference.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Scan Now</a>
-                    -->
+
                 </div>
                 <div class="recent-scans">
                     <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
@@ -339,7 +316,6 @@
                         <h2>Rapid Rating</h2>
                         <div class="form-part-wrapper">
                             <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
-                                <!-- <input type="radio" name="rating" id="radio-choice-h-2a" value="cold" checked="checked"> -->
                                 <input type="radio" name="rating" id="radio-choice-h-2a" value=0 {{#is scan.rating 0}}checked="checked"{{/is}}>
                                 <label class="cold" for="radio-choice-h-2a">Cold</label>
                                 <input type="radio" name="rating" id="radio-choice-h-2b" value=1 {{#is scan.rating 1}}checked="checked"{{/is}}>
@@ -391,16 +367,7 @@
                                         <button type="submit">submit</button>
                                         <button type="button" data-role="note-reset">reset</button>
                                     </form>
-                                <!--
                                     
-                                    <form data-role="addnote-form">
-                                        <p>No notes added yet. Double tap to edit notes</p>
-                                        <textarea></textarea>
-                                        <button type="submit">submit</button>
-                                        <button type="button" data-role="note-reset">reset</button>
-                                    </form>
-                            -->
-                                    <!-- <button data-role="addnote">Add</button> -->
                                 {{/if}}
                             </div>
 
