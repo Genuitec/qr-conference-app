@@ -220,9 +220,21 @@ a {
     margin-right: 15px;
     margin-bottom: 10px;
     padding: 10px;
+    /*background: rgb(44, 183, 248);*/
+    /*color: white;*/
+    background: white;
+    color: rgb(44, 183, 248);
+    border-radius: 5px;
+}
+#scaninfo_page .tags > ul > li.selected {
+/*    background: white;
+    color: rgb(44, 183, 248);*/
     background: rgb(44, 183, 248);
     color: white;
-    border-radius: 5px;
+}
+#scaninfo_page .tags > ul > li.selected > span {
+    /*border-bottom: 1px solid rgb(44, 183, 248);*/
+    border-bottom: 2px solid white;
 }
 #scaninfo_page [data-role="header"] > a{
     margin-top: 11px;
@@ -865,6 +877,11 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
     border: none;
     text-align: center;
     color: #32475e;
+}
+.form-part-wrapper .navlinktoweb > a{
+    color: #22aadd;
+    border: 0;
+    text-align: center;
 }
 
 .ui-listview > .ui-li-static {
