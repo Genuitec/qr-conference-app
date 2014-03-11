@@ -231,6 +231,7 @@ a {
     color: rgb(44, 183, 248);*/
     background: rgb(44, 183, 248);
     color: white;
+    box-shadow: 1px 1px 6px -1px rgb(60, 93, 109) inset;
 }
 #scaninfo_page .tags > ul > li.selected > span {
     /*border-bottom: 1px solid rgb(44, 183, 248);*/
