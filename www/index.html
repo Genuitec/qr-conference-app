@@ -5,9 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>QR conf</title>
         
-        <link rel="stylesheet"  href="assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css">
-        <link rel="stylesheet"  href="assets/css/app.css">
-        <link rel="stylesheet" href="assets/css/fonts.css">
+        <link rel="stylesheet" href="./assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/app.css">
+
+        <script type="text/javascript" src="http://use.typekit.net/gwz4myw.js"></script> <!-- Typekit -->
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script> <!-- Typekit -->
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="barcodescanner.js"></script>
@@ -63,41 +65,39 @@
     <body>
         
         <!-- login_page -->
+        <!-- login_page -->
         <div id="login_page" data-role="page">
-            <div data-role="header">
-                <h2>QR Conference Buddy</h2>
-            </div>
+                <h1>QR Conference Buddy</h1>
             <!-- /header -->
-            <div role="main" class="ui-content recent-scans">
+            <div role="main" class="recent-scans">
                 <h2>Log in to your company's server:</h2>
                 <div class="form">
                     <form method="post" action="#chooseconference_page">
-                        <div>
-                         <label for="hosturl">Host URL:</label>
-                         <input type="text" name="hosturl" id="hosturl" value="http://">
-                         <label for="userid">User ID:</label>
-                         <input type="text" name="userid" id="userid">
-                         <label for="password">Password:</label>
-                         <input type="password" name="password" id="password">
-                        </div>
-                        <div>
-                            <input type="submit" id="submit" value="Login">
-                        </div>
+                         <input type="text" name="hosturl" id="hosturl" placeholder="Host URL">
+                         <input type="text" name="userid" id="userid" placeholder="User ID">
+                         <input type="password" name="password" id="password" placeholder="Password">
+                
+                        <input type="submit" id="submit" value="Login">
+                      
                     </form>
                     <div class="text">
-                        <p>For information on setting up your own server, go to genuitec.com/confbuddy or you can try out the example server at http:// confbuddy.github.com/example/</p>
+                        <p>For information on setting up your own server, go to <a href="http://genuitec.com/confbuddy">genuitec.com/confbuddy</a> or you can try out the example server at <a href="http://confbuddy.github.com/example/">http://confbuddy.github.com/example/</a></p>
                     </div>
                 </div>
             </div><!-- /content -->
+            <div data-role="footer">
+                <h4>Built using <a href="https://www.genuitec.com">Genuitec software</a>.</h4>
+            </div><!-- /footer -->
         </div><!-- /page -->
         <!-- /login_page -->
+        <!-- /login_page -->  
         
         
         <!-- chooseconference_page -->
         <div id="chooseconference_page" data-role="page">
             <div class="hook" id="hook"></div>
             <div data-role="header">
-                <a href="#logout">LogOut</a>
+                <a href="#logout" class="logoutButton">Logout</a>
                 <h1>QR Conference Buddy</h1>
                 <button class="refresh ui-btn ui-btn-inline">Refresh</button>
             </div>
@@ -114,6 +114,10 @@
                     </a>
                 </div> -->
             </div><!-- /content -->
+
+           <div data-role="footer">
+                <h4>Built using <a href="https://www.genuitec.com">Genuitec software</a>.</h4>
+            </div><!-- /footer -->
         </div><!-- /page -->
         <!-- /chooseconference_page -->
         
@@ -130,7 +134,7 @@
                 <div class="scan-area" id="scanner" tabindex="0">
                     <div class="scan-inner">
                         <div class="scan-inside">
-                            <h1><span>S</span>c<span>a</span>n n<span>o</span>w</h1>
+                            <h1><span>Scan now</span></h1>
                         </div>
                         <div class="scan-corner-lt scan-corner"></div> 
                         <div class="scan-corner-rt scan-corner"></div> 
@@ -140,7 +144,7 @@
                 </div>
                 
                 <div class="recent-scans">
-                    <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
+                    <h2>Recent Scans</h2>
                     <ul data-role="listview"></ul>
                 </div>
                 
@@ -215,7 +219,7 @@
             <div class="scan-area" id="scanner" tabindex="0">
                 <div class="scan-inner">
                     <div class="scan-inside">
-                        <h1><span>S</span>c<span>a</span>n n<span>o</span>w</h1>
+                        <h1><span>Scan now</span></h1>
                     </div>
                     <div class="scan-corner-lt scan-corner"></div> 
                     <div class="scan-corner-rt scan-corner"></div> 
@@ -254,7 +258,7 @@
                     <div class="scan-area" id="scanner" tabindex="0">
                         <div class="scan-inner">
                             <div class="scan-inside">
-                                <h1><span>S</span>c<span>a</span>n n<span>o</span>w</h1>
+                                <h1><span>Scan now</span></h1>
                             </div>
                             <div class="scan-corner-lt scan-corner"></div> 
                             <div class="scan-corner-rt scan-corner"></div> 
@@ -265,7 +269,7 @@
 
                 </div>
                 <div class="recent-scans">
-                    <h2>Rec<span>e</span>nt Sc<span>a</span>ns</h2>
+                    <h2>Recent Scans</h2>
                     <ul data-role="listview" class="ui-listview">
                         {{#each scans}}
                             <li><a href="#scaninfo_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{fn}}</a></li>
