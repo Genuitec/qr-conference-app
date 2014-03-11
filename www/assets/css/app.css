@@ -225,6 +225,7 @@ a {
     background: white;
     color: rgb(44, 183, 248);
     border-radius: 5px;
+    box-shadow: 1px 1px 6px -1px rgb(60, 93, 109);
 }
 #scaninfo_page .tags > ul > li.selected {
 /*    background: white;
