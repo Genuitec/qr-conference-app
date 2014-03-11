@@ -25,7 +25,10 @@ function strfield_to_array(field, data){
         var f_split = [];
         if(is_array(field))
             field.forEach(function(iv){
-                f_split.push(data[iv].split(","));
+                if(empty(data[iv]))
+                    f_split.push([]);
+                else
+                    f_split.push(data[iv].split(","));
             });
         else
             f_split = data[field].split(",");

@@ -37,7 +37,7 @@
             if(is_set(serverResponse) && is_set(serverResponse.data) && is_set(serverResponse.info) && is_set(serverResponse.info.time))
                 if(objectLenght(serverResponse.data) > 0)
                     Async.forEach(serverResponse.data, function(values, table, c){
-                        DB.insert_batch_on_duplicate_update(table, values, function(){
+                        DB.insert_batch_on_duplicate_update(table, values, serverResponse.info.time, function(){
                             _syncClear(serverResponse.info.time, table);
                             c();
                         });
@@ -60,23 +60,17 @@
         },
         
         makeRequest = function(changes){
-            console.log("makeRequest");
             $.ajax({
                 type: "POST",
                 url: __getSyncUrl + ";jsessionid="+Session.get("session_id"),
                 contentType: "application/json",
                 success: function(s){
                     if(is_set(s.status) && s.status === 403) return Router.redirect("logout");
-                    console.log("s");
-                    console.log(s);
                     applyChanges(s);
                 },  /// here
                 error: function(e){
                     if(is_set(e.status) && e.status === 403) return Router.redirect("logout");
-                    console.log("e");
-                    console.log(e);
                 },
-//                success: applyChanges,  /// here
                 data: JSON.stringify({
                     info:{
                         time: Session.get("lastSync")

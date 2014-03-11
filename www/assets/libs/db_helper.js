@@ -386,15 +386,31 @@ var SQLite = function(){ // works with local SQLite DB
         }) : _executeSQL(sql)
                 );
     },
-    insert_batch_on_duplicate_update = function(table, data, callback) {
-        console.log(table)
+//    insert_batch_on_duplicate_update = function(table, data, callback) {
+    insert_batch_on_duplicate_update = function(table, data, timeForUpdate, callback) {
+        console.log(table);
+        
+        if(typeof(timeForUpdate) === "number"){
+            var lastUpdateTime = (function(tt){
+                var nd = new Date(tt);
+
+                var year = nd.getFullYear(),
+                    month = (nd.getMonth()+1),
+                    date = nd.getDate();
+                if(month < 10)month = "0"+month;
+                if(date < 10)date = "0"+date;
+
+                return ( year+"-"+month+"-"+date+" "+"00:00" );
+            }(timeForUpdate));
+        }
+        
         var _this = this, len = data.length;
         batch_insert_or_ignore(table, data, function(){
             data.forEach(function(row, i) {
                 if (i == len - 1) {
-                    update(table, row, 'id = "' + row.id + '"', callback);
+                    update(table, row, 'id = "' + row.id + '" AND updatetime < "'+lastUpdateTime+'"', callback);
                 } else {
-                    update(table, row, 'id = "' + row.id + '"');
+                    update(table, row, 'id = "' + row.id + '" AND updatetime < "'+lastUpdateTime+'"');
                 }
             });
         });

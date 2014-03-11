@@ -1,7 +1,7 @@
 (function(Widgets){
     
     $(document).ready(function(){
-        Widgets.sync(true);
+        Widgets.bgSync.start();
     });
     
 }(App.Widgets));

@@ -19,4 +19,3 @@
     };
     
 }(App.viewHelpers, App.Widgets.logIn, App.Router, App.Widgets.bgSync));
-//}(App.viewHelpers, App.Widgets.logIn, App.Router, App.Widgets.sync));

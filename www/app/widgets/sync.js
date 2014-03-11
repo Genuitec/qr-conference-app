@@ -11,13 +11,15 @@
         
         var BackgroundSync = (function(){
             var params = getConfig("sync"),
-            autoInited = false,
-            defaultInterval = 5000,
-            interval;
+                autoInited = false,
+                defaultInterval = 5000,
+                interval;
 
             return {
                 start: function(callback){
                     if(params.auto && autoInited === false){
+                        console.log("init BG SYNC");
+                        clearInterval(interval);
                         interval = setInterval(function(){
                             Sync.sync(function(rs){
                                 console.log("syncInBackground");
@@ -25,11 +27,11 @@
                             });
                         }, (empty(params.interval) ? defaultInterval : params.interval));
                         autoInited = true;
-                        Sync.sync(function(rs){
-                            console.log("NOWsyncInBackground");
-                            if(callback)callback();
-                        });
                     }
+                    Sync.sync(function(rs){
+                        console.log("NOW sync from InBackground");
+                        if(callback)callback();
+                    });
                 },
                 stop: function(){
                     clearInterval(interval);
