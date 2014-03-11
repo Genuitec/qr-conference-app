@@ -60,6 +60,24 @@ table {
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'proxima-nova-soft';
+    src: url('../css/fonts/proximanovasoft-bold.woff') format('woff'),
+         url('../css/fonts/proximanovasoft-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+
+}
+
+@font-face {
+    font-family: 'proxima-nova-soft';
+    src: url('../css/fonts/proximanovasoft-regular.woff') format('woff'),
+         url('../css/fonts/proximanovasoft-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body,
 input,
 select,
@@ -386,7 +404,7 @@ a {
 }
 
 #login_page div.text a {
-    color: #2cfc76;
+    color: #00e9fb;
     border-bottom: 1px solid #0dc1ca;
 }
 
@@ -835,12 +853,12 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
 }
 
 .scan-inside h1 {
-    padding-top: 4.6em;
-    font-size: 1.7em;
+    padding-top: 5.6em;
+    font-size: 1.2em;
     font-weight: bold;
     color: rgba(72,81,92,0.1);
-    background: url('../images/qr-2x.png') 50% 38px no-repeat;
-    background-size: 138px;
+    background: url('../images/qr-2x.png') 50% 69px no-repeat;
+    background-size: 69px;
 }
 
 .ui-shadow {
