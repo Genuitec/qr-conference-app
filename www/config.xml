@@ -13,12 +13,12 @@
         <name>QR Conference</name>
 
         <description>
-            QR Conference Mobile application and backend for tracking conference attendees
-            that you speak to at an exhibition booth, when conference attendees have QR codes
-            on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
+QR Conference Mobile application and backend for tracking conference attendees
+that you speak to at an exhibition booth, when conference attendees have QR codes
+on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
         </description>
 
-        <author href="http://yoursite.com" email="you@youremail.com">
+        <author href="https://www.genuitec.com" email="info@genuitec.com">
             Genuitec
         </author>
         
