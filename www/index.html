@@ -7,9 +7,6 @@
         
         <link rel="stylesheet" href="./assets/bundles/jquery.mobile-1.4.0/jquery.mobile-1.4.0.css">
         <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/app.css">
-
-        <script type="text/javascript" src="http://use.typekit.net/gwz4myw.js"></script> <!-- Typekit -->
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script> <!-- Typekit -->
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="barcodescanner.js"></script>
@@ -73,7 +70,7 @@
                 <h2>Log in to your company's server:</h2>
                 <div class="form">
                     <form method="post" action="#chooseconference_page">
-                         <input type="text" name="hosturl" id="hosturl" placeholder="Host URL">
+                         <input type="url" name="hosturl" id="hosturl" placeholder="Host URL">
                          <input type="text" name="userid" id="userid" placeholder="User ID">
                          <input type="password" name="password" id="password" placeholder="Password">
                 
@@ -81,12 +78,12 @@
                       
                     </form>
                     <div class="text">
-                        <p>For information on setting up your own server, go to <a href="http://genuitec.com/confbuddy">genuitec.com/confbuddy</a> or you can try out the example server at <a href="http://confbuddy.github.com/example/">http://confbuddy.github.com/example/</a></p>
+                        <p>For information on setting up your own server, go to <a href="#" onclick="window.open('http://genuitec.com/confbuddy', '_system', 'location=yes');">genuitec.com/confbuddy</a> or you can try out the example server at <a href="#" onclick="window.open('http://confbuddy.github.com/example/', '_system', 'location=yes');">http://confbuddy.github.com/example/</a></p>
                     </div>
                 </div>
             </div><!-- /content -->
             <div data-role="footer">
-                <h4>Built using <a href="https://www.genuitec.com">Genuitec software</a>.</h4>
+                <h4>Built using <a href="#" onclick="window.open('https://www.genuitec.com/', '_system', 'location=yes');">Genuitec software</a>.</h4>
             </div><!-- /footer -->
         </div><!-- /page -->
         <!-- /login_page -->
@@ -116,7 +113,7 @@
             </div><!-- /content -->
 
            <div data-role="footer">
-                <h4>Built using <a href="https://www.genuitec.com">Genuitec software</a>.</h4>
+                <h4>Built using <a href="#" onclick="window.open('https://www.genuitec.com/', '_system', 'location=yes');">Genuitec software</a>.</h4>
             </div><!-- /footer -->
         </div><!-- /page -->
         <!-- /chooseconference_page -->

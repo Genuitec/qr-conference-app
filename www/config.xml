@@ -13,16 +13,17 @@
         <name>QR Conference</name>
 
         <description>
-            QR Conference Mobile application and backend for tracking conference attendees
-            that you speak to at an exhibition booth, when conference attendees have QR codes
-            on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
+QR Conference Mobile application and backend for tracking conference attendees
+that you speak to at an exhibition booth, when conference attendees have QR codes
+on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
         </description>
 
-        <author href="http://yoursite.com" email="you@youremail.com">
+        <author href="https://www.genuitec.com" email="info@genuitec.com">
             Genuitec
         </author>
         
         <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
+        <gap:plugin name="org.apache.cordova.inappbrowser" />
 
         <feature name="http://api.phonegap.com/1.0/device" />
         
@@ -35,7 +36,20 @@
         <feature name="http://api.phonegap.com/1.0/media"/>
         <feature name="http://api.phonegap.com/1.0/network"/>
         <feature name="http://api.phonegap.com/1.0/notification"/>
+
+        <icon src="icon.png" />
+
+        <icon src="icons/ios/icon.png" gap:platform="ios" width="57" height="57" />
+        <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+        <icon src="icons/ios/icon_at_2x.png" gap:platform="ios" width="114" height="114" />
+
+        <icon src="icons/ios/icon-72_at_2x.png" gap:platform="ios" width="144" height="144" />
+
+        <icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+        <icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+        <icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+        <icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
         
-        <access origin="*" subdomains="true" />
+        <access origin="*" subdomains="true"/>
         
     </widget>

@@ -60,6 +60,24 @@ table {
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'proxima-nova-soft';
+    src: url('../css/fonts/proximanovasoft-bold.woff') format('woff'),
+         url('../css/fonts/proximanovasoft-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+
+}
+
+@font-face {
+    font-family: 'proxima-nova-soft';
+    src: url('../css/fonts/proximanovasoft-regular.woff') format('woff'),
+         url('../css/fonts/proximanovasoft-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body,
 input,
 select,
@@ -219,28 +237,27 @@ a {
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 10px;
-    /*padding: 10px;*/
-    /*background: rgb(44, 183, 248);*/
-    /*color: white;*/
-    background: white;
-    color: rgb(44, 183, 248);
-    border-radius: 5px;
-    box-shadow: 1px 1px 6px -1px rgb(60, 93, 109);
+    padding: 10px;
+    background: #d6dde4;
+    color: #7e90a4;
+    border-radius: 3px;
+    border:1px solid #c4ced7;
 }
 #scaninfo_page .tags > ul > li.selected {
-/*    background: white;
-    color: rgb(44, 183, 248);*/
-    background: rgb(44, 183, 248);
-    color: white;
-    box-shadow: 1px 1px 6px -1px rgb(60, 93, 109) inset;
+    color: #fff;
+    border: 1px solid #00a7ef;
+    background: #00a7ef;
+    text-shadow: none;
 }
 #scaninfo_page .tags > ul > li.selected > span {
     /*border-bottom: 1px solid rgb(44, 183, 248);*/
-    border-bottom: 2px solid white;
 }
 #scaninfo_page [data-role="header"] > a{
-    margin-top: 11px;
     margin-left: 5px;
+    position: absolute;
+    margin-top: -8px;
+    line-height: normal;
+    top: 50%;
 }
 #scaninfo_page .form-part {
     clear: both;
@@ -249,7 +266,7 @@ a {
 #scaninfo_page .form-part .form-part-wrapper.tags-wrapper{
     width: 100%;
     float: left;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 #scaninfo_page .form-part .form-part-wrapper {
     padding: 0px 0.9em;
@@ -386,7 +403,7 @@ a {
 }
 
 #login_page div.text a {
-    color: #2cfc76;
+    color: #00e9fb;
     border-bottom: 1px solid #0dc1ca;
 }
 
@@ -419,7 +436,7 @@ a {
     color: #7e90a4;
 }
 #conference_page div.attend{
-    margin-top: 10%;
+    margin-top: 20px;
 }
 #conference_page div.attend > a{
     color: #8dcdf5;
@@ -446,10 +463,10 @@ a {
 }
 
 #conference_page .scan-area {
-    width: 300px;
+    width: 150px;
     margin: 20px auto;
     outline: 0;
-    height: 300px;
+    height: 150px;
 }
 #conference_page .scan-area:active .scan-corner{
     border-color: #2cfc76;
@@ -479,29 +496,29 @@ a {
     height: 20%;
 }
 #conference_page .scan-area .scan-corner-lt{
-    border-top: 10px solid #aab6c4;
-    border-left: 10px solid #aab6c4;
+    border-top: 7px solid #aab6c4;
+    border-left: 7px solid #aab6c4;
     left: 5px;
     top: 5px;
     border-radius: 15px 0 0 0;
 }
 #conference_page .scan-area .scan-corner-rt{
-    border-top: 10px solid #aab6c4;
-    border-right: 10px solid #aab6c4;
+    border-top: 7px solid #aab6c4;
+    border-right: 7px solid #aab6c4;
     right: 5px;
     top: 5px;
     border-radius: 0 15px 0 0;
 }
 #conference_page .scan-area .scan-corner-lb{
-    border-bottom: 10px solid #aab6c4;
-    border-left: 10px solid #aab6c4;
+    border-bottom: 7px solid #aab6c4;
+    border-left: 7px solid #aab6c4;
     left: 5px;
     bottom: 5px;
     border-radius: 0 0 0 15px;
 }
 #conference_page .scan-area .scan-corner-rb{
-    border-bottom: 10px solid #aab6c4;
-    border-right: 10px solid #aab6c4;
+    border-bottom: 7px solid #aab6c4;
+    border-right: 7px solid #aab6c4;
     right: 5px;
     bottom: 5px;
     border-radius: 0 0 15px 0;
@@ -605,14 +622,14 @@ a {
     text-shadow: none;
     padding: 1em;
     min-height: 70px;
-    position: -webkit-sticky;
-  position: -moz-sticky;
-  position: -ms-sticky;
-  position: -o-sticky;
 }
 
 .ui-header {
     border: none;
+}
+
+#scaninfo_page .ui-header .ui-title {
+    margin: 3px 30%;
 }
 
 .ui-page-theme-a .ui-bar-inherit .ui-btn {
@@ -683,9 +700,9 @@ a {
 #login_page h1 {
     font-weight: bold;
     padding-left: 25px;
-    margin: 50px auto;
+    margin: 20px auto;
     display: block;
-    width: 200px;
+    width: 195px;
     background: url('../images/icon-2x.png') 0 15px no-repeat;
     background-size: 20px;
     line-height: 3em;
@@ -835,12 +852,12 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
 }
 
 .scan-inside h1 {
-    padding-top: 4.6em;
-    font-size: 1.7em;
+    padding-top: 3.1em;
+    font-size: 1em;
     font-weight: bold;
     color: rgba(72,81,92,0.1);
-    background: url('../images/qr-2x.png') 50% 38px no-repeat;
-    background-size: 138px;
+    background: url('../images/qr-2x.png') 50% 18px no-repeat;
+    background-size: 46px;
 }
 
 .ui-shadow {
@@ -855,7 +872,7 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
 
 .ui-listview label:first-child {
     width: 23%;
-    float: left;
+    position: absolute;
     color: #d0d7de;
     margin-left: 0;
 }
@@ -890,5 +907,21 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
     padding: .7em .5em !important;
 }
 
+.form-part-wrapper .ui-listview > li p {
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
+.ui-block-a a {
+    background: #8596a9 !important; /* default background */
+}
+
+.navlinktoweb a {
+    background: #8596a9 !important;
+    color: #fff !important;
+}
 
