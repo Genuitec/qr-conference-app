@@ -18,8 +18,8 @@
         },
         returnCallback = function(data){
             /** save to db and call callback(last_parsed data) **/
-            data.id = _self.md5;
             data.conference_id = Session.get("conference_id");
+            data.id = _self.md5+data.conference_id;
             console.log("returnCallback");
             console.log(data);
             _self.callback(data);
