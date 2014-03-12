@@ -700,9 +700,9 @@ a {
 #login_page h1 {
     font-weight: bold;
     padding-left: 25px;
-    margin: 50px auto;
+    margin: 20px auto;
     display: block;
-    width: 200px;
+    width: 195px;
     background: url('../images/icon-2x.png') 0 15px no-repeat;
     background-size: 20px;
     line-height: 3em;
@@ -914,6 +914,10 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.ui-block-a a {
+    background: #8596a9 !important; /* default background */
 }
 
 .navlinktoweb a {
