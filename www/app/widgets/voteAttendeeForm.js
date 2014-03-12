@@ -1,6 +1,5 @@
 (function(Widgets, Scan, Session){
 
-
     Widgets.voteAttendeeForm = function(scanId, formEl){
         formEl.find('input:radio').change(function(){
             Scan.update({id: scanId}, {rating: $(this).val()});

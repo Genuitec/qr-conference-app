@@ -582,11 +582,12 @@ a {
     border-left: none;
 }
 #scaninfo_page .notes [data-role="notes"] p{}
-#scaninfo_page .notes .active[data-role="notes"]{}
-#scaninfo_page .notes .active[data-role="notes"] textarea, #scaninfo_page .notes .active[data-role="notes"] button{
+/*#scaninfo_page .notes .active[data-role="notes"]{}*/
+#scaninfo_page .notes [data-role="notes"] .active[data-role="note-form"] textarea,
+#scaninfo_page .notes [data-role="notes"] .active[data-role="note-form"] button{
     display: initial;
 }
-#scaninfo_page .notes .active[data-role="notes"] p{
+#scaninfo_page .notes [data-role="notes"] .active[data-role="note-form"] p{
     display: none;
 }
 #scaninfo_page .tags .addtag{
