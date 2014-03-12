@@ -35,7 +35,7 @@
                 }else{
                     if(v.match(/^FN.*:/)){
                         parsedData.fn = v.match(/^FN.*:(.*)/)[1];
-                        var fnAr = parsedData.fn.split(";");
+                        var fnAr = parsedData.fn.split(" ");
                         fnAr.forEach(function(vv, k){
                             if(k === 0)
                                 parsedData.lastname = vv;
@@ -76,10 +76,11 @@
                     parsedData.adr = parsedData.adr.trim();
                 }
                 if(v.match(/^TEL;/)){
-                    if(v.match(/CELL.*:/))
-                        parsedData.cel = v.match(/^TEL;CELL.*:(.*)/)[1];
-                    if(v.match(/WORK.*:/))
-                        parsedData.tel = v.match(/^TEL;WORK.*:(.*)/)[1];
+                    if(v.match(/(CELL|cell).*:/))
+                        parsedData.cel = v.match(/^TEL;(?:CELL|cell.*):(.*)/i)[1];
+                    if(v.match(/(WORK|work).*:/))
+                        parsedData.tel = v.match(/^TEL;(?:WORK|work.*):(.*)/i)[1];
+//                        parsedData.tel = v.match(/^TEL;WORK.*:(.*)/)[1];
                 }
                 if(v.match(/^URL.*:/))
                     parsedData.website = v.match(/^URL.*:(http:\/\/.*)/)[1];
