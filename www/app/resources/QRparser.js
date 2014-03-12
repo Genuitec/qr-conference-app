@@ -32,6 +32,19 @@
                     });
                     parsedData.fn = parsedData.fn.replace(/;/g, " ");
                     parsedData.fn = parsedData.fn.trim();
+                }else{
+                    if(v.match(/^FN.*:/)){
+                        parsedData.fn = v.match(/^FN.*:(.*)/)[1];
+                        var fnAr = parsedData.fn.split(";");
+                        fnAr.forEach(function(vv, k){
+                            if(k === 0)
+                                parsedData.lastname = vv;
+                            if(k === 1)
+                                parsedData.firstname = vv;
+                        });
+                        parsedData.fn = parsedData.fn.replace(/;/g, " ");
+                        parsedData.fn = parsedData.fn.trim();
+                    }
                 }
                 if(v.match(/^TITLE.*:/))
                     parsedData.title = v.match(/^TITLE.*:(.*)/)[1];
