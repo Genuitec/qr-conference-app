@@ -7,31 +7,32 @@
         },
         
         serverLogIn : function(formdata, callback){
-            if(!empty(Session.get("server_url")) && Session.get("server_url") !== formdata.hosturl){
-                this.clearLocalData();
-                alert("You are accessing another server. All local data will be removed");
-            }
+            if(is_set(Session.get("server_url")))
+                if(is_set(Session.get("server_url")) && Session.get("server_url") !== formdata.hosturl){
+                    this.clearLocalData();
+                    alert("You are accessing another server. All local data will be removed");
+                }
             $.post(formdata.hosturl + getConfig("login_url"),
             {
                 j_username: formdata.userid,
                 j_password: formdata.password
             },
             function(responsedata){
-                    if(responsedata.loggedIn == true){
-                        Session.set("session_id", responsedata.session);
-                        Session.set("server_url", formdata.hosturl);
-                        Session.set("user_data", formdata);
-                        console.log("Finished logging in");
-                        console.log(responsedata);
-                        callback({
-                            success     :   true,
-                            userdata    :   formdata
-                        });
-                    }else
-                        callback({
-                            success     :   false,
-                            error       :   "Invalid username or password."
-                        });
+                if(responsedata.loggedIn == true){
+                    Session.set("session_id", responsedata.session);
+                    Session.set("server_url", formdata.hosturl);
+                    Session.set("user_data", formdata);
+                    console.log("Finished logging in");
+                    console.log(responsedata);
+                    callback({
+                        success     :   true,
+                        userdata    :   formdata
+                    });
+                }else
+                    callback({
+                        success     :   false,
+                        error       :   "Invalid username or password."
+                    });
             });
         },
         
