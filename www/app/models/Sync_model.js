@@ -73,7 +73,7 @@
                 },
                 data: JSON.stringify({
                     info:{
-                        time: Session.get("lastSync")
+                        time: (empty(Session.get("lastSync")) ? 0 : Session.get("lastSync"))
                     },
                     data: changes
                 })
