@@ -1,10 +1,11 @@
-(function(Controller, viewHelpers, Models, Router, Session){
+(function(Controller, viewHelpers, Models, Router, Session, Widgets){
 
     Controller.login_page = function(params, load){
         Models.User.isLogged(function(userLogged){
-            if(userLogged === true)
+            if(userLogged === true){
+                Widgets.bgSync.start();
                 Router.redirect("chooseconference_page", {switchPage: true});
-            else{
+            }else{
                 viewHelpers.login_page();
                 if(is_set(load))load();
             }
@@ -52,4 +53,4 @@
         });            
     };
     
-}(App.Controller, App.viewHelpers, App.Models, App.Router, App.Session));
+}(App.Controller, App.viewHelpers, App.Models, App.Router, App.Session, App.Widgets));
