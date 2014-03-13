@@ -925,4 +925,7 @@ html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active {
     background: #8596a9 !important;
     color: #fff !important;
 }
+textarea{
+    -webkit-user-select: initial !important;
+}
 

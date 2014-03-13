@@ -38,9 +38,9 @@
                         var fnAr = parsedData.fn.split(" ");
                         fnAr.forEach(function(vv, k){
                             if(k === 0)
-                                parsedData.lastname = vv;
-                            if(k === 1)
                                 parsedData.firstname = vv;
+                            if(k === 1)
+                                parsedData.lastname = vv;
                         });
                         parsedData.fn = parsedData.fn.replace(/;/g, " ");
                         parsedData.fn = parsedData.fn.trim();

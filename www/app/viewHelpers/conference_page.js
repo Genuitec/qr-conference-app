@@ -12,7 +12,7 @@
                 console.log("QRscanner vCard");
                 console.log(vCard);
                 
-                list.append(listTemplate({scans: [vCard]}));
+                list.prepend(listTemplate({scans: [vCard]}));
                 list.listview('refresh'); 
             });
         });
