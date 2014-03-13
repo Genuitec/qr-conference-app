@@ -17,36 +17,34 @@
                 j_password: formdata.password
             },
             function(responsedata){
-                    if (responsedata.loggedIn == true) {
-                            Session.set("session_id", responsedata.session);
-                    Session.set("server_url", formdata.hosturl);
-                    Session.set("user_data", formdata);
-                    console.log("Finished logging in");
-                    callback({
-                        success     :   true,
-                        userdata    :   formdata
-                    });
-                    } else {
-                    callback({
-                        success     :   false,
-                        error       :   "Invalid username or password."
-                    });
-                    }
+                    if(responsedata.loggedIn == true){
+                        Session.set("session_id", responsedata.session);
+                        Session.set("server_url", formdata.hosturl);
+                        Session.set("user_data", formdata);
+                        console.log("Finished logging in");
+                        console.log(responsedata);
+                        callback({
+                            success     :   true,
+                            userdata    :   formdata
+                        });
+                    }else
+                        callback({
+                            success     :   false,
+                            error       :   "Invalid username or password."
+                        });
             });
         },
         
         logIn : function(data, callback){
-            Session.set("user_data", data) ?
-                (function(){
-                    callback({
-                        success: {
-                            isLogged: true,
-                            userData: data
-                        }
-                    });
-                    Session.set("islogged", true);
-                }())
-            : callback({error: ""});
+            console.log("login")
+            Session.set("user_data", data)
+            Session.set("islogged", true);
+            callback({
+                success: {
+                    isLogged: true,
+                    userData: data
+                }
+            });
         },
         
         logOut : function(){
