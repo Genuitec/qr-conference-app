@@ -60,13 +60,14 @@
         },
         
         makeRequest = function(changes){
+            console.log("makeRequest");
             $.ajax({
                 type: "POST",
                 url: __getSyncUrl + ";jsessionid="+Session.get("session_id"),
                 contentType: "application/json",
-                success: function(s){
-                    if(is_set(s.status) && s.status === 403) return Router.redirect("logout");
-                    applyChanges(s);
+                success: function(s, textStatus, xhr){
+                    if(is_set(xhr.status) && xhr.status === 403) return Router.redirect("logout");
+                    if(is_set(xhr.status) && xhr.status === 200) applyChanges(s);
                 },  /// here
                 error: function(e){
                     if(is_set(e.status) && e.status === 403) return Router.redirect("logout");
