@@ -3,7 +3,7 @@
     Models.Conference = {
         
         create : function(data, callback){},
-        read : function(where, callback){ //*
+        read : function(where, callback){
             DB.select();
             DB.from("conferences");
             if(arguments.length === 2)

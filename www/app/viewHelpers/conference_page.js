@@ -1,7 +1,6 @@
 (function(View, Router, QRscanner){
     
     View.conference_page = function(data){
-        console.log(data);
         var template = Handlebars.compile($("#conference_page-template").html()),
             listTemplate = Handlebars.compile($("#recentscan-template").html());
     

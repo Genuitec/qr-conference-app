@@ -1,7 +1,6 @@
 (function(View, attendeeNotesWidget, voteAttendeeForm, Tags, Router){
     
     View.scaninfo_page = function(data){
-        console.log(data);
         var template = Handlebars.compile($("#scaninfo_page-template").html());        
         $('#scaninfo_page').html(template(data)).trigger('create');
 
