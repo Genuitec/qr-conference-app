@@ -24,6 +24,10 @@
             return false;
         }catch(error){
             console.log(error);
+            console.log(route);
+            console.log(params);
+            console.log(history_need);
+            console.log(callback);
             console.log("_action error");
         }
     },
