@@ -4,6 +4,7 @@
     __adapterLocalStorage = function(Storage){
         return {
             set: function(k, v){
+                k = App.Config.get("appName")+k;
                 if(arguments.length !== 2)return false;
                 if(v && typeof(v) !== "string"){
                     var v = JSON.stringify(v);
@@ -12,6 +13,7 @@
             },
 
             get: function(k){
+                k = App.Config.get("appName")+k;
                 if(arguments.length !== 1)return false;
                 var result = Storage.getItem(k);
                 if(result === null)return false;

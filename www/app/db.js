@@ -1,6 +1,10 @@
 (function(_App, Config, Session){
     
-    var DBconfig = {
+    var appName = Config.get("appName"),
+    
+    DBconfig = {
+        
+        appName : appName,
         
         DBname : "QRconference",
         
@@ -74,7 +78,7 @@
     }
 
     _App.DB = (new SQLite())
-        .init( DBconfig.DBname, DBconfig.tables, DBconfig.createSQL, DBconfig.recreateDB );
+        .init( DBconfig.appName, DBconfig.DBname, DBconfig.tables, DBconfig.createSQL, DBconfig.recreateDB );
     
     
 }(App, App.Config, App.Session));

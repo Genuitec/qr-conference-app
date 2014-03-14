@@ -2,6 +2,8 @@
 
     var configs = {
         
+        appName : "QRconference",
+        
         sync_url : function(){ return (Session.get("server_url")+"/ws/mobile/sync"); },
         
         sync : {

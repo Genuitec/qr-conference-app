@@ -412,13 +412,13 @@ var SQLite = function(){ // works with local SQLite DB
             update(table, data, 'id = "' + data.id + '"', callback);
         });
     },
-    _init_db = function(db_name, db_tables, db_tables_sql, clear) {
+    _init_db = function(appName, db_name, db_tables, db_tables_sql, clear) {
         console.log("start init");
 
-        if(db_name && db_tables && db_tables_sql){
+        if(appName && db_name && db_tables && db_tables_sql){
 
             _db = window.openDatabase(db_name, "1.0", "WebSQL Storage", 200000);
-            if(window.localStorage.getItem("db_inited") !== "true" || is_set(clear)){
+            if(window.localStorage.getItem(appName+"db_inited") !== "true" || is_set(clear)){
                 
                 console.log("recreated");
                 
@@ -428,7 +428,7 @@ var SQLite = function(){ // works with local SQLite DB
 
                 db_tables_sql.forEach(function(v){
                     _executeSQL(v, function(){
-                        window.localStorage.setItem("db_inited", "true"); 
+                        window.localStorage.setItem(appName+"db_inited", "true"); 
                     });
                 });
                  
@@ -456,7 +456,7 @@ var SQLite = function(){ // works with local SQLite DB
                 insert_batch_on_duplicate_update          : insert_batch_on_duplicate_update,
                 insert_on_duplicate_update                : insert_on_duplicate_update,
                 recreate_db : function(){
-                    _init_db(db_name, db_tables, db_tables_sql, true);
+                    _init_db(appName, db_name, db_tables, db_tables_sql, true);
                 }
             };
         }else return false;
