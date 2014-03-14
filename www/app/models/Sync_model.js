@@ -108,10 +108,17 @@
     };
     
     Models.Sync = {
-        sync : function(tables, callback){
-            var args = checkArgs(arguments);
-            if(args === false)return false;
-            (new Sync(args[0], args[1])).init();
+//        sync : function(tables, callback){
+        sync : function(callback){
+            try{
+//                var args = checkArgs(arguments);
+//                if(args === false)return false;
+//                (new Sync(args[0], args[1])).init();
+                (new Sync(getConfig("dbTables"), callback)).init();
+            }catch(error){
+                console.log("Models.Sync sync error");
+                console.log(error);
+            }
         }
     };
     
