@@ -80,44 +80,12 @@
                         parsedData.cel = v.match(/^TEL;(?:CELL|cell.*):(.*)/i)[1];
                     if(v.match(/(WORK|work).*:/))
                         parsedData.tel = v.match(/^TEL;(?:WORK|work.*):(.*)/i)[1];
-//                        parsedData.tel = v.match(/^TEL;WORK.*:(.*)/)[1];
                 }
                 if(v.match(/^URL.*:/))
                     parsedData.website = v.match(/^URL.*:(http:\/\/.*)/)[1];
                 if(v.match(/^EMAIL.*:/))
                     parsedData.email = v.match(/^EMAIL.*:(.*)/)[1];
             });
-            /*
-              
-            BEGIN:VCARD
-            N;CHARSET=utf-8:Izraylevych;Igor;;;
-            FN;CHARSET=utf-8:Igor Izraylevych
-            ORG;CHARSET=utf-8:org
-            TITLE;CHARSET=utf-8:developer
-            TEL;WORK:343967
-            TEL;CELL:0961155555
-            TEL;WORK;FAX:2323
-            EMAIL;INTERNET;WORK;CHARSET=utf-8:igorizr1@gmail.com
-            ADR;WORK;CHARSET=utf-8:;;Prvdy 3;Zaporizhzhya;Zp;69000;Ukraine
-            URL;WORK;CHARSET=utf-8:http://2727 Duke st
-            VERSION:2.1
-            END:VCARD
- 
-            'BEGIN:VCARD\n\
-            VERSION:2.1\n\
-            N:Izraylevych;Igor;S.;Mr;PHD\n\
-            FN:Mr Igor S. Izraylevych PHD\n\
-            TITLE:FOunder\n\
-            ORG:Smartsolutions;coding\n\
-            ADR;WORK:;Suite 1;Maykovskiy;Zaporizhzhya;ZP;69000;Ukraine\n\
-            TEL;WORK;VOICE:31299999\n\
-            TEL;WORK;FAX:232\n\
-            TEL;CELL;VOICE:0961155555\n\
-            URL;WORK:http://website.com\n\
-            EMAIL;PREF;INTERNET:igorizr1@gmail.com\n\
-            END:VCARD'.replace(re,"\n").split("\n");
-            
-            */
            console.log("VCARD parsedData");
            console.log(parsedData);
            callback(parsedData);
@@ -182,8 +150,6 @@
                             parsedData.title = noteAr[0];
                         if(k === 1)
                             parsedData.org = noteAr[1];
-//                        if(k === 2)
-//                            parsedData.pos = noteAr[2];
                     });   
                 }
             });
@@ -194,29 +160,3 @@
     };
     
 }(App.Resources, App.Resources.vCardParser));
-/*
-
-MECARD:N:Izraylevych,Igor;TEL:0961155555;TEL:31299999;EMAIL:igorizr1@gmail.com;URL:http://website.com;ADR:Suite 1,Maykovskiy,Zaporizhzhya,ZP,69000,Ukraine;NOTE:FOunder,Smartsolutions,coding;;
-
-
-BEGIN:VCARD
-VERSION:2.1
-N:Izraylevych;Igor;S.;Mr;PHD
-FN:Mr Igor S. Izraylevych PHD
-TITLE:FOunder
-ORG:Smartsolutions;coding
-ADR;WORK:;Suite 1;Maykovskiy;Zaporizhzhya;ZP;69000;Ukraine
-TEL;WORK;VOICE:31299999
-TEL;WORK;FAX:232
-TEL;CELL;VOICE:0961155555
-URL;WORK:http://website.com
-EMAIL;PREF;INTERNET:igorizr1@gmail.com
-END:VCARD
-
-*/
-
-//[05.03.14, 21:07:34] Timothy Webb: fn -> ‘first name’, ‘last name'
-//adr -> ‘street’, ‘city’, ‘state’, ‘post code’, ‘country’.
-//missing -> ‘website’, ‘cell’
-//[05.03.14, 21:07:43] Timothy Webb: it's ok if you want to also have fn, i don't mind having duplicate data
-//[05.03.14, 21:07:50] Timothy Webb: but we need to maintain first name and last name separately

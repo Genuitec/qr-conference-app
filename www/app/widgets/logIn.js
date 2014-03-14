@@ -8,10 +8,6 @@
         if(empty(data.password))
             return false;
         return true;
-    };
-    
-    function serverLogIn(data, callback){
-        User.serverLogIn(data, callback);
     }
     
     Widgets.logIn = function(formEl, callback){
@@ -20,8 +16,10 @@
             e.preventDefault();
             var formData = $(this).formData();
             if(validate(formData))
-                serverLogIn(formData, function(result){
-                    if(result.success == true)
+                User.serverLogIn(formData, function(result){
+                    console.log("result");
+                    console.log(result);
+                    if(result.success === true)
                         User.logIn(formData , callback);
                     else
                         alert("Invalid credentials. Confirm URL, username and password.");

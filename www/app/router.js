@@ -1,16 +1,6 @@
 (function(Router, Controller, Loader, getConfig){
     
-    // all specific routes goes here ---> F E app_page!==controller || hash !== controller
-    var _routes = {
-//        more_amazing_deals : {
-//            app_page: "results_page",
-//            controller: "more_amazing_deals"
-//        },
-//        home_page : {
-//            app_page: "scannow_page",
-//            controller: "scannow_page"
-//        }
-    },
+    var _routes = {},
     
     _last_hash = "#",
     
@@ -23,13 +13,11 @@
     _action = function(route, params, history_need, callback){
         if(route.controller in Controller){
             Controller[route.controller](params, callback);
-//            Controller[route.controller](params);
             if(history_need !== false)
                 _history.push({
                     route: route,
                     params: params
                 });
-//            callback();
             return true;
         }
         return false;
@@ -58,7 +46,6 @@
         }
     },
             
-//    SwitchPage = function(params, firstStart){
     SwitchPage = function(params){
         if(pageInited === false)
             $.mobile.initializePage();
@@ -116,8 +103,6 @@
             return _action(route, params, history_need, function(){
                 if(is_set(prms) && is_set(prms.switchPage))
                     SwitchPage({page: route.app_page, hash:page});
-//                if(is_set(prms) && is_set(prms.switchPage))
-//                    SwitchPage({page: route.app_page, hash:page}, prms.firstStart);
             });
         }
         console.warn("NOT VALID URL");
@@ -135,7 +120,6 @@
     Router.redirect_back = function(){
         if(_history.length > 1){
             var back_el = _history[_history.length-2];
-//            Router.redirect(back_el.route.hash, back_el.params, false, back_el.callback);
             Router.redirect(back_el.route.hash, {switchPage: true, history_need: false});
             _history = _history.slice(0, _history.length-1);
         }else return Router.redirect(getConfig("home_page"), {switchPage: true});
@@ -168,20 +152,11 @@
         
         window.location.hash === "" ?
             Router.redirect(getConfig("home_page"), {
-//                firstStart: true,
                 switchPage: true
             }) : 
             Router.redirect(window.location.hash.replace("#", ""), {
-//                firstStart: true,
                 switchPage: true
             }); //start the app
- 
-//        function routetogo(r, params, go){
-//            if(params === true)
-//                _passParams = _get_page_params( (r.replace("#", "")) );
-//            if(go === true)
-//                return Router.redirect(r.match(/^#{0,1}(.[^\?]+)\?*/)[1]);
-//        }
        
     });
     

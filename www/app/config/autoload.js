@@ -1,3 +1,0 @@
-(function(Widgets){
-    
-}(App.Widgets));

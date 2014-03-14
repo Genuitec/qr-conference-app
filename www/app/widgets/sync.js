@@ -1,10 +1,13 @@
 (function(Widgets, Sync, getConfig){
     
     Widgets.sync = function(now, callback){
-        Sync.sync(function(rs){
-            console.log("syncnow");
-            if(callback)callback();
-        });
+        var params = getConfig("sync");
+        if(is_set(params) && params.active === true)
+            Sync.sync(function(rs){
+                console.log("syncnow");
+                if(typeof(callback) !== "undefined")callback();
+            });
+        else callback();
     };
     
     Widgets.bgSync = (function(){
@@ -23,15 +26,17 @@
                         interval = setInterval(function(){
                             Sync.sync(function(rs){
                                 console.log("syncInBackground");
-//                                if(callback)callback();
                             });
                         }, (empty(params.interval) ? defaultInterval : params.interval));
                         autoInited = true;
                     }
-                    Sync.sync(function(rs){
-                        console.log("NOW sync from InBackground");
-                        if(callback)callback();
-                    });
+                    if(is_set(params) && params.active === true){
+                        console.log("sync bbb")
+                        Sync.sync(function(rs){
+                            console.log("NOW sync from InBackground");
+                            if(typeof(callback) !== "undefined")callback();
+                        });
+                    }else callback();
                 },
                 stop: function(){
                     clearInterval(interval);

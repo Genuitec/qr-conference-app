@@ -3,7 +3,6 @@
     Controller.login_page = function(params, load){
         console.log("login_page");
         Models.User.isLogged(function(userLogged){
-            console.log(userLogged);
             if(userLogged === true){
                 Widgets.bgSync.start();
                 Router.redirect("chooseconference_page", {switchPage: true});

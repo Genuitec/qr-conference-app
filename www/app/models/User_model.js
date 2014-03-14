@@ -7,18 +7,17 @@
         },
         
         serverLogIn : function(formdata, callback){
-            if(is_set(Session.get("server_url")))
+            if(is_set(Session.get("server_url"))){
                 if(is_set(Session.get("server_url")) && Session.get("server_url") !== formdata.hosturl){
                     this.clearLocalData();
                     alert("You are accessing another server. All local data will be removed");
                 }
-            $.post(formdata.hosturl + getConfig("login_url"),
-            {
+            }
+            $.post(formdata.hosturl + getConfig("login_url"),{
                 j_username: formdata.userid,
                 j_password: formdata.password
-            },
-            function(responsedata){
-                if(responsedata.loggedIn == true){
+            }, function(responsedata){
+                if(responsedata.loggedIn === true){
                     Session.set("session_id", responsedata.session);
                     Session.set("server_url", formdata.hosturl);
                     Session.set("user_data", formdata);
@@ -37,8 +36,8 @@
         },
         
         logIn : function(data, callback){
-            console.log("login")
-            Session.set("user_data", data)
+            console.log("login");
+            Session.set("user_data", data);
             Session.set("islogged", true);
             callback({
                 success: {
@@ -62,7 +61,6 @@
                 
         isLogged: function(callback){
             callback(empty(Session.get("islogged")) ? false : true);
-//            callback(empty(Session.get("user_data")) ? false : true);
         }
         
     };

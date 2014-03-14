@@ -16,17 +16,12 @@ var SQLite = function(){ // works with local SQLite DB
     },
 
     _querySuccess = function(tx, results, callback){
-//        console.log(results);
-//        try{
-            var len = results.rows.length, db_result = [];
-            if(results.rows.length === 0 && results.rowsAffected > 0)
-                db_result = results;
-            else
-                for(var i = 0; i < len; i++)
-                    db_result[i] = results.rows.item(i);
-//        }catch(e){
-//            db_result = [];
-//        }
+        var len = results.rows.length, db_result = [];
+        if(results.rows.length === 0 && results.rowsAffected > 0)
+            db_result = results;
+        else
+            for(var i = 0; i < len; i++)
+                db_result[i] = results.rows.item(i);
         return (callback ? callback(db_result) : true);
     },
 
@@ -51,7 +46,6 @@ var SQLite = function(){ // works with local SQLite DB
     },
     from = function(table) {
         _sql += ' FROM ' + table;
-        // return SERVER.API._tables_to_sync.push(table.match(/([A-z0-9_]+)/ig)[0]);
     },
     where = function(where) {
         _sql += (_sql.match(/( WHERE )/g) ? " AND " : " WHERE ");
@@ -66,11 +60,9 @@ var SQLite = function(){ // works with local SQLite DB
         return _sql += (where+")");
     },
     join = function(table, on) {
-        // SERVER.API._tables_to_sync.push(table.match(/([A-z0-9_]+)/ig)[0]);
         return _sql += ' INNER JOIN ' + table + ' ON ' + on;
     },
     left_join = function(table, on) {
-        // SERVER.API._tables_to_sync.push(table.match(/([A-z0-9_]+)/ig)[0]);
         return _sql += ' LEFT JOIN ' + table + ' ON ' + on;
     },
     order_by = function(order) {
@@ -467,28 +459,6 @@ var SQLite = function(){ // works with local SQLite DB
                     _init_db(db_name, db_tables, db_tables_sql, true);
                 }
             };
-//            return function(){
-////                return {
-//                    this.select          = select,
-//                    this.from            = from,
-//                    this.where           = where,
-//                    this.where_in        = where_in,
-//                    this.order_by        = order_by,
-//                    this.order_by_desc   = order_by_desc,
-//                    this.limit           = limit,
-//                    this.join            = join,
-//                    this.left_join       = left_join,
-//                    this.query           = query,
-//                    this.row             = row,
-//                    this.col             = col,
-//                    this.insert          = insert,
-//                    this.update          = update,
-//                    this.remove          = remove,
-//                    this.recreate_db  = function(){
-//                        _init_db(db_name, db_tables, db_tables_sql, true);
-//                    };
-////                };
-//            };
         }else return false;
     };
 

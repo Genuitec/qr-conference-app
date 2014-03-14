@@ -5,6 +5,8 @@
         sync_url : function(){ return (Session.get("server_url")+"/ws/mobile/sync"); },
         
         sync : {
+//            active   :  false,
+            active   :  true,
             auto     :  true,
             interval :  120000 //in miliseconds
         },

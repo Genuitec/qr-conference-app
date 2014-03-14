@@ -17,11 +17,8 @@
             });
         },
         returnCallback = function(data){
-            /** save to db and call callback(last_parsed data) **/
             data.conference_id = Session.get("conference_id");
             data.id = _self.md5+data.conference_id;
-            console.log("returnCallback");
-            console.log(data);
             _self.callback(data);
         };
             
@@ -52,44 +49,16 @@
             try{
                 Resources.barcodeScanner.scan(
                     function (scanData) {
-                        console.log(scanData);
-                        console.log("scanData.text");
-                        console.log(scanData.text);
-                        /**
-                         * success
-                         */
                         new ScanHandler(scanData.text, md5(scanData.text), function(QR){
                             saveQRtoDB(QR, callback);
                         });
-                        /**
-                         * success
-                         */
                     }, 
                     function (error) {
                         callback({error:error});
-                        console.log(error);
                         alert("Scanning failed: " + error);
                     });
             }catch(e){
-                /**
-                 * TEST MODE
-                 **/
-//                return new ScanHandler({
-//                    fn : "Test User",
-//                    email: [{value: "test@gmail.com"},
-//                            {value: "other@gmail.com"}],
-//                    tel: [{value: "555-1212"},
-//                            {value: "555-3952"}],
-//                }, "1234", function(QR){
-//                    saveQRtoDB(QR, callback);
-//                }, true);
-                
-//                callback({error:e});
-//                console.log(e);
                 alert("Scanning failed: " + e);
-                /**
-                 * TEST MODE
-                 **/
             }
         };
         
