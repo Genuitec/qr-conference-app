@@ -26,7 +26,7 @@
             },
 
             clear: function(item){
-                return (arguments.length === 1 ? Storage.removeItem(item) : Storage.clear());
+                return (arguments.length === 1 ? Storage.removeItem(App.Config.get("appName")+item) : Storage.clear());
             }
         };
     };
