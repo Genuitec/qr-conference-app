@@ -219,7 +219,7 @@ $(document).ready(function(){
         $.fn.formData = function(){
             var res = {};
             ($(this).serializeArray()).forEach(function(v,k){
-               res[v.name] = v.value;
+               res[v.name] = v.value.trim();
             });
             return res;
         };

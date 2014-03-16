@@ -13,6 +13,7 @@
     Widgets.logIn = function(formEl, callback){
         try{
             formEl.submit(function(e){
+                console.log("form submited");
                 e.preventDefault();
                 var formData = $(this).formData();
                 if(validate(formData))
