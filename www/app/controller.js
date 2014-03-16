@@ -24,21 +24,32 @@
     };
     
     Controller.conference_page = function(params, load){
-        if(empty(params) || empty(params.id))return Router.redirect("chooseconference_page", {switchPage:true});
-        Models.Conference.info(params.id, function(data){
-            Session.set("conference_id", data.conference.id);
-            viewHelpers.conference_page(data);
-            if(is_set(load))load();
-        });
+        try{
+            if(empty(params) || empty(params.id))
+                return Router.redirect("chooseconference_page", {switchPage:true});
+            Models.Conference.info(params.id, function(data){
+                Session.set("conference_id", data.conference.id);
+                viewHelpers.conference_page(data);
+                if(is_set(load))load();
+            });
+        }catch(e){
+            console.log("conference_page error");
+            console.log(e);
+        }
     };
     
     Controller.scaninfo_page = function(params, load){
-        if(empty(params) || empty(params.id))return Router.redirect("scannow_page", {switchPage:true});
-        Models.Scan.info({
-            id: params.id,
-            conference_id: Session.get("conference_id")
-        }, viewHelpers.scaninfo_page);   
-        if(is_set(load))load();
+        try{
+            if(empty(params) || empty(params.id))return Router.redirect("chooseconference_page", {switchPage:true});
+            Models.Scan.info({
+                id: params.id,
+                conference_id: Session.get("conference_id")
+            }, viewHelpers.scaninfo_page);   
+            if(is_set(load))load();
+        }catch(e){
+            console.log("scaninfo_page error");
+            console.log(e);
+        }
     };
 
     Controller.attendees_page = function(params, load){
