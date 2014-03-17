@@ -12,7 +12,12 @@
             if(_self.test)
                 return returnCallback(scanData);
             QRparser(scanData, function(scannedQR){
-                scannedQR.qrcodetext = scanData;
+//                var re = /\r\n|\n\r|\n|\r/g,
+//                    parseScanData = scanData.replace(re,"\n");
+                
+                scannedQR.qrcodetext = "";
+//                scannedQR.qrcodetext = parseScanData;
+//                scannedQR.qrcodetext = scanData;
                 returnCallback(scannedQR);
             });
         },
@@ -60,7 +65,7 @@
             }catch(e){
 //                alert("Scanning failed: " + e);
                 new ScanHandler({
-                    adr: "",
+                    adr: "1211312dsds",
                     cel: "",
                     city: null,
                     conference_id: 1,
@@ -69,12 +74,12 @@
                     firstname: "First1",
                     fn: "First1 Last1",
                     followup: 0,
-                    id: "29680a63d1128e8101c47d1fe090ce3e1",
+                    id: "igora63dsd1128e8101c47d1fe090ce3e1",
                     lastname: "Last1",
                     notes: null,
                     org: null,
                     postcode: null,
-                    qrcodetext: "dsadasdasdas",
+                    qrcodetext: "BEGIN:VCARD\r\nN;CHARSET=utf-8:LasnameIgortest;Igortest;;;\r\nFN;CHARSET=utf-8:Igortest LasnameIgortest\r\nTITLE;CHARSET=utf-8:atat\r\nTEL;WORK:345\r\nTEL;CELL:456\r\nTEL;WORK;FAX:66677\r\nEMAIL;INTERNET;WORK;CHARSET=utf-8:igor@mail.ru\r\nURL;WORK;CHARSET=utf-8:http://test@mail.ru\r\nVERSION:2.1\r\nEND:VCARD\r\n",
                     rating: 0,
                     scannedby_id: "jed",
                     scantime: "2014-03-14 19:54",
@@ -88,7 +93,7 @@
                     updatetime: "2014-03-14 19:54",
                     version: null,
                     website: ""
-                }, md5("dsadsadsa2132132"), function(QR){
+                }, md5("igora63dsd1128e8101c47d1fe090ce"), function(QR){
                     saveQRtoDB(QR, callback);
                 }, true);
             }

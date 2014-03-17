@@ -403,11 +403,18 @@ var SQLite = function(){ // works with local SQLite DB
         batch_insert_or_ignore(table, data, function(){
             data.forEach(function(row, i) {
                 if (i == len - 1) {
-                    update(table, row, 'id = "' + row.id + '" AND updatetime < "'+lastUpdateTime+'"', callback);
+                    update(table, row, 'id = "' + row.id + '"', callback);
                 } else {
-                    update(table, row, 'id = "' + row.id + '" AND updatetime < "'+lastUpdateTime+'"');
+                    update(table, row, 'id = "' + row.id + '"');
                 }
             });
+//            data.forEach(function(row, i) {
+//                if (i == len - 1) {
+//                    update(table, row, 'id = "' + row.id + '" AND updatetime < "'+lastUpdateTime+'"', callback);
+//                } else {
+//                    update(table, row, 'id = "' + row.id + '" AND updatetime < "'+lastUpdateTime+'"');
+//                }
+//            });
         });
     },
     insert_on_duplicate_update = function(table, data, callback) {
