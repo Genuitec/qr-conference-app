@@ -177,7 +177,7 @@
         document.addEventListener('backbutton', function(e){
             console.log("backbutton")
             e.preventdefault();
-            Router.redirect_back();
+//            Router.redirect_back();
             return false;
         }, false);
 
