@@ -174,6 +174,14 @@
             }
         });
         
+        document.addEventListener('backbutton', function(e){
+            console.log("backbutton")
+            e.preventdefault();
+            Router.redirect_back();
+            return false;
+        }, false);
+
+        
         (window.location.hash === "" || window.location.hash === "#") ?
             Router.redirect(getConfig("home_page"), {
                 switchPage: true
