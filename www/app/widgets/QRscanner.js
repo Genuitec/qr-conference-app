@@ -9,7 +9,7 @@
         var _self = this,
                 
         MakeObjectFromText = function(scanData){
-            if(test)
+            if(_self.test)
                 return returnCallback(scanData);
             QRparser(scanData, function(scannedQR){
                 scannedQR.qrcodetext = scanData;
@@ -31,7 +31,7 @@
         
         var saveQRtoDB = function(QR, callback){
             Scan.read({
-                id           :    QR.id,
+                id            :    QR.id,
                 conference_id :    QR.conference_id
             }, function(checkData){
                 if(checkData.length > 0)
@@ -58,7 +58,39 @@
                         alert("Scanning failed: " + error);
                     });
             }catch(e){
-                alert("Scanning failed: " + e);
+//                alert("Scanning failed: " + e);
+                new ScanHandler({
+                    adr: "",
+                    cel: "",
+                    city: null,
+                    conference_id: 1,
+                    country: null,
+                    email: "first1@last1.com",
+                    firstname: "First1",
+                    fn: "First1 Last1",
+                    followup: 0,
+                    id: "29680a63d1128e8101c47d1fe090ce3e1",
+                    lastname: "Last1",
+                    notes: null,
+                    org: null,
+                    postcode: null,
+                    qrcodetext: "dsadasdasdas",
+                    rating: 0,
+                    scannedby_id: "jed",
+                    scantime: "2014-03-14 19:54",
+                    state: null,
+                    street: null,
+                    synctime: 1394826968120,
+                    tags: null,
+                    tel: "1234567890",
+                    title: null,
+                    type: null,
+                    updatetime: "2014-03-14 19:54",
+                    version: null,
+                    website: ""
+                }, md5("dsadsadsa2132132"), function(QR){
+                    saveQRtoDB(QR, callback);
+                }, true);
             }
         };
         

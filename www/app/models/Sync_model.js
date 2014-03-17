@@ -71,6 +71,7 @@
                 },  /// here
                 error: function(e){
                     if(is_set(e.status) && e.status === 403) return Router.redirect("logout");
+//                    if(is_set(e.status) && e.status === 409) alert("sync error");
                 },
                 data: JSON.stringify({
                     info:{

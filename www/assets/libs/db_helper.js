@@ -16,13 +16,16 @@ var SQLite = function(){ // works with local SQLite DB
     },
 
     _querySuccess = function(tx, results, callback){
-        var len = results.rows.length, db_result = [];
-        if(results.rows.length === 0 && results.rowsAffected > 0)
-            db_result = results;
-        else
-            for(var i = 0; i < len; i++)
-                db_result[i] = results.rows.item(i);
-        return (callback ? callback(db_result) : true);
+        try{
+            results.insertId;
+            return callback(results);
+        }catch(e){
+            var len = results.rows.length, db_result = [];
+            if(results.rows.length > 0)
+                for(var i = 0; i < len; i++)
+                    db_result[i] = results.rows.item(i);
+            return (callback ? callback(db_result) : true);
+        }
     },
 
     _queryDB = function(tx, sql, callback) {
@@ -436,6 +439,7 @@ var SQLite = function(){ // works with local SQLite DB
             console.log("inited");
 
             return {
+                _executeSQL     : _executeSQL,
                 select          : select,
                 from            : from,
                 where           : where,
