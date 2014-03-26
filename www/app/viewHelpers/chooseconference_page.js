@@ -14,11 +14,13 @@
     });
     
     View.chooseconference_page = function(data){
-        template = new Template($("#chooseconference_page-template"));
+        template = new Template($("#chooseconference_page-templateDoT"));
+//        template = new Template($("#chooseconference_page-template"));
         $("#chooseconference_page .main").html(template.getHtml(data));
         
 //        template = Handlebars.compile($("#chooseconference_page-template").html());
 //        $("#chooseconference_page .main").html(template(data));
     };
     
-}(App.viewHelpers, App.Widgets.sync, App.Models.Conference, App.Session, App.Resources.templateHandlebars));
+}(App.viewHelpers, App.Widgets.sync, App.Models.Conference, App.Session, App.Resources.templateDoT));
+//}(App.viewHelpers, App.Widgets.sync, App.Models.Conference, App.Session, App.Resources.templateHandlebars));

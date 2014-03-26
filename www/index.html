@@ -148,6 +148,13 @@
         
         
         <!-- templates -->
+        <script id="attendees-templateDoT" type="text/x-dot-template">
+            <h2>By Contact Tags</h2>
+            {{~it.tags :value:index}}
+                <a href="#attendeeslist_page?tags={{=value}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{=value}}</a>
+            {{~}}
+        </script>
+        
         <script id="attendees-template" type="text/x-handlebars-template">
             <h2>By Contact Tags</h2>
             {{#each tags}}
@@ -155,24 +162,22 @@
             {{/each}}
         </script>
         
-        <script id="scannow-template" type="text/x-handlebars-template">
-            <div class="scan-area" id="scanner" tabindex="0">
-                <div class="scan-inner">
-                    <div class="scan-inside">
-                        <h1><span>Scan now</span></h1>
-                    </div>
-                    <div class="scan-corner-lt scan-corner"></div> 
-                    <div class="scan-corner-rt scan-corner"></div> 
-                    <div class="scan-corner-lb scan-corner"></div> 
-                    <div class="scan-corner-rb scan-corner"></div> 
-                </div>
-            </div>
+        <script id="recentscan-templateDoT" type="text/x-handlebars-template">
+            {{~it.scans :v}}
+                <li><a href="#scaninfo_page?id={{=v.id}}">{{=v.fn}}</a></li>
+            {{~}}
         </script>
         
         <script id="recentscan-template" type="text/x-handlebars-template">
             {{#each scans}}
                 <li><a href="#scaninfo_page?id={{id}}">{{fn}}</a></li>
             {{/each}}
+        </script>
+        
+        <script id="attendeeslist-templateDoT" type="text/x-handlebars-template">
+            {{~it.attendees :v:index}}
+                <li><a href="#scaninfo_page?id={{=v.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{=v.fn}}<br /><span class="scanned">Scanned by {{=v.scannedby_id}} {{=v.scantime}}<!-- today at 14:01 --></span></a></li>
+            {{~}}
         </script>
         
         <script id="attendeeslist-template" type="text/x-handlebars-template">
@@ -185,6 +190,70 @@
             {{#each this}}
                 <a href="#conference_page?id={{id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{name}}</a>
             {{/each}}
+        </script>
+        
+        <script id="chooseconference_page-templateDoT" type="text/x-handlebars-template">
+            {{~it :v:i}}
+                <a href="#conference_page?id={{=v.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{=v.name}}</a>
+            {{~}}
+        </script>
+        
+        <script id="conference_page-templateDoT" type="text/x-handlebars-template">
+            <div data-role="header">
+                <a href="#" data-role="button" data-rel="back">Go Back</a>
+                <h1>{{=it.conference.name}}</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <div class="main">
+                
+                    <div class="scan-area" id="scanner" tabindex="0">
+                        <div class="scan-inner">
+                            <div class="scan-inside">
+                                <h1><span>Scan now</span></h1>
+                            </div>
+                            <div class="scan-corner-lt scan-corner"></div> 
+                            <div class="scan-corner-rt scan-corner"></div> 
+                            <div class="scan-corner-lb scan-corner"></div> 
+                            <div class="scan-corner-rb scan-corner"></div> 
+                        </div>
+                    </div>
+
+                </div>
+                <div class="recent-scans">
+                    <h2>Recent Scans</h2>
+                    <ul data-role="listview" class="ui-listview">
+                        {{~it.scans :v:i}}
+                            <li><a href="#scaninfo_page?id={{=v.id}}" class="ui-btn ui-btn-icon-right ui-icon-carat-r">{{=v.fn}}</a></li>
+                        {{~}}
+                    </ul>
+                </div>
+                <div class="attend">
+                    <a href="#attendees_page" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Browse Attendees</a>
+                </div>
+                <div class="blueline-block-wrapper stats-links">
+                    <h2><span>C</span>on<span>f</span>er<span>e</span>nce <span>S</span>t<span>a</span>ts</h2>
+                    <table class="blueline-block">
+                        <tbody>
+                            <tr>
+                                <td>Total scans</td>
+                                <td class="right"><a href="#attendeeslist_page?sync=all">{{=it.stat.scans.total}}({{=it.stat.scans.offline}} offline)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Top Leads</td>
+                                <td class="right"><a href="#attendeeslist_page?rating=top">{{=it.stat.top_leads.hot}} hot & {{=it.stat.top_leads.warm}} warm</a></td>
+                            </tr>
+                            <tr>
+                                <td>Followups</td>
+                                <td class="right"><a href="#attendeeslist_page?followup=true">{{=it.stat.followups.needed}} needed({{=it.stat.followups.done}} done)</a></td>
+                            </tr>
+                            <tr>
+                                <td>Last Sync</td>
+                                <td class="right">{{=it.stat.lastSync}} minutes ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /content -->
         </script>
         
         <script id="conference_page-template" type="text/x-handlebars-template">
@@ -242,6 +311,173 @@
                         </tbody>
                     </table>
                 </div>
+            </div><!-- /content -->
+        </script>
+        
+        <script id="scaninfo_page-templateDoT" type="text/x-handlebars-template">
+            <div data-role="header">
+                <a href="#" data-role="button" data-rel="back" class="ui-btn ui-btn-inline">Go Back</a>
+                <h1>{{=it.scan.fn}}</h1>
+                {{~it.scan.email :v}}
+                    <p class="email">{{=v}}</p>
+                {{~}}
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+                
+                <form>
+                    <div class="rating form-part first-form-part">
+                        <h2>Rapid Rating</h2>
+                        <div class="form-part-wrapper">
+                            <fieldset class="rating-select" data-role="controlgroup" data-type="horizontal">
+                                <input type="radio" name="rating" id="radio-choice-h-2a" value=0 {{? it.scan.rating === 0}}checked="checked"{{?}}>
+                                <label class="cold" for="radio-choice-h-2a">Cold</label>
+                                <input type="radio" name="rating" id="radio-choice-h-2b" value=1 {{? it.scan.rating === 1}}checked="checked"{{?}}>
+                                <label class="warm" for="radio-choice-h-2b">Warm</label>
+                                <input type="radio" name="rating" id="radio-choice-h-2c" value=2 {{? it.scan.rating === 2}}checked="checked"{{?}}>
+                                <label class="hot" for="radio-choice-h-2c">Hot</label>
+                            </fieldset>
+
+                            <fieldset data-role="controlgroup">
+                                <label class="ratingcheckbox" for="checkbox-2">Requires Follow Up</label>
+                                <input type="checkbox" name="followup" id="checkbox-2" {{? it.scan.followup === 1}}checked="checked"{{?}}>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="form-part">
+                    <h2>Contact Tags</h2>
+                    <div class="form-part-wrapper tags-wrapper">
+                        <div class="tags">
+                            <ul>
+                                {{~it.tags :v}}
+                                    <li{{? v.selected === 1}} class="selected"{{?}}><span>{{=v.tag}}</span></li>
+                                {{~}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-part">
+                    <h2>Notes</h2>
+                    <div class="form-part-wrapper">
+                        <div class="notes">
+
+                            <div data-role="notes">
+                                {{ if(it.scan.notes){ }}
+                                    <form data-role="note-form" noteid="" creatorid="">
+                                        <p>{{=it.scan.notes}}</p>
+                                        <textarea>{{=it.scan.notes}}</textarea>
+                                        <button type="submit">submit</button>
+                                        <button type="button" data-role="note-reset">reset</button>
+                                    </form>
+                                {{ }else{ }}
+
+                                    <form data-role="note-form" >
+                                        <p>No notes added yet. Double tap to edit notes</p>
+                                        <textarea></textarea>
+                                        <button type="submit">submit</button>
+                                        <button type="button" data-role="note-reset">reset</button>
+                                    </form>
+
+                                {{ } }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-part">
+                    <h2>Contact details</h2>
+                    <div class="form-part-wrapper">
+                         <ul data-role="listview" data-inset="true">
+                            {{? it.scan.fn}}
+                                <li class="ui-field-contain">
+                                    <label>Name:</label>
+                                    <label>{{=it.scan.fn}}</label>
+                                </li>
+                            {{?}}
+                            {{? it.scan.title}}
+                                <li class="ui-field-contain">
+                                    <label>Title:</label>
+                                    <label>{{=it.scan.title}}</label>
+                                </li>
+                            {{?}}
+                            {{? it.scan.org}}  
+                                <li class="ui-field-contain">
+                                    <label>Company</label>
+                                    <label>{{=it.scan.org}}</label>
+                                </li>
+                            {{?}}
+                            {{ if(it.scan.tel){ }}
+                                <li class="ui-field-contain">
+                                    <label>Phone(s):</label>
+                                    {{~it.scan.tel :v}}
+                                        <label>{{=v}}</label>
+                                    {{~}}
+                                    {{ if(it.scan.cel){ }}
+                                        {{~it.scan.cel :v}}
+                                            <label>{{=v}}</label>
+                                        {{~}}
+                                    {{ } }}
+                                </li>
+                            {{ }else{ }}  
+                                {{ if(it.scan.cel){ }}
+                                    <li class="ui-field-contain">
+                                        <label>Phone(s):</label>
+                                        {{ if(it.scan.tel){ }}
+                                            {{~it.scan.tel :v}}
+                                                <label>{{=v}}</label>
+                                            {{~}}
+                                        {{ } }}
+                                        {{~it.scan.cel :v}}
+                                            <label>{{=v}}</label>
+                                        {{~}}
+                                    </li>
+                                {{ } }}
+                            {{ } }}
+                            {{ if(it.scan.email){ }}
+                                <li class="ui-field-contain">
+                                    <label>Email(s):</label>
+                                    {{~it.scan.email :v}}
+                                        <label>{{=v}}</label>
+                                    {{~}}
+                                </li>
+                            {{ } }}
+                            {{ if(it.scan.adr){ }}  
+                                <li class="ui-field-contain">
+                                    <label>Address</label>
+                                    <label><p>{{=it.scan.adr}}</p></label>
+                                </li>
+                            {{ } }}
+                            {{ if(it.scan.org){ }}
+                                <li class="ui-field-contain">
+                                    <label>Website</label>
+                                    <label>{{=it.scan.website}}</label>
+                                </li>
+                            {{ } }}
+                            <li class="ui-body ui-body-b">
+                                <div data-role="navbar">
+                                    <ul>
+                                        {{ if(it.scan.tel[0]){ }}
+                                            <li><a href="tel:{{=it.scan.tel[0]}}" class="ui-btn-active">Call</a></li>
+                                        {{ }else{ }}
+                                            {{ if(it.scan.cel[0]){ }}
+                                                <li><a href="tel:{{=it.scan.cel[0]}}" class="ui-btn-active">Call</a></li>
+                                            {{ } }}
+                                        {{ } }}
+                                        {{ if(it.scan.email[0]){ }}
+                                            <li><a href="mailto:{{=it.scan.email[0]}}">Email</a></li>
+                                        {{ } }}
+                                        {{ if(it.scan.org){ }}
+                                            <li class="navlinktoweb"><a href="{{=it.scan.org}}" target="_blank"  data-rel="external" onclick="window.open('http://{{=it.scan.org}}', '_blank', 'location=yes');">Web</a></li>
+                                        {{ } }}
+                                    </ul>
+                                </div><!-- /navbar -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
             </div><!-- /content -->
         </script>
         
@@ -427,6 +663,8 @@
         <script src="assets/libs/localStorage_helper.js"></script>
         <script src="assets/libs/db_helper.js"></script>
 
+        <script src="assets/libs/doT.min.js"></script>
+
         <script src="assets/libs/handlebars-v1.3.0.js"></script>
         <script src="assets/libs/handlebars_helpers.js"></script>
          
@@ -440,6 +678,7 @@
         <script src="app/models/Conference_model.js"></script>
         <script src="app/models/Tag_model.js"></script>
         <script src="app/resources/templateHandlebars.js"></script>
+        <script src="app/resources/templateDoT.js"></script>
         <script src="app/resources/QRparser.js"></script>
         <script src="app/resources/barcodeScanner.js"></script>
         <script src="app/widgets/loader.js"></script>
