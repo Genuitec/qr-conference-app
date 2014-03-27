@@ -40,12 +40,18 @@
                 conference_id :    QR.conference_id
             }, function(checkData){
                 if(checkData.length > 0)
-                    return alert(getConfig("scans", "error_already_exist"));
+                    return callback({
+                        exist : true,
+                        QR    : checkData[0]
+                    });
                 
                 var _filteredQR = filter_fields(QR, getConfig("scans", "db_fields"));
                 _filteredQR.scannedby_id = Session.get("user_data").userid;
                 Scan.create( _filteredQR , function(insertId){
-                    callback(_filteredQR);
+                    callback({
+                        exist: false,
+                        QR: _filteredQR
+                    });
                 });
             });
         };
@@ -71,10 +77,10 @@
                     conference_id: 1,
                     country: null,
                     email: "first1@last1.com",
-                    firstname: "First1",
-                    fn: "First1 Last1",
+                    firstname: "testiiiimmm",
+                    fn: "testiiiimmm Last1",
                     followup: 0,
-                    id: "igora63dsd1128e8101c47d1fe090ce3e1",
+                    id: "igo553dsd1128e8101c47d1fe090ce3e1",
                     lastname: "Last1",
                     notes: null,
                     org: null,
@@ -93,7 +99,7 @@
                     updatetime: "2014-03-14 19:54",
                     version: null,
                     website: ""
-                }, md5("igora63dsd1128e8101c47d1fe090ce"), function(QR){
+                }, md5("ig55wwwra63dsd1128e8101c47d1fe090ce"), function(QR){
                     saveQRtoDB(QR, callback);
                 }, true);
             }

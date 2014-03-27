@@ -75,6 +75,7 @@
     };
     
     Router.redirect = function(page, prms){
+        console.log(prms);
         /* * var prms = {
          *      params: 
          *      history_need:
@@ -84,7 +85,8 @@
         try{
             var history_need = true;
             if(!empty(prms)){
-                if(is_set(prms.params))var params = prms.params.params;
+                if(is_set(prms.params))var params = prms.params;
+//                if(is_set(prms.params))var params = prms.params.params;
                 if(prms.history_need === false) history_need = prms.history_need;
                 if(is_set(prms.callback)) var callback = prms.callback;
             }
@@ -159,7 +161,8 @@
                 if(!$(this).attr("data-rel") && $(this).attr("data-rel") !== "back"){
                     var page_name = $(this).attr("href").match(/^#(.[^\?]+)\?*/)[1];
                     Router.redirect(page_name, {
-                        params: _get_page_params( $(this).attr("href").replace("#", "") ),
+                        params: (_get_page_params( $(this).attr("href").replace("#", "") )).params,
+//                        params: _get_page_params( $(this).attr("href").replace("#", "") ),
                         switchPage: true
                     });
                     return false;

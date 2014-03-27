@@ -39,6 +39,7 @@
     };
     
     Controller.scaninfo_page = function(params, load){
+        console.log(params);
         try{
             if(empty(params) || empty(params.id))return Router.redirect("chooseconference_page", {switchPage:true});
             Models.Scan.info({

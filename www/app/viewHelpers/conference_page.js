@@ -1,4 +1,4 @@
-(function(View, Router, QRscanner, Template){
+(function(View, Router, getConfig, QRscanner, Sync, Template){
     
     View.conference_page = function(data){
         var template = new Template($("#conference_page-templateDoT")),
@@ -7,14 +7,25 @@
         var list = $('#conference_page .recent-scans ul[data-role="listview"]');
 
         $("#conference_page #scanner").on("tap", function(){
-            QRscanner(function(vCard){
+            QRscanner(function(qrscan){
+                if(qrscan.exist === true)
+                    alert(getConfig("scans", "error_already_exist"));
+                else
+                    Sync(true, function(){});
+
+                Router.redirect("scaninfo_page", {
+                    switchPage:true,
+                    params:{
+                        id: qrscan.QR.id
+                    }
+                });
                 console.log("QRscanner vCard");
-                console.log(vCard);
+                console.log(qrscan);
                 
-                list.prepend(listTemplate.getHtml({scans: [vCard]}));
-                list.listview('refresh'); 
+//                list.prepend(listTemplate.getHtml({scans: [vCard]}));
+//                list.listview('refresh'); 
             });
         });
     };
     
-}(App.viewHelpers, App.Router, App.Widgets.QRscanner, App.Resources.templateDoT));
+}(App.viewHelpers, App.Router, App.Config.get, App.Widgets.QRscanner, App.Widgets.sync, App.Resources.templateDoT));

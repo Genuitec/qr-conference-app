@@ -34,17 +34,16 @@
                     DB.query(function(offline){
                         c(offline.length);
                     });
-//                    SELECT sid from sync WHERE table_name = "scans" GROUP BY row_id HAVING table_name = "scans"
                 },
                 stat: function(c){
                     Async.parallel({
                         hot       :     function(cc){
-                            Models.Scan.read({rating: 3, conference_id: conference_id}, function(hot){
+                            Models.Scan.read({rating: 2, conference_id: conference_id}, function(hot){
                                 cc(hot.length);
                             });
                         },
                         warm      :     function(cc){
-                            Models.Scan.read({rating: 2, conference_id: conference_id}, function(warm){
+                            Models.Scan.read({rating: 1, conference_id: conference_id}, function(warm){
                                 cc(warm.length);
                             });
                         },
