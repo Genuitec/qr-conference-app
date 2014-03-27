@@ -3,8 +3,8 @@
 
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "com.genuitec.qrconference"
-        version     = "1.0.1"
-        versionCode = "10" >
+        version     = "1.0.0"
+        versionCode = "1" >
 
         <!-- versionCode is optional and Android only -->
 
