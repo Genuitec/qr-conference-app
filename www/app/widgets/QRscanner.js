@@ -79,7 +79,7 @@
                     notes: null,
                     org: null,
                     postcode: null,
-                    qrcodetext: "BEGIN:VCARD\r\nN;CHARSET=utf-8:LasnameIgortest;Igortest;;;\r\nFN;CHARSET=utf-8:Igortest LasnameIgortest\r\nTITLE;CHARSET=utf-8:atat\r\nTEL;WORK:345\r\nTEL;CELL:456\r\nTEL;WORK;FAX:66677\r\nEMAIL;INTERNET;WORK;CHARSET=utf-8:igor@mail.ru\r\nURL;WORK;CHARSET=utf-8:http://test@mail.ru\r\nVERSION:2.1\r\nEND:VCARD\r\n",
+//                    qrcodetext: "BEGIN:VCARD\r\nN;CHARSET=utf-8:LasnameIgortest;Igortest;;;\r\nFN;CHARSET=utf-8:Igortest LasnameIgortest\r\nTITLE;CHARSET=utf-8:atat\r\nTEL;WORK:345\r\nTEL;CELL:456\r\nTEL;WORK;FAX:66677\r\nEMAIL;INTERNET;WORK;CHARSET=utf-8:igor@mail.ru\r\nURL;WORK;CHARSET=utf-8:http://test@mail.ru\r\nVERSION:2.1\r\nEND:VCARD\r\n",
                     rating: 0,
                     scannedby_id: "jed",
                     scantime: "2014-03-14 19:54",

@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
 
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.phonegap.example"
-        version     = "1.0.0"
+        id          = "com.genuitec.qrconference"
+        version     = "1.0.1"
         versionCode = "10" >
 
         <!-- versionCode is optional and Android only -->
@@ -13,9 +13,9 @@
         <name>QR Conference</name>
 
         <description>
-QR Conference Mobile application and backend for tracking conference attendees
-that you speak to at an exhibition booth, when conference attendees have QR codes
-on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
+            QR Conference Mobile application and backend for tracking conference attendees
+            that you speak to at an exhibition booth, when conference attendees have QR codes
+            on their conference badges. Built using PhoneGap, HTML5, jQuery Mobile, and SQLite.
         </description>
 
         <author href="https://www.genuitec.com" email="info@genuitec.com">
