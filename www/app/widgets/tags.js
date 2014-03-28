@@ -7,7 +7,7 @@
          *      tags_available : data.tags_available
          * }
          */
-         var scan_id = params.scan_id,
+        var scan_id = params.scan_id,
             tags = params.tags,
             tagsEl = tagsEl;
         $(tagsEl).ham("click", function(e){

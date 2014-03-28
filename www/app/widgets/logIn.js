@@ -13,13 +13,10 @@
     Widgets.logIn = function(formEl, callback){
         try{
             formEl.submit(function(e){
-                console.log("form submited");
                 e.preventDefault();
                 var formData = $(this).formData();
                 if(validate(formData))
                     User.serverLogIn(formData, function(result){
-                        console.log("result");
-                        console.log(result);
                         if(result.success === true)
                             User.logIn(formData , callback);
                         else

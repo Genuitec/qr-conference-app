@@ -2,7 +2,6 @@
     
     Resources.QRparser = function(scanData, callback){
         if(scanData.match("END:VCARD")){
-            console.log("VCARD");
             var parsedData = {
                 fn          : "",
                 firstname   : "",
@@ -20,7 +19,6 @@
             
             ar.forEach(function(v){
                 var v = v.trim();
-                console.log(v);
                 if(v.match(/^N.*:/)){
                     parsedData.fn = v.match(/^N.*:(.*)/)[1];
                     var fnAr = parsedData.fn.split(";");
@@ -86,12 +84,9 @@
                 if(v.match(/^EMAIL.*:/))
                     parsedData.email = v.match(/^EMAIL.*:(.*)/)[1];
             });
-           console.log("VCARD parsedData");
-           console.log(parsedData);
            callback(parsedData);
 
         }else if(scanData.match("MECARD:")){
-            console.log("MECARD");
             //MECARD
             var parsedData = {
                 fn          : "",
@@ -153,8 +148,6 @@
                     });   
                 }
             });
-            console.log("parsedData Mecard");
-            console.log(parsedData);
             callback(parsedData);
         }
     };

@@ -75,7 +75,6 @@
     };
     
     Router.redirect = function(page, prms){
-        console.log(prms);
         /* * var prms = {
          *      params: 
          *      history_need:

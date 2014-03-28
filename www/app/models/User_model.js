@@ -14,29 +14,7 @@
                 }
             }
             var urlToPost = ((formdata.hosturl.trim())+(getConfig("login_url").trim())).trim();
-            
-//            $.post(urlToPost,{
-//                j_username: formdata.userid,
-//                j_password: formdata.password
-//            }, function(responsedata){
-//                if(responsedata.loggedIn === true){
-//                    Session.set("session_id", responsedata.session);
-//                    Session.set("server_url", formdata.hosturl);
-//                    Session.set("user_data", formdata);
-//                    console.log("Finished logging in");
-//                    console.log(responsedata);
-//                    callback({
-//                        success     :   true,
-//                        userdata    :   formdata
-//                    });
-//                }else
-//                    callback({
-//                        success     :   false,
-//                        error       :   "Invalid username or password."
-//                    });
-//            }); 
-            
-            
+
             $.ajax({
                 type: "POST",
                 url: urlToPost,
@@ -57,7 +35,7 @@
                             success     :   false,
                             error       :   "Invalid username or password."
                         });
-                },  /// here
+                },
                 error: function(e){
                     alert("server unavailable");
                 },
@@ -70,7 +48,6 @@
         },
         
         logIn : function(data, callback){
-            console.log("login");
             Session.set("user_data", data);
             Session.set("islogged", true);
             callback({
