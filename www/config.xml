@@ -44,9 +44,13 @@
 
     <!-- Splash Images -->
 
-    <gap:splash src="splash.png" />
+    <gap:splash src="Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
     
-    
+        
+    <gap:splash src="splash/android/res-notlong-port-ldpi/default.png" gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="splash/android/res-notlong-port-mdpi/default.png" gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="splash/android/res-notlong-port-hdpi/default.png" gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="splash/android/res-notlong-port-xhdpi/default.png" gap:platform="android" gap:density="xhdpi" />
         
     <access origin="*" subdomains="true" />
         
