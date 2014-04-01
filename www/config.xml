@@ -44,7 +44,9 @@
 
     <!-- Splash Images -->
 
-   
+    <gap:splash src="splash.png" />
+    
+    
         
     <access origin="*" subdomains="true" />
         
