@@ -45,7 +45,7 @@
     <!-- Splash Images -->
 
     
-    <!--<gap:splash src="splash.png" />-->
+    <gap:splash src="splash.png" />
     
     <gap:splash src="splash/ios/Default.png" gap:platform="ios" width="320" height="480" />
     <gap:splash src="splash/ios/Default@2x.png" gap:platform="ios" width="640" height="960" />
