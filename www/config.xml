@@ -3,12 +3,13 @@
 
             xmlns:gap   = "http://phonegap.com/ns/1.0"
             id          = "com.genuitec.qrconferencebuddy"
-            version     = "1.0.0"
+            version     = "1.0"
             versionCode = "1" >
 
     <!-- versionCode is optional and Android only -->
 
     <preference name="phonegap-version" value="3.3.0" />
+	<preference name="target-device" value="handset" />
 
     <name>QR Conference Buddy</name>
 
