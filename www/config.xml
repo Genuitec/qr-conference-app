@@ -20,7 +20,6 @@
     <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.core.dialogs" />
-    <gap:plugin name="com.jamiestarke.webviewdebug" />
 
     <!-- Application Icons -->
 
