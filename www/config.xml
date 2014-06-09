@@ -21,6 +21,10 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.core.dialogs" />
 
+    <gap:config-file platform="android" parent="/manifest">
+	<application android:debuggable="true" />
+    </gap:config-file>
+
     <!-- Application Icons -->
 
     <icon src="icons/appicon.png" />
